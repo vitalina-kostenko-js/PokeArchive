@@ -8,7 +8,10 @@ export const getPokemonList = async (offset = 0, limit = 20): Promise<IPokemonLi
     next: { revalidate: 3000 },
   })
 
-  if (!res.ok) throw new Error('Network response was not ok')
+  if (!res.ok) {
+    throw new Error('Network response was not ok')
+  }
+
   return res.json()
 }
 
@@ -17,7 +20,9 @@ export const getPokemonByName = async (name: string): Promise<IPokemon> => {
     next: { revalidate: 3000 },
   })
 
-  if (!res.ok) throw new Error('Network response was not ok')
+  if (!res.ok) {
+    throw new Error('Network response was not ok')
+  }
   return res.json()
 }
 
@@ -26,8 +31,14 @@ export const getPokemonByNameOrNull = async (name: string): Promise<IPokemon | n
     next: { revalidate: 3000 },
   })
 
-  if (res.status === 404) return null
-  if (!res.ok) throw new Error('Network response was not ok')
+  if (res.status === 404) {
+    return null
+  }
+
+  if (!res.ok) {
+    throw new Error('Network response was not ok')
+  }
+
   return res.json()
 }
 
@@ -36,7 +47,10 @@ export const getPokemonSpecies = async (name: string): Promise<IPokemonSpecies> 
     next: { revalidate: 3000 },
   })
 
-  if (!res.ok) throw new Error('Species not found')
+  if (!res.ok) {
+    throw new Error('Species not found')
+  }
+
   return res.json()
 }
 
@@ -45,6 +59,9 @@ export const getEvolutionChain = async (url: string): Promise<IEvolutionChainRes
     next: { revalidate: 3000 },
   })
 
-  if (!res.ok) throw new Error('Evolution chain not found')
+  if (!res.ok) {
+    throw new Error('Evolution chain not found')
+  }
+
   return res.json()
 }
