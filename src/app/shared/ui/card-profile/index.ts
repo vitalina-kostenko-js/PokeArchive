@@ -1,0 +1,1 @@
+export {default as CardProfileComponent} from './card-profile.component'

@@ -1,0 +1,84 @@
+{
+  "form_register": {
+    "subtitle": "Legen Sie ein neues Konto an, um loszulegen",
+    "registrationFailed": "Registrierung fehlgeschlagen",
+    "enterName": "Name eingeben",
+    "enterEmail": "E-Mail eingeben",
+    "enterPassword": "Passwort eingeben",
+    "enterConfirmPassword": "Passwort bestätigen",
+    "createAccount": "Konto erstellen",
+    "creatingAccount": "Konto wird erstellt...",
+    "register": "Registrieren",
+    "name": "Name",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "alreadyHaveAccount": "Bereits ein Konto?"
+  },
+  "form_login": {
+    "subtitle": "Melden Sie sich mit Ihren Zugangsdaten an",
+    "loginFailed": "Anmeldung fehlgeschlagen",
+    "enterEmail": "E-Mail eingeben",
+    "enterPassword": "Passwort eingeben",
+    "login": "Anmelden",
+    "loggingIn": "Wird angemeldet...",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "dontHaveAccount": "Noch kein Konto?"
+  },
+  "auth_schema": {
+    "invalidEmail": "Ungültige E-Mail",
+    "nameIsRequired": "Name ist erforderlich.",
+    "passwordMustBeAtLeast8CharactersLong": "Passwort muss mindestens 8 Zeichen lang sein.",
+    "passwordConfirmationIsRequired": "Passwortbestätigung ist erforderlich.",
+    "passwordsDoNotMatch": "Passwörter stimmen nicht überein."
+  },
+  "auth_button": {
+    "login": "Anmelden",
+    "register": "Registrieren"
+  },
+  "profile_menu": {
+    "user": "Benutzer",
+    "myAccount": "Mein Konto",
+    "settings": "Einstellungen",
+    "billing": "Abrechnung",
+    "manageTeam": "Team verwalten",
+    "customization": "Anpassung",
+    "addTeamAccount": "Team-Konto hinzufügen",
+    "logout": "Abmelden"
+  },
+  "loading": {
+    "loading": "Lädt...",
+    "signingOut": "Wird abgemeldet..."
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Wir konnten die gesuchte Seite nicht finden",
+    "backToHome": "Zurück zur Startseite"
+  },
+  "home": {
+    "title": "Willkommen bei PokeArchive",
+    "welcome": "Hallo",
+    "welcomeDescription": "Willkommen bei PokeArchive",
+    "description": "Melden Sie sich an oder registrieren Sie sich, um den Pokédex zu erkunden und Pokémon-Stats sowie Entwicklungen anzuzeigen.",
+    "signIn": "Anmelden",
+    "signUp": "Konto erstellen",
+    "viewLibrary": "Pokédex ansehen"
+  },
+  "card_component": {
+    "click_message": "Klicken Sie mich an, wenn Sie mehr über mich erfahren möchten!",
+    "abilities": "Fähigkeiten"
+  },
+  "header": {
+    "home": "Startseite"
+  },
+  "items_page": {
+    "backToList": "Zurück zur Liste",
+    "baseStats": "Basisstatistiken",
+    "evolutionChain": "Evolution-Kette"
+  },
+  "card_profile": {
+    "weight": "Gewicht",
+    "height": "Höhe"
+  }
+}
