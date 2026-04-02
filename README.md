@@ -10,6 +10,42 @@ A Next.js client application for browsing and managing Pokémon-style catalog da
 
 ---
 
+## UI screenshots
+
+Reference captures live in [`src/app/shared/assets/images/`](src/app/shared/assets/images/).
+
+### Welcome page
+
+The public landing screen introduces **PokeArchive**, explains that users must sign in or register to explore the Pokédex, and offers **Sign In** and **Create account**. The header includes home navigation, locale switcher, and links to login and registration.
+
+![Welcome page](./src/app/shared/assets/images/welcome-page.png)
+
+### Login page
+
+Email and password fields with validation-oriented placeholders, primary **Login** action, and a shortcut to **Register** for users without an account. The layout is a centered card on a light background.
+
+![Login page](./src/app/shared/assets/images/login-page.png)
+
+### Register page
+
+Account creation with **Name**, **Email**, **Password**, and **Password confirmation**, plus a **Register** button and a link back to **Login**.
+
+![Register page](./src/app/shared/assets/images/register-page.png)
+
+### Items list (catalog)
+
+Authenticated **items** view: paginated grid of Pokémon cards (image, name, type tags such as Grass/Poison), breadcrumbs (**Home**), and header actions (language, user menu). Pagination supports moving through the full catalog.
+
+![Items catalog](./src/app/shared/assets/images/items-page.png)
+
+### Pokémon detail (`profile-page.png`)
+
+Single-species view (example: Ivysaur): large artwork, Pokédex-style metadata (number, species label, types, weight, height), **Base stats** with bar indicators, and an **Evolution chain** diagram with **Back to list** navigation. *Note: despite the filename `profile-page.png`, this screen is the item/detail page, not the account profile screen.*
+
+![Pokémon detail](./src/app/shared/assets/images/profile-page.png)
+
+---
+
 ## Tech stack
 
 | Area | Technology |
