@@ -3,9 +3,10 @@ import { IEvolutionChainResponse } from '../../models'
 
 const API_URL = 'https://pokeapi.co/api/v2'
 
-export const getPokemonList = async (offset = 0, limit = 20): Promise<IPokemonListResponse> => {
+export const getPokemonList = async (offset = 0, limit = 20, signal?: AbortSignal): Promise<IPokemonListResponse> => {
   const res = await fetch(`${API_URL}/pokemon?offset=${offset}&limit=${limit}`, {
     next: { revalidate: 3000 },
+    signal,
   })
 
   if (!res.ok) {
@@ -15,9 +16,10 @@ export const getPokemonList = async (offset = 0, limit = 20): Promise<IPokemonLi
   return res.json()
 }
 
-export const getPokemonByName = async (name: string): Promise<IPokemon> => {
+export const getPokemonByName = async (name: string, signal?: AbortSignal): Promise<IPokemon> => {
   const res = await fetch(`${API_URL}/pokemon/${encodeURIComponent(name)}`, {
     next: { revalidate: 3000 },
+    signal
   })
 
   if (!res.ok) {
