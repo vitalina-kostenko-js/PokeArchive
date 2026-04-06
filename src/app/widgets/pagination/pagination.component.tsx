@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation'
 import { cn } from '../../../pkg/lib/utils/utils'
-import { usePathname, useRouter } from '../../../pkg/locale'
+import { usePathname } from '../../../pkg/locale'
 import { buttonVariants } from '../../../pkg/theme/ui/button'
 import {
   Pagination,
@@ -21,37 +21,28 @@ interface IPaginationProps {
   onPageChange?: (page: number) => void
 }
 
-const PaginationComponent = (props: IPaginationProps) => {
-  const { itemsPerPage, totalItems, onPageChange } = props
-
-  const router = useRouter()
+const PaginationComponent = ({ itemsPerPage, totalItems }: IPaginationProps) => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const page = Number(searchParams.get('page') || '1') || 1
+  const page = Number(searchParams.get('page') || '1')
   const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage))
 
-  const handlePageChange = (newPage: number) => {
+  const createPageURL = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams.toString())
-
-    params.set('page', String(newPage))
-
-    router.replace(`${pathname}?${params.toString()}`)
-
-    onPageChange?.(newPage)
+    params.set('page', pageNumber.toString())
+    return `${pathname}?${params.toString()}`
   }
 
-  const pages = visiblePageItems(Math.min(Math.max(1, page), totalPages), totalPages)
+  const pages = visiblePageItems(page, totalPages)
 
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            size='default'
-            onClick={() => {
-              if (page > 1) handlePageChange(page - 1)
-            }}
+            href={page > 1 ? createPageURL(page - 1) : '#'}
+            className={page <= 1 ? 'pointer-events-none opacity-50' : ''}
           />
         </PaginationItem>
 
@@ -63,17 +54,12 @@ const PaginationComponent = (props: IPaginationProps) => {
           ) : (
             <PaginationItem key={p}>
               <PaginationLink
-                size='default'
-                onClick={() => handlePageChange(p)}
+                href={createPageURL(p)}
                 isActive={page === p}
-                className={
-                  page === p
-                    ? cn(
-                        'hover:!text-secondary-foreground !border-none !shadow-none',
-                        buttonVariants({ variant: 'secondary', size: 'icon' }),
-                      )
-                    : ''
-                }
+                className={cn(
+                  page === p && 'hover:!text-secondary-foreground !border-none !shadow-none',
+                  page === p && buttonVariants({ variant: 'secondary', size: 'icon' }),
+                )}
               >
                 {p}
               </PaginationLink>
@@ -83,11 +69,9 @@ const PaginationComponent = (props: IPaginationProps) => {
 
         <PaginationItem>
           <PaginationNext
+            href={page < totalPages ? createPageURL(page + 1) : '#'}
+            className={page >= totalPages ? 'pointer-events-none opacity-50' : ''}
             data-testid='pagination-next'
-            size='default'
-            onClick={() => {
-              if (page < totalPages) handlePageChange(page + 1)
-            }}
           />
         </PaginationItem>
       </PaginationContent>

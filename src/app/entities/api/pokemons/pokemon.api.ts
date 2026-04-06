@@ -1,11 +1,16 @@
-import type { IPokemon, IPokemonListResponse, IPokemonSpecies } from '@/app/shared/interfaces'
-import { IEvolutionChainResponse } from '../../models'
+import type {
+  IEvolutionChainResponse,
+  IPokemon,
+  IPokemonListResponse,
+  IPokemonSpecies,
+} from '@/app/entities/models'
 
 const API_URL = 'https://pokeapi.co/api/v2'
 
 export const getPokemonList = async (offset = 0, limit = 20, signal?: AbortSignal): Promise<IPokemonListResponse> => {
   const res = await fetch(`${API_URL}/pokemon?offset=${offset}&limit=${limit}`, {
-    next: { revalidate: 3000 },
+    cache: 'force-cache',
+    next: { revalidate: 3600 },
     signal,
   })
 
@@ -18,8 +23,9 @@ export const getPokemonList = async (offset = 0, limit = 20, signal?: AbortSigna
 
 export const getPokemonByName = async (name: string, signal?: AbortSignal): Promise<IPokemon> => {
   const res = await fetch(`${API_URL}/pokemon/${encodeURIComponent(name)}`, {
-    next: { revalidate: 3000 },
-    signal
+    cache: 'force-cache',
+    next: { revalidate: 3600 },
+    signal,
   })
 
   if (!res.ok) {
@@ -30,7 +36,8 @@ export const getPokemonByName = async (name: string, signal?: AbortSignal): Prom
 
 export const getPokemonByNameOrNull = async (name: string): Promise<IPokemon | null> => {
   const res = await fetch(`${API_URL}/pokemon/${encodeURIComponent(name)}`, {
-    next: { revalidate: 3000 },
+    cache: 'force-cache',
+    next: { revalidate: 3600 },
   })
 
   if (res.status === 404) {
@@ -46,7 +53,8 @@ export const getPokemonByNameOrNull = async (name: string): Promise<IPokemon | n
 
 export const getPokemonSpecies = async (name: string): Promise<IPokemonSpecies> => {
   const res = await fetch(`${API_URL}/pokemon-species/${encodeURIComponent(name)}`, {
-    next: { revalidate: 3000 },
+    cache: 'force-cache',
+    next: { revalidate: 3600 },
   })
 
   if (!res.ok) {
@@ -57,7 +65,14 @@ export const getPokemonSpecies = async (name: string): Promise<IPokemonSpecies> 
 }
 
 export const getEvolutionChain = async (url: string): Promise<IEvolutionChainResponse> => {
+  const parsed = new URL(url)
+
+  if (parsed.hostname !== 'pokeapi.co') {
+    throw new Error('Invalid evolution chain URL')
+  }
+
   const res = await fetch(url, {
+    cache: 'force-cache',
     next: { revalidate: 3000 },
   })
 

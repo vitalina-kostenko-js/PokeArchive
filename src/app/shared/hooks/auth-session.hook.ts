@@ -15,7 +15,6 @@ type AuthSessionResponse = {
   session: { token: string } | null
 }
 
-/** Reads JWT session from same-origin Next route handlers (`/auth/session`), not the external API on :4000. */
 export function useAuthSession() {
   const pathname = usePathname()
   const [isPending, setIsPending] = useState(true)
@@ -47,7 +46,6 @@ export function useAuthSession() {
 
   return {
     isPending,
-    /** Shape compatible with profile menu (`session.user`). */
     session: user ? { user } : null,
   }
 }

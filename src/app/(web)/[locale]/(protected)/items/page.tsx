@@ -1,15 +1,11 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
-import { getLocale } from 'next-intl/server'
-import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
-import { fetchPokemonCards, pokemonCardsQueryKey } from '@/app/entities/api/pokemons'
+import { fetchPokemonCards, pokemonKeys } from '@/app/entities/api/pokemons'
 import { ReactQueryHydration } from '@/app/shared/providers'
-import { authServer } from '@/pkg/auth/server'
-import { getPathname } from '@/pkg/locale'
 
-import { DashboardLayoutComponent } from '../../../widgets/dashboard'
-import PokemonListComponent from '../../../widgets/pokemon-list/pokemon-list.component'
+import { DashboardLayoutComponent } from '../../../../widgets/dashboard'
+import PokemonListComponent from '../../../../widgets/pokemon-list/pokemon-list.component'
 
 export const revalidate = 3600
 
@@ -20,14 +16,6 @@ interface ItemsPageProps {
 
 //page
 const ItemsPage = async ({ searchParams }: ItemsPageProps) => {
-  const session = await authServer.getSession()
-  const user = session.user
-
-  if (!user) {
-    const locale = await getLocale()
-    redirect(getPathname({ href: '/sign-in', locale }))
-  }
-
   const sp = await searchParams
 
   const rawPage = Number(sp.page ?? '1')
@@ -38,7 +26,7 @@ const ItemsPage = async ({ searchParams }: ItemsPageProps) => {
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
-    queryKey: pokemonCardsQueryKey(offset, itemsPerPage),
+    queryKey: pokemonKeys.cards(offset, itemsPerPage),
     queryFn: () => fetchPokemonCards(offset, itemsPerPage),
   })
 
@@ -47,7 +35,7 @@ const ItemsPage = async ({ searchParams }: ItemsPageProps) => {
       <DashboardLayoutComponent>
         <div className='flex flex-1 flex-col gap-6 py-4'>
           <Suspense fallback={<div className='text-muted-foreground text-sm'>Loading…</div>}>
-            <PokemonListComponent />
+            <PokemonListComponent page={page} offset={offset} />
           </Suspense>
         </div>
       </DashboardLayoutComponent>

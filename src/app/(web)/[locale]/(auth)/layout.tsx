@@ -8,11 +8,11 @@ interface IProps {
 }
 
 // component
-const ProtectedLayoutComponent: FC<Readonly<IProps>> = (props) => {
+const AuthLayoutComponent: FC<Readonly<IProps>> = (props) => {
   const { children } = props
 
   // render
   return <LayoutComponent type='protected'>{children}</LayoutComponent>
 }
 
-export default ProtectedLayoutComponent
+export default AuthLayoutComponent

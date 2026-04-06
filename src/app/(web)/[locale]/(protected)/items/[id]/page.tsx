@@ -2,18 +2,18 @@ import { ArrowLeft } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { Link } from '../../../../../pkg/locale'
+import { Link } from '../../../../../../pkg/locale'
 import {
   getEvolutionChain,
   getPokemonByNameOrNull,
   getPokemonSpecies,
-} from '../../../../entities/api/pokemons/pokemon.api'
-import { flattenEvolutionChain } from '../../../../entities/models'
-import { CardProfileComponent } from '../../../../shared/ui/card-profile'
-import { PokemonAvatar } from '../../../../shared/ui/pokemon-avatar'
-import { DashboardLayoutComponent } from '../../../../widgets/dashboard'
+} from '../../../../../entities/api/pokemons/pokemon.api'
+import { flattenEvolutionChain } from '../../../../../entities/models'
+import { CardProfileComponent } from '../../../../../widgets/card-profile'
+import { DashboardLayoutComponent } from '../../../../../widgets/dashboard'
+import { PokemonAvatar } from '../../../../../widgets/pokemon-avatar'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 //interface
 interface IProps {
@@ -80,7 +80,7 @@ const Page = async ({ params }: IProps) => {
         <CardProfileComponent pokemon={pokemon} species={species} />
 
         <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
-          <div className='rounded-3xl border border-gray-100 bg-white p-6 shadow-lg md:col-span-1 dark:border-gray-700 dark:bg-gray-800'>
+          <div className='bg-card rounded-3xl border p-6 shadow-lg md:col-span-1'>
             <h3 className='mb-6 flex items-center gap-2 text-xl font-bold dark:text-white'>
               <span className='h-6 w-2 rounded-full bg-red-500'></span> {t('baseStats')}
             </h3>

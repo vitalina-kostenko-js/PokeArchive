@@ -67,7 +67,8 @@
   },
   "card_component": {
     "click_message": "Klicken Sie mich an, wenn Sie mehr über mich erfahren möchten!",
-    "abilities": "Fähigkeiten"
+    "abilities": "Fähigkeiten",
+    "base_stat": "Basiswerte"
   },
   "header": {
     "home": "Startseite"

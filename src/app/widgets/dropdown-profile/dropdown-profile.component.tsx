@@ -7,9 +7,9 @@ import { useState } from 'react'
 import { signOutAppAuth, useAuthSession } from '@/app/shared/hooks'
 import { useRouter } from '@/pkg/locale'
 
-import { Avatar, AvatarFallback, AvatarImage } from '../../../../pkg/theme/ui/avatar'
-import { Button } from '../../../../pkg/theme/ui/button'
-import { LoginButtonComponent, RegisterButtonComponent } from '../auth-button'
+import { Avatar, AvatarFallback, AvatarImage } from '../../../pkg/theme/ui/avatar'
+import { Button } from '../../../pkg/theme/ui/button'
+import { LoginButtonComponent, RegisterButtonComponent } from '../../features/auth-button'
 import ProfileMenuContentComponent from './profile-menu-content.component'
 
 const ProfileDropdownComponent = () => {
@@ -19,16 +19,11 @@ const ProfileDropdownComponent = () => {
 
   const params = useParams()
   const locale = (params.locale as string) ?? 'en'
+  const callbackUrl = `/${locale}`
 
-  const { session, isPending } = useAuthSession()
+  const { session } = useAuthSession()
 
-  if (isPending) {
-    return <div>{tLoading('loading')}</div>
-  }
-
-  if (session?.user) {
-    const callbackUrl = `/${locale}`
-
+  if (session) {
     return (
       <>
         {isSigningOut && (
@@ -60,7 +55,7 @@ const ProfileDropdownComponent = () => {
             <Button variant='ghost' size='icon'>
               <Avatar className='size-9.5 rounded-md'>
                 <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png' />
-                <AvatarFallback>JD</AvatarFallback>
+                <AvatarFallback>{session.user.name?.charAt(0).toUpperCase() ?? '?'}</AvatarFallback>
               </Avatar>
             </Button>
           }

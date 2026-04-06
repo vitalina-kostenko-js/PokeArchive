@@ -1,6 +1,18 @@
 export { mapPokemonToCard } from './pokemon.model'
 
-export type { IPokemonCardData } from './pokemon.model'
+export type {
+  IAbility,
+  IHeldItem,
+  IMove,
+  INameResource,
+  IPokemon,
+  IPokemonCardData,
+  IPokemonListResponse,
+  IPokemonSpecies,
+  ISprites,
+  IStat,
+  IType,
+} from './pokemon.model'
 
 export type { IEvolutionChainResponse, IEvolutionDetail, IEvolutionNode } from './evolution.model'
 

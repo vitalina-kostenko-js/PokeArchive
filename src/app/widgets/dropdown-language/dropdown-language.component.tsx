@@ -8,10 +8,10 @@ import {
   DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu'
 import { useLocale } from 'next-intl'
-import { useRouter as useStandardRouter } from 'next/navigation' // Імпортуємо стандартний роутер
+import { useRouter as useStandardRouter } from 'next/navigation' 
 import type { ReactNode } from 'react'
-import { useEffect, useState, useTransition } from 'react' // Додаємо useTransition
-import { usePathname, useRouter } from '../../../../pkg/locale'
+import { useEffect, useState, useTransition } from 'react' 
+import { usePathname, useRouter } from '../../../pkg/locale'
 
 const LOCALES = [
   { value: 'en', label: 'English' },

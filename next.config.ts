@@ -20,8 +20,8 @@ const nextConfig: NextConfig = {
 
   images: {
     remotePatterns: [
-      { protocol: 'https', hostname: '**' },
-      { protocol: 'http', hostname: 'localhost', port: '4000' },
+      { protocol: 'https', hostname: 'raw.githubusercontent.com' },
+      { protocol: 'https', hostname: 'cdn.shadcnstudio.com' },
     ],
     minimumCacheTTL: 86400,
     deviceSizes: [640, 1080, 1920],

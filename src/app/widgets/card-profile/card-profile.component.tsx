@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import { FC } from 'react'
 
-import { IPokemon, IPokemonSpecies } from '../../interfaces'
 import { useTranslations } from 'next-intl'
+import { IPokemon, IPokemonSpecies } from '@/app/entities/models'
 
 interface IProps {
   pokemon: IPokemon
@@ -11,7 +11,7 @@ interface IProps {
 
 const CardProfileComponent: FC<Readonly<IProps>> = ({ pokemon, species }) => {
   const t = useTranslations('card_profile')
-  
+
   const mainImage = pokemon.sprites?.other?.['official-artwork']?.front_default ?? pokemon.sprites?.front_default ?? ''
   const genus = species.genera.find((g) => g.language.name === 'en')?.genus
 
@@ -39,13 +39,8 @@ const CardProfileComponent: FC<Readonly<IProps>> = ({ pokemon, species }) => {
           </div>
 
           <div className='flex flex-wrap justify-center gap-2 md:justify-start'>
-            {pokemon.types?.map((t) => (
-              <span
-                key={t.type.name}
-                className='rounded-full border border-gray-200 bg-gray-100 px-4 py-1 text-sm font-semibold text-gray-700 uppercase dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200'
-              >
-                {t.type.name}
-              </span>
+            {pokemon.types?.map((typeItem) => (
+              <span key={typeItem.type.name}>{typeItem.type.name}</span>
             ))}
           </div>
 

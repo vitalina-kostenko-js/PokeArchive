@@ -1,31 +1,25 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
 import { FC, useMemo } from 'react'
 
 import { usePokemonCardsQuery } from '@/app/entities/api/pokemons'
-import { IPokemon, IPokemonCardData } from '@/app/shared/interfaces'
-import { CardComponent } from '@/app/shared/ui/card'
+import { IPokemon, IPokemonCardData, mapPokemonToCard } from '@/app/entities/models'
+import { CardComponent } from '@/app/widgets/card'
 
 import { Link } from '../../../pkg/locale'
-import { mapPokemonToCard } from '../../entities/models'
 import { PaginationComponent } from '../pagination'
 
-interface PokemonListComponentProps {
+//inteface
+interface IPokemonListComponentProps {
   dataPokemons?: IPokemon[]
-  page?: number
+  page: number
+  offset: number
 }
 
-const PokemonListComponent: FC<Readonly<PokemonListComponentProps>> = (props) => {
-  const { dataPokemons, page: pageProp } = props
+//component
+const PokemonListComponent: FC<Readonly<IPokemonListComponentProps>> = (props) => {
+  const { dataPokemons, page: currentPage, offset: listOffset } = props
   const itemsPerPage = 12
-
-  const searchParams = useSearchParams()
-
-  const urlPage = Number(searchParams.get('page') || '1')
-  const pageFromUrl = Number.isFinite(urlPage) && urlPage >= 1 ? Math.floor(urlPage) : 1
-  const currentPage = pageProp ?? pageFromUrl
-  const listOffset = (currentPage - 1) * itemsPerPage
 
   const { data: fetchedData, isLoading, isError } = usePokemonCardsQuery(listOffset, itemsPerPage, !dataPokemons)
 
@@ -37,14 +31,14 @@ const PokemonListComponent: FC<Readonly<PokemonListComponentProps>> = (props) =>
     return (fetchedData?.items ?? []).map(mapPokemonToCard)
   }, [dataPokemons, fetchedData])
 
-  const paginatedData = useMemo(() => {
-    if (!Array.isArray(displayData)) return []
-    if (dataPokemons) {
-      const start = (currentPage - 1) * itemsPerPage
-      return displayData.slice(start, start + itemsPerPage)
-    }
-    return displayData
-  }, [dataPokemons, displayData, currentPage, itemsPerPage])
+  // const paginatedData = useMemo(() => {
+  //   if (!Array.isArray(displayData)) return []
+  //   if (dataPokemons) {
+  //     const start = (currentPage - 1) * itemsPerPage
+  //     return displayData.slice(start, start + itemsPerPage)
+  //   }
+  //   return displayData
+  // }, [dataPokemons, displayData, currentPage, itemsPerPage])
 
   const totalItems = dataPokemons ? dataPokemons.length : (fetchedData?.totalCount ?? 0)
 
@@ -58,7 +52,7 @@ const PokemonListComponent: FC<Readonly<PokemonListComponentProps>> = (props) =>
       </div>
 
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-        {paginatedData.map((item) => (
+        {displayData.map((item) => (
           <div key={item.name} className='min-h-0'>
             <Link href={`/items/${item.name}`}>
               <CardComponent data={item} />

@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server'
 import createMiddleware from 'next-intl/middleware'
+import { NextRequest, NextResponse } from 'next/server'
 
 import { getSessionPayloadFromRequest } from '@/pkg/auth/session-from-request'
 import { routing } from '@/pkg/locale'
@@ -28,19 +28,23 @@ export default async function proxy(req: NextRequest) {
   const itemsIdx = parts.indexOf('items')
   const isItemsListOnly = itemsIdx !== -1 && itemsIdx === parts.length - 1
 
-  const isSignIn = pathname === '/sign-in'
-  const isSignUp = pathname === '/sign-up' 
+  const localeRegex = /^\/(en|de)/
+  const strippedPath = pathname.replace(localeRegex, '') || '/'
 
+  const isSignIn = strippedPath === '/sign-in'
+  const isSignUp = strippedPath === '/sign-up'
+
+  const locale = parts[0] || 'en'
   if (isItemsListOnly && !user) {
-    return NextResponse.redirect(new URL('/sign-in', req.url))
+    return NextResponse.redirect(new URL(`/${locale}/sign-in`, req.url))
   }
 
   if (isSignIn && user) {
-    return NextResponse.redirect(new URL('/items', req.url))
+    return NextResponse.redirect(new URL(`/${locale}/items`, req.url))
   }
 
   if (isSignUp && user) {
-    return NextResponse.redirect(new URL('/items', req.url))
+    return NextResponse.redirect(new URL(`/${locale}/items`, req.url))
   }
 
   return i18nRes

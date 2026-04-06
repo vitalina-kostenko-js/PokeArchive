@@ -1,4 +1,4 @@
-import { IPokemonCardData } from '@/app/shared/interfaces'
+import { IPokemonCardData } from '@/app/entities/models'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { FC } from 'react'
@@ -45,7 +45,9 @@ const CardComponent: FC<Readonly<IProps>> = (props) => {
         </div>
 
         <div className='absolute inset-0 flex h-full w-full [transform:rotateY(180deg)] flex-col rounded-3xl border-2 bg-slate-800 p-6 text-white shadow-inner [backface-visibility:hidden]'>
-          <h3 className='mb-6 text-center text-xl font-black tracking-wider text-sky-400 uppercase'>Base Stats</h3>
+          <h3 className='mb-6 text-center text-xl font-black tracking-wider text-sky-400 uppercase'>
+            {t('base_stat')}
+          </h3>
 
           <div className='w-full space-y-4'>
             {data.stats?.map((stat) => (

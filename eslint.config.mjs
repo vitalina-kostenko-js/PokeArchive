@@ -3,6 +3,7 @@ import nextVitals from 'eslint-config-next/core-web-vitals'
 import nextTs from 'eslint-config-next/typescript'
 import prettierPlugin from 'eslint-plugin-prettier'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
+import cleanCodePlugin from 'eslint-plugin-clean-code'
 
 // eslint config
 const eslintConfig = defineConfig([
@@ -19,7 +20,7 @@ const eslintConfig = defineConfig([
     plugins: {
       'simple-import-sort': simpleImportSort,
       prettier: prettierPlugin,
-       "clean-code"
+      'clean-code': cleanCodePlugin,
     },
     rules: {
       'no-undef': 'off',

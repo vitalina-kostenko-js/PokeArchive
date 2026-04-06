@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '../pkg/locale'
 
 export default function GlobalError() {
   const t = useTranslations('notFound')
@@ -12,19 +12,13 @@ export default function GlobalError() {
       <body>
         <div className='flex min-h-screen flex-col items-center justify-center bg-white px-4 text-center'>
           <div className='mb-8 flex items-center justify-center select-none'>
-            <span className='text-[120px] font-extrabold leading-none text-black md:text-[180px]'>4</span>
+            <span className='text-[120px] leading-none font-extrabold text-black md:text-[180px]'>4</span>
 
             <div className='animate-bounce-slow z-10 -mx-4 w-32 md:-mx-8 md:w-48'>
-              <Image
-                src='/images/not_found.svg'
-                alt='Error illustration'
-                width={200}
-                height={420}
-                unoptimized
-              />
+              <Image src='/images/not_found.svg' alt='Error illustration' width={200} height={420} unoptimized />
             </div>
 
-            <span className='text-[120px] font-extrabold leading-none text-black md:text-[180px]'>4</span>
+            <span className='text-[120px] leading-none font-extrabold text-black md:text-[180px]'>4</span>
           </div>
 
           <div className='space-y-4'>

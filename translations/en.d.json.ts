@@ -70,7 +70,8 @@ declare const messages: {
   },
   "card_component": {
     "click_message": "Click on me if you want to see more details about me!",
-    "abilities": "Abilities"
+    "abilities": "Abilities",
+    "base_stat": "Base Stats"
   },
   "header": {
     "home": "Home"

@@ -1,4 +1,4 @@
-import { INameResource } from '../../shared/interfaces'
+import { INameResource } from './pokemon.model'
 
 export interface IEvolutionDetail {
   trigger: INameResource

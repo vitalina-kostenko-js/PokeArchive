@@ -1,13 +1,12 @@
 import { type Metadata } from 'next'
-import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
+import { notFound } from 'next/navigation'
 import { type FC, type ReactNode } from 'react'
 
 import { EAssetImage } from '@/app/shared/interfaces'
 import { envClient } from '@/config/env'
 import { routing } from '@/pkg/locale'
-import { RestApiProvider } from '@/pkg/rest-api'
 import { ThemeProvider } from '@/pkg/theme'
 import { Toaster } from '@/pkg/theme/ui/sonner'
 
@@ -76,8 +75,7 @@ const LocaleLayout: FC<Readonly<IProps>> = async (props: IProps) => {
   // return
   return (
     <ThemeProvider>
-      <RestApiProvider>{children}</RestApiProvider>
-
+      {children}
       <Toaster position='top-center' duration={3000} />
     </ThemeProvider>
   )
