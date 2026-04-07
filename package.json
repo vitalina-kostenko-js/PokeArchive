@@ -54,6 +54,7 @@
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "babel-plugin-polyfill-corejs3": "^0.14.2",
     "eslint": "^9",
     "eslint-config-next": "16.0.5",
     "eslint-config-prettier": "^10.1.8",

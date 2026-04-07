@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import { FC } from 'react'
 
-import { useTranslations } from 'next-intl'
 import { IPokemon, IPokemonSpecies } from '@/app/entities/models'
+import { useTranslations } from 'next-intl'
+import { PokemonTypeComponent } from '../../features/pokemon-type'
 
 interface IProps {
   pokemon: IPokemon
@@ -40,7 +41,7 @@ const CardProfileComponent: FC<Readonly<IProps>> = ({ pokemon, species }) => {
 
           <div className='flex flex-wrap justify-center gap-2 md:justify-start'>
             {pokemon.types?.map((typeItem) => (
-              <span key={typeItem.type.name}>{typeItem.type.name}</span>
+              <PokemonTypeComponent key={typeItem.type.name} typeName={typeItem.type.name} />
             ))}
           </div>
 

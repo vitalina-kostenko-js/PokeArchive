@@ -2,6 +2,7 @@ import { IPokemonCardData } from '@/app/entities/models'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { FC } from 'react'
+import { PokemonTypeComponent } from '../../features/pokemon-type'
 
 //interface
 interface IProps {
@@ -33,13 +34,8 @@ const CardComponent: FC<Readonly<IProps>> = (props) => {
           <h3 className='mb-4 text-center text-2xl font-black text-slate-800 capitalize'>{data.name}</h3>
 
           <div className='flex flex-wrap justify-center gap-2'>
-            {data.types.map((type) => (
-              <span
-                key={`${type.slot}-${type.type.name}`}
-                className='rounded-xl border px-4 py-1.5 text-xs font-bold uppercase shadow-sm'
-              >
-                {type.type.name}
-              </span>
+            {data.types?.map((typeItem) => (
+              <PokemonTypeComponent key={typeItem.type.name} typeName={typeItem.type.name} />
             ))}
           </div>
         </div>
