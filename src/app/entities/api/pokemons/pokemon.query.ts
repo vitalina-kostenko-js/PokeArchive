@@ -1,6 +1,6 @@
 import type { IPokemon } from '@/app/entities/models'
 import { useQuery } from '@tanstack/react-query'
-import { getPokemonByName, getPokemonList } from './pokemon.api'
+import { getEvolutionChain, getPokemonByName, getPokemonList, getPokemonSpecies } from './pokemon.api'
 
 export type PokemonCardsQueryResult = {
   items: IPokemon[]
@@ -47,5 +47,21 @@ export const usePokemonCardsQuery = (offset: number, limit: number, enabled = tr
     queryKey: pokemonKeys.cards(offset, limit),
     queryFn: () => fetchPokemonCards(offset, limit),
     enabled,
+    staleTime: 1000 * 60 * 5,
+  })
+
+// export const usePokemonSpeciesQuery = (name: string) =>
+//   useQuery({
+//     queryKey: pokemonKeys.species(name),
+//     queryFn: () => getPokemonSpecies(name),
+//     enabled: !!name,
+//     staleTime: 1000 * 60 * 5,
+//   })
+
+export const usePokemonEvolutionQuery = (url: string) =>
+  useQuery({
+    queryKey: pokemonKeys.evolution(url),
+    queryFn: () => getEvolutionChain(url),
+    enabled: !!url,
     staleTime: 1000 * 60 * 5,
   })
