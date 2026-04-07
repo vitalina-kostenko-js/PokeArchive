@@ -1,7 +1,7 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { usePathname } from '@/pkg/locale'
 
 type AuthSessionUser = {
   id: string
@@ -20,24 +20,33 @@ export function useAuthSession() {
   const [isPending, setIsPending] = useState(true)
   const [user, setUser] = useState<AuthSessionUser | null>(null)
 
+  const isFirstRender = useRef(true)
+
   useEffect(() => {
     let cancelled = false
-    setIsPending(true)
 
-    fetch('/auth/session', { credentials: 'include' })
-      .then((res) => res.json() as Promise<AuthSessionResponse>)
-      .then((body) => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+    }
+
+    const fetchSession = async () => {
+      try {
+        const res = await fetch('/auth/session', { credentials: 'include' })
+        const body = (await res.json()) as AuthSessionResponse
+
         if (!cancelled) {
           setUser(body.user ?? null)
           setIsPending(false)
         }
-      })
-      .catch(() => {
+      } catch {
         if (!cancelled) {
           setUser(null)
           setIsPending(false)
         }
-      })
+      }
+    }
+
+    fetchSession()
 
     return () => {
       cancelled = true

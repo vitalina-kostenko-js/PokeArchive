@@ -18,22 +18,25 @@ import { LoginFormValues, loginSchema, loginUser } from '../../../../features/au
 
 //component
 const LoginFormComponent = () => {
-  const t = useTranslations("form_login");
-  const tSchema = useTranslations("auth_schema");
+  const t = useTranslations('form_login')
+  const tSchema = useTranslations('auth_schema')
 
-  const router = useRouter();
+  const router = useRouter()
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema(tSchema)),
-    defaultValues: { email: "", password: "" },
-  });
+    defaultValues: { email: '', password: '' },
+  })
+
+  const { control, formState, handleSubmit, setError } = form
+  const { errors, isSubmitting } = formState
 
   const handleLoginSubmit = async (values: LoginFormValues) => {
     try {
-      const res = await loginUser(values);
+      const res = await loginUser(values)
 
       if ('error' in res) {
-        form.setError('root', { message: t('loginFailed') })
+        setError('root', { message: t('loginFailed') })
         return
       }
 
@@ -47,30 +50,23 @@ const LoginFormComponent = () => {
       router.push('/items')
       router.refresh()
     } catch {
-      form.setError("root", { message: t("loginFailed") });
+      setError('root', { message: t('loginFailed') })
     }
-  };
+  }
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(handleLoginSubmit)}
-        className="space-y-4"
-      >
-        {form.formState.errors.root && (
-          <p className="text-destructive text-sm">
-            {form.formState.errors.root.message}
-          </p>
-        )}
+      <form onSubmit={handleSubmit(handleLoginSubmit)} className='space-y-4'>
+        {errors.root && <p className='text-destructive text-sm'>{errors.root.message}</p>}
 
         <FormField
-          control={form.control}
-          name="email"
+          control={control}
+          name='email'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("email")}</FormLabel>
+              <FormLabel>{t('email')}</FormLabel>
 
-              <Input placeholder={t("enterEmail")} {...field} />
+              <Input placeholder={t('enterEmail')} {...field} />
 
               <FormMessage />
             </FormItem>
@@ -78,29 +74,25 @@ const LoginFormComponent = () => {
         />
 
         <FormField
-          control={form.control}
-          name="password"
+          control={control}
+          name='password'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("password")}</FormLabel>
+              <FormLabel>{t('password')}</FormLabel>
 
-              <Input
-                type="password"
-                placeholder={t("enterPassword")}
-                {...field}
-              />
+              <Input type='password' placeholder={t('enterPassword')} {...field} />
 
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting ? t("loggingIn") : t("login")}
+        <Button type='submit' disabled={isSubmitting}>
+          {isSubmitting ? t('loggingIn') : t('login')}
         </Button>
       </form>
     </Form>
-  );
-};
+  )
+}
 
 export default LoginFormComponent;

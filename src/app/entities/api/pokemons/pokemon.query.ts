@@ -1,6 +1,6 @@
 import type { IPokemon } from '@/app/entities/models'
 import { useQuery } from '@tanstack/react-query'
-import { getEvolutionChain, getPokemonByName, getPokemonList, getPokemonSpecies } from './pokemon.api'
+import { getEvolutionChain, getPokemonByName, getPokemonList } from './pokemon.api'
 
 export type PokemonCardsQueryResult = {
   items: IPokemon[]

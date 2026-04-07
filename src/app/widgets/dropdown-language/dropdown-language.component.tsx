@@ -8,9 +8,8 @@ import {
   DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu'
 import { useLocale } from 'next-intl'
-import { useRouter as useStandardRouter } from 'next/navigation' 
 import type { ReactNode } from 'react'
-import { useEffect, useState, useTransition } from 'react' 
+import { useEffect, useState, useTransition } from 'react'
 import { usePathname, useRouter } from '../../../pkg/locale'
 
 const LOCALES = [
@@ -28,8 +27,7 @@ const LanguageDropdownComponent = (props: ILanguageDropdownProps) => {
   const { trigger, defaultOpen, align = 'end' } = props
 
   const locale = useLocale()
-  const router = useRouter() 
-  const standardRouter = useStandardRouter()
+  const router = useRouter()
   const pathname = usePathname()
   
   const [isPending, startTransition] = useTransition()
@@ -45,8 +43,6 @@ const LanguageDropdownComponent = (props: ILanguageDropdownProps) => {
     
     startTransition(() => {
       router.replace(pathname, { locale: value })
-      
-      standardRouter.refresh()
     })
   }
 
