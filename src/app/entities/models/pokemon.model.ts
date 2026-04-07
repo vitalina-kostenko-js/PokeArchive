@@ -107,3 +107,15 @@ export const mapPokemonToCard = (pokemon: IPokemon): IPokemonCardData => ({
   abilities: pokemon.abilities ?? [],
   stats: pokemon.stats ?? [],
 })
+
+export interface IPokemonTypeResponse {
+  id: string
+  name: string
+  pokemon: Array<{
+    pokemon: {
+      name: string
+      url: string
+    }
+    slot: number
+  }>
+}

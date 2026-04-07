@@ -1,9 +1,4 @@
-import type {
-  IEvolutionChainResponse,
-  IPokemon,
-  IPokemonListResponse,
-  IPokemonSpecies,
-} from '@/app/entities/models'
+import type { IEvolutionChainResponse, IPokemon, IPokemonListResponse, IPokemonSpecies, IPokemonTypeResponse } from '@/app/entities/models'
 
 const API_URL = 'https://pokeapi.co/api/v2'
 
@@ -78,6 +73,20 @@ export const getEvolutionChain = async (url: string): Promise<IEvolutionChainRes
 
   if (!res.ok) {
     throw new Error('Evolution chain not found')
+  }
+
+  return res.json()
+}
+
+export const getPokemonByType = async (typeName: string, signal?: AbortSignal): Promise<IPokemonTypeResponse> => {
+  const res = await fetch(`${API_URL}/type/${encodeURIComponent(typeName)}`, {
+    cache: 'force-cache',
+    next: { revalidate: 3600 },
+    signal,
+  })
+
+  if (!res.ok) {
+    throw new Error('Type noot found')
   }
 
   return res.json()

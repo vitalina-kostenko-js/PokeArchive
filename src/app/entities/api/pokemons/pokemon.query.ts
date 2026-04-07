@@ -1,6 +1,6 @@
 import type { IPokemon } from '@/app/entities/models'
 import { useQuery } from '@tanstack/react-query'
-import { getEvolutionChain, getPokemonByName, getPokemonList } from './pokemon.api'
+import { getEvolutionChain, getPokemonByName, getPokemonByType, getPokemonList } from './pokemon.api'
 
 export type PokemonCardsQueryResult = {
   items: IPokemon[]
@@ -13,6 +13,8 @@ export const pokemonKeys = {
   list: (offset: number, limit: number) => [...pokemonKeys.all, 'list', offset, limit] as const,
   detail: (name: string) => [...pokemonKeys.all, 'detail', name] as const,
   cards: (offset: number, limit: number) => [...pokemonKeys.all, 'cards', offset, limit] as const,
+  cardsByType: (typeName: string, offset: number, limit: number) =>
+    [...pokemonKeys.all, 'cards', 'type', typeName, offset, limit] as const,
   species: (name: string) => [...pokemonKeys.all, 'species', name] as const,
   evolution: (url: string) => [...pokemonKeys.all, 'evolution', url] as const,
 }
@@ -24,6 +26,23 @@ export const fetchPokemonCards = async (offset: number, limit: number): Promise<
   const items = await Promise.all(list.results.map((p) => getPokemonByName(p.name)))
 
   return { items, totalCount: list.count }
+}
+
+export const fetcherPokemonCardsByType = async (
+  typeName: string,
+  offset: number,
+  limit: number,
+): Promise<PokemonCardsQueryResult> => {
+  const typeData = await getPokemonByType(typeName)
+
+  const sliced = typeData.pokemon.slice(offset, offset + limit)
+
+  const items = await Promise.all(sliced.map((entry) => getPokemonByName(entry.pokemon.name)))
+
+  return {
+    items,
+    totalCount: typeData.pokemon.length,
+  }
 }
 
 // query hooks
@@ -63,5 +82,13 @@ export const usePokemonEvolutionQuery = (url: string) =>
     queryKey: pokemonKeys.evolution(url),
     queryFn: () => getEvolutionChain(url),
     enabled: !!url,
+    staleTime: 1000 * 60 * 5,
+  })
+
+export const usePokemonCardsByTypeQuery = (typeName: string | null, offset: number, limit: number) =>
+  useQuery({
+    queryKey: pokemonKeys.cardsByType(typeName ?? '', offset, limit),
+    queryFn: () => fetcherPokemonCardsByType(typeName!, offset, limit),
+    enabled: !!typeName,
     staleTime: 1000 * 60 * 5,
   })

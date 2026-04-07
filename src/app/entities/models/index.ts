@@ -9,6 +9,7 @@ export type {
   IPokemonCardData,
   IPokemonListResponse,
   IPokemonSpecies,
+  IPokemonTypeResponse,
   ISprites,
   IStat,
   IType,
@@ -18,4 +19,4 @@ export type { IEvolutionChainResponse, IEvolutionDetail, IEvolutionNode } from '
 
 export { flattenEvolutionChain } from './evolution.model'
 
-export type { IItem } from './item.model'
+// export type { IItem } from './item.model'
