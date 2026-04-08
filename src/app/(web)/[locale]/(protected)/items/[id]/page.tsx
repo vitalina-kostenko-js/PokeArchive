@@ -1,9 +1,9 @@
-import { ArrowLeft } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { Link } from '../../../../../../pkg/locale'
+
 import { getPokemonByNameOrNull, getPokemonSpecies } from '../../../../../entities/api/pokemons/pokemon.api'
+import { BackButtonComponent } from '../../../../../widgets/back-button'
 import { CardProfileComponent } from '../../../../../widgets/card-profile'
 import { DashboardLayoutComponent } from '../../../../../widgets/dashboard'
 import { BaseStatsComponent } from '../../../../../widgets/polemon-details/base-stats'
@@ -57,11 +57,7 @@ const Page = async ({ params }: IProps) => {
   return (
     <DashboardLayoutComponent>
       <div className='pb-2'>
-        <Link href='/items'>
-          <button className='inline-flex cursor-pointer items-center gap-1'>
-            <ArrowLeft size={20} /> {t('backToList')}
-          </button>
-        </Link>
+        <BackButtonComponent text={t('backToList')} />
       </div>
 
       <div className='animate-in fade-in slide-in-from-bottom-4 mx-auto max-w-5xl space-y-8 duration-700'>

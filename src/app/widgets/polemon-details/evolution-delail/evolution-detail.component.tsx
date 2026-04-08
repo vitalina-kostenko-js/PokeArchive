@@ -1,6 +1,7 @@
 'use client'
 import { useTranslations } from 'next-intl'
 import { FC } from 'react'
+
 import { usePokemonEvolutionQuery } from '../../../entities/api/pokemons'
 import { flattenEvolutionChain } from '../../../entities/models'
 import { PokemonAvatar } from '../../pokemon-avatar'

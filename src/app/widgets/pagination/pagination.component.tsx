@@ -1,6 +1,9 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
+
+import visiblePageItems from './pagination.service'
+
 import { cn } from '../../../pkg/lib/utils/utils'
 import { usePathname } from '../../../pkg/locale'
 import { buttonVariants } from '../../../pkg/theme/ui/button'
@@ -13,7 +16,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '../../../pkg/theme/ui/pagination'
-import visiblePageItems from './pagination.service'
 
 interface IPaginationProps {
   itemsPerPage: number

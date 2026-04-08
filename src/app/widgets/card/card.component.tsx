@@ -1,7 +1,9 @@
-import { IPokemonCardData } from '@/app/entities/models'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { FC } from 'react'
+
+import { IPokemonCardData } from '@/app/entities/models'
+
 import { PokemonTypeComponent } from '../../features/pokemon-type'
 
 //interface
@@ -18,8 +20,8 @@ const CardComponent: FC<Readonly<IProps>> = (props) => {
   return (
     <div className='group relative z-0 h-[400px] w-full [perspective:1000px] hover:z-50'>
       {/* message */}
-      <div className='pointer-events-none absolute top-10 -right-4 z-50 translate-x-full opacity-0 transition-all delay-700 duration-300 group-hover:-right-2 group-hover:opacity-100'>
-        <div className='relative rounded-lg bg-slate-900 px-3 py-2 text-[10px] font-bold whitespace-nowrap text-white shadow-xl after:absolute after:top-1/2 after:right-full after:-translate-y-1/2 after:border-8 after:border-transparent after:border-r-slate-900 after:content-[""]'>
+      <div className='pointer-events-none absolute -top-12 left-1/2 z-50 -translate-x-1/2 opacity-0 transition-all delay-700 duration-300 group-hover:-top-14 group-hover:opacity-100 group-active:hidden'>
+        <div className='relative rounded-lg bg-slate-900 px-3 py-2 text-[10px] font-bold whitespace-nowrap text-white shadow-xl after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-8 after:border-transparent after:border-t-slate-900 after:content-[""]'>
           {t('click_message')}
         </div>
       </div>

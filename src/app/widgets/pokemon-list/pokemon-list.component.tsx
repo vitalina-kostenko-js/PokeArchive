@@ -75,6 +75,10 @@ const PokemonListComponent: FC<Readonly<IPokemonListComponentProps>> = (props) =
           </div>
         ))}
       </div>
+
+      <div className='py-2'>
+        <PaginationComponent totalItems={totalItems} itemsPerPage={itemsPerPage} />
+      </div>
     </>
   )
 }

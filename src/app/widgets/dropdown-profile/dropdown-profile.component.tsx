@@ -7,10 +7,11 @@ import { useState } from 'react'
 import { signOutAppAuth, useAuthSession } from '@/app/shared/hooks'
 import { useRouter } from '@/pkg/locale'
 
+import ProfileMenuContentComponent from './profile-menu-content.component'
+
 import { Avatar, AvatarFallback, AvatarImage } from '../../../pkg/theme/ui/avatar'
 import { Button } from '../../../pkg/theme/ui/button'
 import { LoginButtonComponent, RegisterButtonComponent } from '../../features/auth-button'
-import ProfileMenuContentComponent from './profile-menu-content.component'
 
 const ProfileDropdownComponent = () => {
   const tLoading = useTranslations('loading')
@@ -45,7 +46,7 @@ const ProfileDropdownComponent = () => {
             setIsSigningOut(true)
             try {
               await signOutAppAuth()
-              router.push(callbackUrl)
+              router.push('/sign-in')
               router.refresh()
             } catch {
               setIsSigningOut(false)

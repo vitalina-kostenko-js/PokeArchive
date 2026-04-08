@@ -1,18 +1,13 @@
-"use client";
+'use client'
 
-import { Button } from "@/pkg/theme/ui/button";
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/pkg/theme/ui/form";
-import { Input } from "@/pkg/theme/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
 import { useAuthStore } from '@/app/shared/store'
 import { useRouter } from '@/pkg/locale'
+import { Button } from '@/pkg/theme/ui/button'
+import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/pkg/theme/ui/form'
+import { Input } from '@/pkg/theme/ui/input'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useTranslations } from 'next-intl'
+import { useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { LoginFormValues, loginSchema, loginUser } from '../../../../features/auth-form'
 
@@ -20,6 +15,8 @@ import { LoginFormValues, loginSchema, loginUser } from '../../../../features/au
 const LoginFormComponent = () => {
   const t = useTranslations('form_login')
   const tSchema = useTranslations('auth_schema')
+
+  const [isPending, startTransition] = useTransition()
 
   const router = useRouter()
 
@@ -29,7 +26,9 @@ const LoginFormComponent = () => {
   })
 
   const { control, formState, handleSubmit, setError } = form
+
   const { errors, isSubmitting } = formState
+  const isLoading = isSubmitting || isPending
 
   const handleLoginSubmit = async (values: LoginFormValues) => {
     try {
@@ -47,8 +46,10 @@ const LoginFormComponent = () => {
         image: null,
       })
 
-      router.push('/items')
-      router.refresh()
+      startTransition(() => {
+        router.push('/items')
+        router.refresh()
+      })
     } catch {
       setError('root', { message: t('loginFailed') })
     }
@@ -87,12 +88,12 @@ const LoginFormComponent = () => {
           )}
         />
 
-        <Button type='submit' disabled={isSubmitting}>
-          {isSubmitting ? t('loggingIn') : t('login')}
+        <Button type='submit' disabled={isLoading}>
+          {isLoading ? t('loggingIn') : t('login')}
         </Button>
       </form>
     </Form>
   )
 }
 
-export default LoginFormComponent;
+export default LoginFormComponent

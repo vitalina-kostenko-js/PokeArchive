@@ -1,8 +1,9 @@
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { FC } from 'react'
 
 import { IPokemon, IPokemonSpecies } from '@/app/entities/models'
-import { useTranslations } from 'next-intl'
+
 import { PokemonTypeComponent } from '../../features/pokemon-type'
 
 interface IProps {

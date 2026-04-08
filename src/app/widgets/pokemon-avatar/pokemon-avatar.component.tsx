@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { FC } from 'react'
+
 import { Link } from '../../../pkg/locale'
 import { usePokemonDetailQuery } from '../../entities/api/pokemons'
 

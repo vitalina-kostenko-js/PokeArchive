@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server'
+
 import { authServer } from '../../../pkg/auth/server'
 import { Link } from '../../../pkg/locale'
 import { DashboardLayoutComponent } from '../../widgets/dashboard'
@@ -11,7 +12,7 @@ interface UserSession {
 
 const MainComponent = async () => {
   const t = await getTranslations('home')
-  
+
   const session = (await authServer.getSession()) as UserSession | null
   const user = session?.user
 

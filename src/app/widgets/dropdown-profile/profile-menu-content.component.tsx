@@ -122,9 +122,13 @@ const ProfileMenuContentComponent = (props: IProfileMenuContentProps) => {
 
         <DropdownMenuItem
           className={`${itemClasses} text-red-600 focus:bg-red-50 focus:text-red-600 dark:focus:bg-red-900/10`}
-          onSelect={(e) => {
+          onSelect={async (e) => {
             e.preventDefault()
-            void Promise.resolve(onLogout?.())
+            try {
+              await onLogout?.()
+            } catch (error) {
+              console.error('Logout failed', error)
+            }
           }}
         >
           <LogOutIcon className='size-5' />

@@ -1,5 +1,6 @@
 import { LanguagesIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+
 import { Link } from '../../../pkg/locale'
 import {
   Breadcrumb,

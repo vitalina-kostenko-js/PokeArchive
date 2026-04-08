@@ -1,5 +1,9 @@
 'use client'
 
+import { useLocale } from 'next-intl'
+import type { ReactNode } from 'react'
+import { useEffect, useState, useTransition } from 'react'
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,9 +11,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu'
-import { useLocale } from 'next-intl'
-import type { ReactNode } from 'react'
-import { useEffect, useState, useTransition } from 'react'
+
 import { usePathname, useRouter } from '../../../pkg/locale'
 
 const LOCALES = [
@@ -29,7 +31,7 @@ const LanguageDropdownComponent = (props: ILanguageDropdownProps) => {
   const locale = useLocale()
   const router = useRouter()
   const pathname = usePathname()
-  
+
   const [isPending, startTransition] = useTransition()
 
   const [language, setLanguage] = useState(locale)
@@ -40,7 +42,7 @@ const LanguageDropdownComponent = (props: ILanguageDropdownProps) => {
 
   const handleChange = (value: string) => {
     setLanguage(value)
-    
+
     startTransition(() => {
       router.replace(pathname, { locale: value })
     })
