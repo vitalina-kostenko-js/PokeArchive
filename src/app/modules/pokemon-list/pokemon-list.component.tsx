@@ -9,8 +9,8 @@ import { CardComponent } from '@/app/widgets/card'
 import { useTypeFilter } from './pokemon-list.service'
 
 import { Link } from '../../../pkg/locale'
-import { PaginationComponent } from '../pagination'
-import { TypeFilterComponent } from '../type-filter'
+import { TypeFilterComponent } from '../../shared/ui/type-filter'
+import { PaginationComponent } from '../../widgets/pagination'
 
 //inteface
 interface IPokemonListComponentProps {

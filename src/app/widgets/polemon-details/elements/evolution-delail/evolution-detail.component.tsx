@@ -2,9 +2,9 @@
 import { useTranslations } from 'next-intl'
 import { FC } from 'react'
 
-import { usePokemonEvolutionQuery } from '../../../entities/api/pokemons'
-import { flattenEvolutionChain } from '../../../entities/models'
-import { PokemonAvatar } from '../../pokemon-avatar'
+import { usePokemonEvolutionQuery } from '../../../../entities/api/pokemons'
+import { flattenEvolutionChain } from '../../../../entities/models'
+import { PokemonAvatarComponent } from '../../../pokemon-avatar'
 
 //interface
 interface IProps {
@@ -34,7 +34,7 @@ const EvolutionDetailComponent: FC<Readonly<IProps>> = (props) => {
       <div className='flex flex-wrap items-center justify-around gap-6 py-4'>
         {evolutionNames.map((name, index) => (
           <div key={name} className='flex items-center gap-4'>
-            <PokemonAvatar name={name} size='md' />
+            <PokemonAvatarComponent name={name} size='md' />
 
             {index < evolutionNames.length - 1 && <span className='text-2xl text-gray-300 dark:text-gray-600'>→</span>}
           </div>

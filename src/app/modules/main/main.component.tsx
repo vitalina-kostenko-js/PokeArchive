@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server'
 
 import { authServer } from '../../../pkg/auth/server'
 import { Link } from '../../../pkg/locale'
-import { DashboardLayoutComponent } from '../../widgets/dashboard'
 
 interface UserSession {
   user?: {
@@ -17,7 +16,7 @@ const MainComponent = async () => {
   const user = session?.user
 
   return (
-    <DashboardLayoutComponent>
+    <>
       <div className='flex flex-1 flex-col items-center justify-center p-4'>
         <div className='max-w-xl space-y-6 text-center'>
           {user ? (
@@ -55,7 +54,7 @@ const MainComponent = async () => {
           )}
         </div>
       </div>
-    </DashboardLayoutComponent>
+    </>
   )
 }
 

@@ -10,8 +10,8 @@ import {
   BreadcrumbSeparator,
 } from '../../../pkg/theme/ui/breadcrumb'
 import { Button } from '../../../pkg/theme/ui/button'
-import { LanguageDropdownComponent } from '../dropdown-language'
-import { ProfileDropdownComponent } from '../dropdown-profile'
+import { LanguageDropdownComponent } from '../../widgets/dropdown-language'
+import { ProfileDropdownComponent } from '../../widgets/dropdown-profile'
 
 //interface
 interface IProps {}

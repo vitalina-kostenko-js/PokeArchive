@@ -1,1 +1,1 @@
-export { default as PokemonAvatar } from './pokemon-avatar.component'
+export { default as PokemonAvatarComponent } from './pokemon-avatar.component'

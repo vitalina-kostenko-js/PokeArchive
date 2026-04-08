@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from '@/pkg/theme/ui/select'
 import { FC } from 'react'
-import { POKEMON_TYPES } from '../../shared/constants'
+import { POKEMON_TYPES } from '../../constants'
 
 //interface
 interface IProps {
@@ -23,7 +23,10 @@ const TypeFilterComponent: FC<Readonly<IProps>> = (props) => {
   const { selectedType, onTypeChange } = props
 
   return (
-    <Select value={selectedType ?? 'all'} onValueChange={(value) => onTypeChange(value === 'all' ? null : value)}>
+    <Select
+      value={selectedType ?? 'all'}
+      onValueChange={(value: string) => onTypeChange(value === 'all' ? null : value)}
+    >
       <SelectTrigger className='w-full max-w-48'>
         <SelectValue placeholder='Select Pokemon by type' />
       </SelectTrigger>

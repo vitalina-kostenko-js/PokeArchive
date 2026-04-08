@@ -2,7 +2,7 @@
 import { useTranslations } from 'next-intl'
 import { FC } from 'react'
 
-import { IPokemon } from '../../../entities/models'
+import { IPokemon } from '../../../../entities/models'
 
 //interface
 interface IProps {

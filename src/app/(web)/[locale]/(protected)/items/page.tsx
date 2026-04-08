@@ -5,8 +5,8 @@ import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { fetcherPokemonCardsByType, fetchPokemonCards, pokemonKeys } from '@/app/entities/api/pokemons'
 import { ReactQueryHydration } from '@/app/shared/providers'
 
-import { DashboardLayoutComponent } from '../../../../widgets/dashboard'
-import PokemonListComponent from '../../../../widgets/pokemon-list/pokemon-list.component'
+import { DashboardLayoutComponent } from '../../../../modules/dashboard'
+import PokemonListComponent from '../../../../modules/pokemon-list/pokemon-list.component'
 
 export const revalidate = 3600
 

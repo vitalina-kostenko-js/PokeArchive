@@ -3,11 +3,11 @@ import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 
 import { getPokemonByNameOrNull, getPokemonSpecies } from '../../../../../entities/api/pokemons/pokemon.api'
-import { BackButtonComponent } from '../../../../../widgets/back-button'
+import { DashboardLayoutComponent } from '../../../../../modules/dashboard'
+import { BackButtonComponent } from '../../../../../shared/ui/back-button'
 import { CardProfileComponent } from '../../../../../widgets/card-profile'
-import { DashboardLayoutComponent } from '../../../../../widgets/dashboard'
-import { BaseStatsComponent } from '../../../../../widgets/polemon-details/base-stats'
-import { EvolutionDetailComponent } from '../../../../../widgets/polemon-details/evolution-delail'
+import { BaseStatsComponent } from '../../../../../widgets/polemon-details/elements/base-stats'
+import { EvolutionDetailComponent } from '../../../../../widgets/polemon-details/elements/evolution-delail'
 
 export const revalidate = 3600
 

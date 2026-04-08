@@ -1,4 +1,5 @@
-import { ReactNode } from 'react'
+import { ReactNode, Suspense } from 'react'
+import LocaleSegmentLoading from '../../shared/ui/loading/loading'
 
 //interface
 interface ILayoutComponentProps {
@@ -10,7 +11,11 @@ interface ILayoutComponentProps {
 const LayoutComponent = (props: ILayoutComponentProps) => {
   const { children, type } = props
 
-  return <div className='relative z-0 flex min-h-dvh flex-col'>{children}</div>
+  return (
+    <Suspense fallback={<LocaleSegmentLoading/>}>
+      <div className='relative z-0 flex min-h-dvh flex-col'>{children}</div>
+    </Suspense>
+  )
 }
 
 export default LayoutComponent

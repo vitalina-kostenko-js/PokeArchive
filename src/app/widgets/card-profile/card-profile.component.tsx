@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 import { FC } from 'react'
 
 import { IPokemon, IPokemonSpecies } from '@/app/entities/models'

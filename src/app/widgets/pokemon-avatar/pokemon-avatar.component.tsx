@@ -11,7 +11,7 @@ interface IProps {
   size?: 'sm' | 'md' | 'lg'
 }
 
-const PokemonAvatar: FC<Readonly<IProps>> = ({ name, size = 'md' }) => {
+const PokemonAvatarComponent: FC<Readonly<IProps>> = ({ name, size = 'md' }) => {
   const { data, isLoading, isError } = usePokemonDetailQuery(name)
 
   const sizeClasses = {
@@ -57,4 +57,4 @@ const PokemonAvatar: FC<Readonly<IProps>> = ({ name, size = 'md' }) => {
   )
 }
 
-export default PokemonAvatar
+export default PokemonAvatarComponent
