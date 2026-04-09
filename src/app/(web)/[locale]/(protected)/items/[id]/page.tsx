@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 
-import { getPokemonByNameOrNull, getPokemonSpecies } from '../../../../../entities/api/pokemons/pokemon.api'
+import { getFullPokemonData, getPokemonByNameOrNull } from '../../../../../entities/api/pokemons/pokemon.api'
 import { DashboardLayoutComponent } from '../../../../../modules/dashboard'
 import { BackButtonComponent } from '../../../../../shared/ui/back-button'
 import { CardProfileComponent } from '../../../../../widgets/card-profile'
@@ -41,18 +41,13 @@ const Page = async ({ params }: IProps) => {
   const { id } = await params
   const t = await getTranslations('items_page')
 
-  const pokemon = await getPokemonByNameOrNull(id)
+  const pokemon = await getFullPokemonData(id)
+
   if (!pokemon) {
     notFound()
   }
 
-  let species
-
-  try {
-    species = await getPokemonSpecies(id)
-  } catch {
-    notFound()
-  }
+  const { species } = pokemon
 
   return (
     <DashboardLayoutComponent>

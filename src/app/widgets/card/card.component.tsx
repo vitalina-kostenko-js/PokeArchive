@@ -18,7 +18,7 @@ const CardComponent: FC<Readonly<IProps>> = (props) => {
   const t = useTranslations('card_component')
 
   return (
-    <div className='group relative z-0 h-[400px] w-full [perspective:1000px] hover:z-50'>
+    <div className='group relative z-0 h-[400px] w-full [perspective:1000px] focus-within:z-50 hover:z-50'>
       {/* message */}
       <div className='pointer-events-none absolute -top-12 left-1/2 z-50 -translate-x-1/2 opacity-0 transition-all delay-700 duration-300 group-hover:-top-14 group-hover:opacity-100 group-active:hidden'>
         <div className='relative rounded-lg bg-slate-900 px-3 py-2 text-[10px] font-bold whitespace-nowrap text-white shadow-xl after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-8 after:border-transparent after:border-t-slate-900 after:content-[""]'>
@@ -27,7 +27,7 @@ const CardComponent: FC<Readonly<IProps>> = (props) => {
       </div>
 
       {/* pokemon */}
-      <div className='relative h-full w-full transform-gpu transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]'>
+      <div className='relative h-full w-full transform-gpu transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] focus-within:[transform:rotateY(180deg)]'>
         <div className='absolute inset-0 flex flex-col items-center justify-center rounded-3xl border-2 bg-white p-6 [backface-visibility:hidden]'>
           <div className='relative mb-4 h-40 w-full transition-transform duration-300 group-hover:scale-110'>
             <Image src={data.sprite} alt={data.name} fill className='object-contain' unoptimized />

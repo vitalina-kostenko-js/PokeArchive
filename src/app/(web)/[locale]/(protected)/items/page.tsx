@@ -1,5 +1,3 @@
-import { Suspense } from 'react'
-
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 
 import { fetcherPokemonCardsByType, fetchPokemonCards, pokemonKeys } from '@/app/entities/api/pokemons'
@@ -43,9 +41,7 @@ const ItemsPage = async ({ searchParams }: ItemsPageProps) => {
     <ReactQueryHydration state={dehydrate(queryClient)}>
       <DashboardLayoutComponent>
         <div className='flex flex-1 flex-col gap-6 py-4'>
-          <Suspense fallback={<div className='text-muted-foreground text-sm'>Loading…</div>}>
-            <PokemonListComponent page={page} offset={offset} selectedType={selectedType} />
-          </Suspense>
+          <PokemonListComponent page={page} offset={offset} selectedType={selectedType} />
         </div>
       </DashboardLayoutComponent>
     </ReactQueryHydration>

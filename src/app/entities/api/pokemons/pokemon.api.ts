@@ -1,4 +1,10 @@
-import type { IEvolutionChainResponse, IPokemon, IPokemonListResponse, IPokemonSpecies, IPokemonTypeResponse } from '@/app/entities/models'
+import type {
+  IEvolutionChainResponse,
+  IPokemon,
+  IPokemonListResponse,
+  IPokemonSpecies,
+  IPokemonTypeResponse,
+} from '@/app/entities/models'
 
 const API_URL = 'https://pokeapi.co/api/v2'
 
@@ -90,4 +96,18 @@ export const getPokemonByType = async (typeName: string, signal?: AbortSignal): 
   }
 
   return res.json()
+}
+
+export const getFullPokemonData = async (id: string) => {
+  try {
+    const [pokemon, species] = await Promise.all([getPokemonByNameOrNull(id), getPokemonSpecies(id)])
+
+    if (!pokemon) {
+      return null
+    }
+
+    return { ...pokemon, species }
+  } catch {
+    return null
+  }
 }

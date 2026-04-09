@@ -1,6 +1,6 @@
-import { LanguagesIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
+import { FC, ReactNode } from 'react'
 import { Link } from '../../../pkg/locale'
 import {
   Breadcrumb,
@@ -9,16 +9,17 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '../../../pkg/theme/ui/breadcrumb'
-import { Button } from '../../../pkg/theme/ui/button'
-import { LanguageDropdownComponent } from '../../widgets/dropdown-language'
-import { ProfileDropdownComponent } from '../../widgets/dropdown-profile'
 
 //interface
-interface IProps {}
+interface IProps {
+  children?: ReactNode
+}
 
 //component
-const HeaderBarComponent = () => {
+const HeaderBarComponent: FC<Readonly<IProps>> = (props) => {
   const t = useTranslations('header')
+
+  const { children } = props
 
   return (
     <header className='bg-card sticky top-0 z-50 border-b'>
@@ -36,16 +37,7 @@ const HeaderBarComponent = () => {
           </Breadcrumb>
         </div>
 
-        <div className='flex items-center gap-1.5'>
-          <LanguageDropdownComponent
-            trigger={
-              <Button data-testid='language-toggle' variant='ghost' size='icon'>
-                <LanguagesIcon />
-              </Button>
-            }
-          />
-          <ProfileDropdownComponent />
-        </div>
+        <div className='flex items-center gap-1.5'>{children}</div>
       </div>
     </header>
   )
