@@ -1,1 +1,1 @@
-export { default as TypeFilterComponent } from './type-filte.component'
+export { default as TypeFilterComponent } from './type-filter.component'

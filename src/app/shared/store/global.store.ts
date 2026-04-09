@@ -10,7 +10,7 @@ interface IStore extends IState {
 }
 
 // store
-export const useGlobalStore = create<IStore>()(
+export const seGlobalStore = create<IStore>()(
   devtools(
     (set) => ({
       menu: false,

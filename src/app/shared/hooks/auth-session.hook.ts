@@ -20,14 +20,8 @@ export function useAuthSession() {
   const [isPending, setIsPending] = useState(true)
   const [user, setUser] = useState<AuthSessionUser | null>(null)
 
-  const isFirstRender = useRef(true)
-
   useEffect(() => {
     let cancelled = false
-
-    if (isFirstRender.current) {
-      isFirstRender.current = false
-    }
 
     const fetchSession = async () => {
       try {

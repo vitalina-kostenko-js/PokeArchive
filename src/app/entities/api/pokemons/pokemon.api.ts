@@ -74,7 +74,7 @@ export const getEvolutionChain = async (url: string): Promise<IEvolutionChainRes
 
   const res = await fetch(url, {
     cache: 'force-cache',
-    next: { revalidate: 3000 },
+    next: { revalidate: 3600 },
   })
 
   if (!res.ok) {
@@ -92,7 +92,7 @@ export const getPokemonByType = async (typeName: string, signal?: AbortSignal): 
   })
 
   if (!res.ok) {
-    throw new Error('Type noot found')
+    throw new Error('Type not found')
   }
 
   return res.json()

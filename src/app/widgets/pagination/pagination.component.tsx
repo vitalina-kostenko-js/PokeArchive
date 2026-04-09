@@ -20,7 +20,7 @@ import {
 interface IPaginationProps {
   itemsPerPage: number
   totalItems: number
-  onPageChange?: (page: number) => void
+  // onPageChange?: (page: number) => void
 }
 
 const PaginationComponent = ({ itemsPerPage, totalItems }: IPaginationProps) => {
