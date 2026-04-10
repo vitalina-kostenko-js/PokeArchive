@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { localUsers } from '../_store'
+
+import { createUser, findUserByEmail } from '../_user.service'
 
 export async function POST(req: NextRequest) {
   try {
@@ -9,12 +10,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'All fields are required' }, { status: 400 })
     }
 
-    if (localUsers.has(email)) {
+    if (await findUserByEmail(email)) {
       return NextResponse.json({ error: 'User already exists' }, { status: 400 })
     }
 
-    const user = { id: crypto.randomUUID(), name, email, password }
-    localUsers.set(email, user)
+    await createUser(name, email, password)
 
     return NextResponse.json({ success: true })
   } catch {

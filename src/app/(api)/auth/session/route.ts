@@ -25,7 +25,9 @@ export async function GET() {
       user: { id: payload.id, name: payload.name, email: payload.email },
       session: { token },
     })
-  } catch {
-    return NextResponse.json({ user: null, session: null })
+  } catch (err) {
+    const message = err instanceof Error ? err.message : JSON.stringify(err)
+    console.error('POST /api/favorites error:', message)
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

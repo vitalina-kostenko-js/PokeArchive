@@ -6,7 +6,7 @@ import { Translate } from './auth-form.interface'
 export const loginSchema = (t: Translate) => {
   return z.object({
     email: z.email({ message: t('invalidEmail') }),
-    password: z.string().min(8, { message: t('passwordMustBeAtLeast8CharactersLong') }),
+    password: z.string().min(10, { message: t('passwordMustBeAtLeast10CharactersLong') }),
   })
 }
 
@@ -16,7 +16,7 @@ export const registerSchema = (t: Translate) => {
     .object({
       name: z.string().min(1, { message: t('nameIsRequired') }),
       email: z.email({ message: t('invalidEmail') }),
-      password: z.string().min(8, { message: t('passwordMustBeAtLeast8CharactersLong') }),
+      password: z.string().min(10, { message: t('passwordMustBeAtLeast10CharactersLong') }),
       confirmPassword: z.string().min(1, { message: t('passwordConfirmationIsRequired') }),
     })
     .refine((data) => data.password === data.confirmPassword, {

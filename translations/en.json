@@ -29,7 +29,7 @@
   "auth_schema": {
     "invalidEmail": "Invalid email",
     "nameIsRequired": "Name is required.",
-    "passwordMustBeAtLeast8CharactersLong": "Password must be at least 8 characters long",
+    "passwordMustBeAtLeast10CharactersLong": "Password must be at least 10 characters long",
     "passwordConfirmationIsRequired": "Password confirmation is required.",
     "passwordsDoNotMatch": "Passwords do not match."
   },
@@ -71,7 +71,9 @@
     "base_stat": "Base Stats"
   },
   "header": {
-    "home": "Home"
+    "home": "Home",
+    "library": "Library",
+    "favorite": "Favorite"
   },
   "items_page": {
     "backToList": "Back to list",

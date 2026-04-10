@@ -1,6 +1,7 @@
 import { SignJWT } from 'jose'
 import { NextRequest, NextResponse } from 'next/server'
-import { localUsers } from '../_store'
+
+import { findUserByEmail, verifyPassword } from '../_user.service'
 
 const secret = new TextEncoder().encode(process.env.JWT_SECRET ?? 'local-dev-secret')
 
@@ -8,9 +9,9 @@ export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json()
 
-    const user = localUsers.get(email)
+    const user = await findUserByEmail(email)
 
-    if (!user || user.password !== password) {
+    if (!user || !(await verifyPassword(password, user.password_hash))) {
       return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 })
     }
 

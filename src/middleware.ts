@@ -1,12 +1,33 @@
-import createMiddleware from 'next-intl/middleware'
 import { NextRequest, NextResponse } from 'next/server'
+import createMiddleware from 'next-intl/middleware'
 
 import { getSessionPayloadFromRequest } from '@/pkg/auth/session-from-request'
 import { routing } from '@/pkg/locale'
 
+import { getBearerPayload } from './pkg/auth/bearer-token'
+
 export default async function proxy(req: NextRequest) {
-  if (req.nextUrl.pathname.startsWith('/api/') || req.nextUrl.pathname.startsWith('/auth/')) {
+  if (req.nextUrl.pathname.startsWith('/auth/')) {
     return NextResponse.next()
+  }
+
+  if (req.nextUrl.pathname.startsWith('/api/')) {
+    let payload = await getBearerPayload(req)
+
+    if (!payload) {
+      payload = await getSessionPayloadFromRequest(req)
+    }
+
+    if (!payload) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const res = NextResponse.next()
+
+    res.headers.set('x-user-id', payload.id as string)
+    res.headers.set('x-user-email', payload.email as string)
+
+    return res
   }
 
   const i18nRes = createMiddleware(routing)(req)

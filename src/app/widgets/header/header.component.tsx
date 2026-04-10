@@ -32,7 +32,22 @@ const HeaderBarComponent: FC<Readonly<IProps>> = (props) => {
                   <Link href='/'>{t('home')}</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
+
               <BreadcrumbSeparator />
+
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href='/items'>{t('library')}</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+
+              <BreadcrumbSeparator />
+
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href='/favorite'>{t('favorite')}</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>

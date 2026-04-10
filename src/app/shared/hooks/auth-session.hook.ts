@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+
 import { usePathname } from '@/pkg/locale'
 
 type AuthSessionUser = {
@@ -17,6 +18,7 @@ type AuthSessionResponse = {
 
 export function useAuthSession() {
   const pathname = usePathname()
+
   const [isPending, setIsPending] = useState(true)
   const [user, setUser] = useState<AuthSessionUser | null>(null)
 

@@ -1,9 +1,10 @@
-import { useTranslations } from 'next-intl'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { FC } from 'react'
 
 import { IPokemon, IPokemonSpecies } from '@/app/entities/models'
 
+import { FavoriteButtonComponent } from '../../features/favorite-button'
 import { PokemonTypeComponent } from '../../features/pokemon-type'
 
 interface IProps {
@@ -58,6 +59,7 @@ const CardProfileComponent: FC<Readonly<IProps>> = ({ pokemon, species }) => {
           </div>
         </div>
       </div>
+      <FavoriteButtonComponent pokemonId={pokemon.id} />
     </div>
   )
 }
