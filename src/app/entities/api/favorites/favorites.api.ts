@@ -26,3 +26,19 @@ export const addFavorite = async (pokemonId: number) => {
 
   return res.json()
 }
+
+export const removeFavorite = async (pokemonId: number) => {
+  const res = await fetch('/api/favorites', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ pokemonId }),
+    credentials: 'include',
+  })
+
+  if (!res.ok) {
+    const errorBody = await res.text()
+    throw new Error(`Failed (${res.status}): ${errorBody}`)
+  }
+
+  return res.json()
+}

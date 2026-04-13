@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
-
 import { FC, ReactNode } from 'react'
+
 import { Link } from '../../../pkg/locale'
 import {
   Breadcrumb,
@@ -45,7 +45,7 @@ const HeaderBarComponent: FC<Readonly<IProps>> = (props) => {
 
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href='/favorite'>{t('favorite')}</Link>
+                  <Link href='/favorites'>{t('favorite')}</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
