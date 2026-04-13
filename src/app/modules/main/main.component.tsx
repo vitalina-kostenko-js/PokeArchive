@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server'
 
 import { authServer } from '../../../pkg/auth/server'
 import { Link } from '../../../pkg/locale'
+import { Button } from '../../../pkg/theme/ui/button'
 import { DashboardLayoutComponent } from '../dashboard'
 
 //interface
@@ -14,7 +15,6 @@ interface UserSession {
 //component
 const MainComponent = async () => {
   const t = await getTranslations('home')
-
   const session = (await authServer.getSession()) as UserSession | null
   const user = session?.user
 
@@ -27,31 +27,25 @@ const MainComponent = async () => {
               <h1 className='text-4xl font-bold tracking-tight'>
                 {t('welcome')} {user.name}
               </h1>
-              <p className='text-lg text-gray-600'>{t('welcomeDescription')}</p>
-              <Link
-                href='/items'
-                className='inline-block rounded-lg bg-white px-8 py-3 text-sm font-medium text-gray-900 shadow-sm ring-1 ring-gray-200 transition-all hover:bg-gray-50 hover:shadow-md active:scale-95'
-              >
-                {t('viewLibrary')}
-              </Link>
+              <p className='text-muted-foreground text-lg'>{t('welcomeDescription')}</p>
+
+              <Button asChild size='lg' className='px-8'>
+                <Link href='/items'>{t('viewLibrary')}</Link>
+              </Button>
             </>
           ) : (
             <>
               <h1 className='text-4xl font-bold tracking-tight'>{t('title')}</h1>
-              <p className='text-lg text-gray-600'>{t('description')}</p>
+              <p className='text-muted-foreground text-lg'>{t('description')}</p>
+
               <div className='flex items-center justify-center gap-4'>
-                <Link
-                  href='/sign-in'
-                  className='min-w-[120px] rounded-lg bg-white px-6 py-3 text-sm font-medium text-gray-900 shadow-sm ring-1 ring-gray-200 transition-all hover:bg-gray-50 hover:shadow-md active:scale-95'
-                >
-                  {t('signIn')}
-                </Link>
-                <Link
-                  href='/sign-up'
-                  className='min-w-[120px] rounded-lg bg-gray-50 px-6 py-3 text-sm font-medium text-gray-700 transition-all hover:bg-gray-100 active:scale-95'
-                >
-                  {t('signUp')}
-                </Link>
+                <Button asChild size='lg'>
+                  <Link href='/sign-in'>{t('signIn')}</Link>
+                </Button>
+
+                <Button asChild size='lg' variant='outline'>
+                  <Link href='/sign-up'>{t('signUp')}</Link>
+                </Button>
               </div>
             </>
           )}

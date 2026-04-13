@@ -2,6 +2,7 @@ import { LanguagesIcon } from 'lucide-react'
 import { ReactNode } from 'react'
 
 import { Button } from '../../../pkg/theme/ui/button'
+import { ModeToggle } from '../../shared/ui/mode-toggle'
 import { LanguageDropdownComponent } from '../../widgets/dropdown-language'
 import { ProfileDropdownComponent } from '../../widgets/dropdown-profile'
 import { HeaderBarComponent } from '../../widgets/header'
@@ -25,6 +26,7 @@ export const DashboardLayoutComponent = (props: IDashboardLayoutProps) => {
             </Button>
           }
         />
+        <ModeToggle />
         <ProfileDropdownComponent />
       </HeaderBarComponent>
 

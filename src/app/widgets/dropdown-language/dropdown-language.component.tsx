@@ -4,15 +4,14 @@ import { useLocale } from 'next-intl'
 import type { ReactNode } from 'react'
 import { useEffect, useState, useTransition } from 'react'
 
+import { usePathname, useRouter } from '../../../pkg/locale'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from '@radix-ui/react-dropdown-menu'
-
-import { usePathname, useRouter } from '../../../pkg/locale'
+} from '../../../pkg/theme/ui/dropdown-menu'
 
 const LOCALES = [
   { value: 'en', label: 'English' },
@@ -33,7 +32,6 @@ const LanguageDropdownComponent = (props: ILanguageDropdownProps) => {
   const pathname = usePathname()
 
   const [isPending, startTransition] = useTransition()
-
   const [language, setLanguage] = useState(locale)
 
   useEffect(() => {
@@ -42,7 +40,6 @@ const LanguageDropdownComponent = (props: ILanguageDropdownProps) => {
 
   const handleChange = (value: string) => {
     setLanguage(value)
-
     startTransition(() => {
       router.replace(pathname, { locale: value })
     })
@@ -54,17 +51,10 @@ const LanguageDropdownComponent = (props: ILanguageDropdownProps) => {
         {trigger}
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent
-        className='z-50 min-w-[8rem] overflow-hidden rounded-md border bg-white p-1 shadow-md'
-        align={align}
-      >
+      <DropdownMenuContent align={align}>
         <DropdownMenuRadioGroup value={language} onValueChange={handleChange}>
           {LOCALES.map(({ value, label }) => (
-            <DropdownMenuRadioItem
-              key={value}
-              value={value}
-              className='relative flex cursor-default items-center rounded-sm py-1.5 pr-2 pl-8 text-sm transition-colors outline-none select-none focus:bg-gray-100 data-[state=checked]:font-bold'
-            >
+            <DropdownMenuRadioItem key={value} value={value} className='cursor-pointer'>
               {label}
             </DropdownMenuRadioItem>
           ))}

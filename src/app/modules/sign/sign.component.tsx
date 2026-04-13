@@ -17,7 +17,7 @@ const SignComponent = async ({ variant }: IProps) => {
       <div className='bg-card w-full max-w-md space-y-6 rounded-xl border p-8 shadow-sm'>
         <div className='space-y-1 text-center'>
           <h1 className='text-2xl font-bold'>{variant === 'sign-in' ? tLogin('login') : tRegister('createAccount')}</h1>
-          
+
           <p className='text-muted-foreground text-sm'>
             {variant === 'sign-in' ? tLogin('subtitle') : tRegister('subtitle')}
           </p>
