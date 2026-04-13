@@ -4,6 +4,7 @@ import { useLocale } from 'next-intl'
 import type { ReactNode } from 'react'
 import { useEffect, useState, useTransition } from 'react'
 
+import { useSearchParams } from 'next/navigation'
 import { usePathname, useRouter } from '../../../pkg/locale'
 import {
   DropdownMenu,
@@ -31,6 +32,8 @@ const LanguageDropdownComponent = (props: ILanguageDropdownProps) => {
   const router = useRouter()
   const pathname = usePathname()
 
+  const searchParams = useSearchParams()
+
   const [isPending, startTransition] = useTransition()
   const [language, setLanguage] = useState(locale)
 
@@ -40,8 +43,15 @@ const LanguageDropdownComponent = (props: ILanguageDropdownProps) => {
 
   const handleChange = (value: string) => {
     setLanguage(value)
+
+    const localePrefix = new RegExp(`^/(${LOCALES.map((l) => l.value).join('|')})(/|$)`)
+    const cleanPath = pathname.replace(localePrefix, '/') || '/'
+
+    const params = searchParams.toString()
+    const fullPath = params ? `${cleanPath}?${params}` : cleanPath
+
     startTransition(() => {
-      router.replace(pathname, { locale: value })
+      router.replace(fullPath, { locale: value })
     })
   }
 
@@ -51,10 +61,10 @@ const LanguageDropdownComponent = (props: ILanguageDropdownProps) => {
         {trigger}
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align={align}>
+      <DropdownMenuContent>
         <DropdownMenuRadioGroup value={language} onValueChange={handleChange}>
           {LOCALES.map(({ value, label }) => (
-            <DropdownMenuRadioItem key={value} value={value} className='cursor-pointer'>
+            <DropdownMenuRadioItem key={value} value={value}>
               {label}
             </DropdownMenuRadioItem>
           ))}
