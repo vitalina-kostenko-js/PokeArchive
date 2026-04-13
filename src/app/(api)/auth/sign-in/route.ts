@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { findUserByEmail, verifyPassword } from '../_user.service'
 
-const secret = new TextEncoder().encode(process.env.JWT_SECRET ?? 'local-dev-secret')
+const secret = new TextEncoder().encode(process.env.JWT_SECRET)
 
 export async function POST(req: NextRequest) {
   try {

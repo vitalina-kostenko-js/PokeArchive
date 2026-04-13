@@ -35,23 +35,6 @@ export const getPokemonByName = async (name: string, signal?: AbortSignal): Prom
   return res.json()
 }
 
-export const getPokemonByNameOrNull = async (name: string): Promise<IPokemon | null> => {
-  const res = await fetch(`${API_URL}/pokemon/${encodeURIComponent(name)}`, {
-    cache: 'force-cache',
-    next: { revalidate: 3600 },
-  })
-
-  if (res.status === 404) {
-    return null
-  }
-
-  if (!res.ok) {
-    throw new Error('Network response was not ok')
-  }
-
-  return res.json()
-}
-
 export const getPokemonSpecies = async (name: string): Promise<IPokemonSpecies> => {
   const res = await fetch(`${API_URL}/pokemon-species/${encodeURIComponent(name)}`, {
     cache: 'force-cache',
@@ -100,7 +83,7 @@ export const getPokemonByType = async (typeName: string, signal?: AbortSignal): 
 
 export const getFullPokemonData = async (id: string) => {
   try {
-    const [pokemon, species] = await Promise.all([getPokemonByNameOrNull(id), getPokemonSpecies(id)])
+    const [pokemon, species] = await Promise.all([getPokemonByName(id), getPokemonSpecies(id)])
 
     if (!pokemon) {
       return null

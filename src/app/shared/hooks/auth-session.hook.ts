@@ -16,7 +16,7 @@ type AuthSessionResponse = {
   session: { token: string } | null
 }
 
-export function useAuthSession() {
+export const useAuthSession = () => {
   const pathname = usePathname()
 
   const [isPending, setIsPending] = useState(true)
@@ -55,6 +55,6 @@ export function useAuthSession() {
   }
 }
 
-export async function signOutAppAuth(): Promise<void> {
+export const signOutAppAuth = async (): Promise<void> => {
   await fetch('/auth/sign-out', { method: 'POST', credentials: 'include' })
 }

@@ -1,25 +1,21 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useParams } from 'next/navigation'
 import { useState } from 'react'
 
 import { signOutAppAuth, useAuthSession } from '@/app/shared/hooks'
 import { useRouter } from '@/pkg/locale'
 
+import { ProfileMenuContentComponent } from './element'
+
 import { Avatar, AvatarFallback, AvatarImage } from '../../../pkg/theme/ui/avatar'
 import { Button } from '../../../pkg/theme/ui/button'
 import { LoginButtonComponent, RegisterButtonComponent } from '../../features/auth-button'
-import { ProfileMenuContentComponent } from './element'
 
 const ProfileDropdownComponent = () => {
   const tLoading = useTranslations('loading')
   const router = useRouter()
   const [isSigningOut, setIsSigningOut] = useState(false)
-
-  const params = useParams()
-  const locale = (params.locale as string) ?? 'en'
-  const callbackUrl = `/${locale}`
 
   const { session } = useAuthSession()
 
@@ -54,7 +50,7 @@ const ProfileDropdownComponent = () => {
           trigger={
             <Button variant='ghost' size='icon'>
               <Avatar className='size-9.5 rounded-md'>
-                <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png' />
+                <AvatarImage src={session.user.image ?? undefined} />
                 <AvatarFallback>{session.user.name?.charAt(0).toUpperCase() ?? '?'}</AvatarFallback>
               </Avatar>
             </Button>

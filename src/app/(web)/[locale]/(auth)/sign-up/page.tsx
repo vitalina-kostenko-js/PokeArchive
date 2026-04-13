@@ -1,8 +1,9 @@
-import SignComponent from '@/app/modules/sign/sign.component'
 import { Metadata } from 'next'
 
+import SignComponent from '@/app/modules/sign/sign.component'
+
 export const metadata: Metadata = {
-  title: 'Sign up | MyLibrary',
+  title: 'Sign up | PokeArchive',
   description: 'Sign up to create your account to access your library',
 }
 

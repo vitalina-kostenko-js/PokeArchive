@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
-import { getFullPokemonData, getPokemonByNameOrNull } from '../../../../../entities/api/pokemons/pokemon.api'
+import { getFullPokemonData, getPokemonByName } from '../../../../../entities/api/pokemons'
 import { DashboardLayoutComponent } from '../../../../../modules/dashboard'
 import { BackButtonComponent } from '../../../../../shared/ui/back-button'
 import { CardProfileComponent } from '../../../../../widgets/card-profile'
@@ -19,7 +19,7 @@ interface IProps {
 //metadata
 export const generateMetadata = async ({ params }: IProps): Promise<Metadata> => {
   const { id } = await params
-  const pokemon = await getPokemonByNameOrNull(id)
+  const pokemon = await getPokemonByName(id)
 
   if (!pokemon) {
     return {
