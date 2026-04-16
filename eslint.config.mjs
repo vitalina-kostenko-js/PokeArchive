@@ -1,21 +1,16 @@
-import { defineConfig, globalIgnores } from 'eslint/config'
 import nextVitals from 'eslint-config-next/core-web-vitals'
 import nextTs from 'eslint-config-next/typescript'
+import cleanCodePlugin from 'eslint-plugin-clean-code'
 import prettierPlugin from 'eslint-plugin-prettier'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
-import cleanCodePlugin from 'eslint-plugin-clean-code'
+import { defineConfig, globalIgnores } from 'eslint/config'
 
 // eslint config
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  globalIgnores([
-    '.next/**',
-    'out/**',
-    'build/**',
-    'next-env.d.ts',
-  ]),
-    {
+  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
+  {
     files: ['**/*.{js,jsx,ts,tsx}'],
     plugins: {
       'simple-import-sort': simpleImportSort,
@@ -31,11 +26,11 @@ const eslintConfig = defineConfig([
           groups: [['^node:'], ['^\\w'], ['^@(?!/)\\w'], ['^@/'], ['^\\./'], ['^.+\\.?(css)$']],
         },
       ],
-      "clean-code/feature-envy": 2,
+      'clean-code/feature-envy': 2,
       'no-console': 'warn',
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
-      'react-hooks/exhaustive-deps': 'off',
+      'react-hooks/exhaustive-deps': 'warn',
       'simple-import-sort/exports': 'warn',
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'error',
@@ -68,6 +63,6 @@ const eslintConfig = defineConfig([
       ],
     },
   },
-]);
+])
 
-export default eslintConfig;
+export default eslintConfig

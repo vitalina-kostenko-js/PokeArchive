@@ -1,8 +1,9 @@
 import { getLocale } from 'next-intl/server'
 import { type FC, type ReactNode } from 'react'
-import { authServer } from '../../../../pkg/auth/server/auth.server'
-import { redirect } from '../../../../pkg/locale'
-import { LayoutComponent } from '../../../modules/layout'
+
+import { LayoutComponent } from '@/app/modules/layout'
+import { authServer } from '@/pkg/auth/server'
+import { redirect } from '@/pkg/locale'
 
 // interface
 interface IProps {
@@ -21,6 +22,7 @@ const ProtectedLayoutComponent: FC<Readonly<IProps>> = async (props) => {
     redirect({ href: '/sign-in', locale })
   }
 
+  //render
   return <LayoutComponent type='protected'>{children}</LayoutComponent>
 }
 

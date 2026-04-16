@@ -13,7 +13,10 @@
     "email": "E-Mail",
     "password": "Passwort",
     "confirmPassword": "Passwort bestätigen",
-    "alreadyHaveAccount": "Bereits ein Konto?"
+    "alreadyHaveAccount": "Bereits ein Konto?",
+    "tooManyRequests": "Zu viele Anfragen, bitte versuchen Sie es später erneut",
+    "userAlreadyExists": "Benutzer bereits vorhanden",
+    "formLocked": "Formular ist gesperrt, bitte versuchen Sie es in {seconds} Sekunden erneut"
   },
   "form_login": {
     "subtitle": "Melden Sie sich mit Ihren Zugangsdaten an",
@@ -24,14 +27,17 @@
     "loggingIn": "Wird angemeldet...",
     "email": "E-Mail",
     "password": "Passwort",
-    "dontHaveAccount": "Noch kein Konto?"
+    "dontHaveAccount": "Noch kein Konto?",
+    "tooManyRequests": "Zu viele Anfragen, bitte versuchen Sie es später erneut",
+    "formLocked": "Formular ist gesperrt, bitte versuchen Sie es in {seconds} Sekunden erneut"
   },
   "auth_schema": {
     "invalidEmail": "Ungültige E-Mail",
     "nameIsRequired": "Name ist erforderlich.",
     "passwordMustBeAtLeast10CharactersLong": "Passwort muss mindestens 10 Zeichen lang sein.",
     "passwordConfirmationIsRequired": "Passwortbestätigung ist erforderlich.",
-    "passwordsDoNotMatch": "Passwörter stimmen nicht überein."
+    "passwordsDoNotMatch": "Passwörter stimmen nicht überein.",
+    "tooManyRequests": "Zu viele Anfragen, bitte versuchen Sie es später erneut"
   },
   "auth_button": {
     "login": "Anmelden",

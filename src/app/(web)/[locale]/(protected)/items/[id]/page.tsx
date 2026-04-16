@@ -1,13 +1,12 @@
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
+import { notFound } from 'next/navigation'
 
-import { getFullPokemonData, getPokemonByName } from '../../../../../entities/api/pokemons'
-import { DashboardLayoutComponent } from '../../../../../modules/dashboard'
-import { BackButtonComponent } from '../../../../../shared/ui/back-button'
-import { CardProfileComponent } from '../../../../../widgets/card-profile'
-import { BaseStatsComponent } from '../../../../../widgets/pokemon-details/elements/base-stats'
-import { EvolutionDetailComponent } from '../../../../../widgets/pokemon-details/elements/evolution-delail'
+import { getFullPokemonData, getPokemonByName } from '@/app/entities/api/pokemons'
+import PokemonDetailsComponent from '@/app/features/pokemon-details/pokemon-details.component'
+import { DashboardLayoutComponent } from '@/app/modules/dashboard'
+import { CardProfileComponent } from '@/app/shared/components/card-profile'
+import { BackButtonComponent } from '@/app/features/back-button'
 
 export const revalidate = 3600
 
@@ -39,6 +38,7 @@ export const generateMetadata = async ({ params }: IProps): Promise<Metadata> =>
 //page
 const Page = async ({ params }: IProps) => {
   const { id } = await params
+
   const t = await getTranslations('items_page')
 
   const pokemon = await getFullPokemonData(id)
@@ -49,6 +49,7 @@ const Page = async ({ params }: IProps) => {
 
   const { species } = pokemon
 
+  //render
   return (
     <DashboardLayoutComponent>
       <div className='pb-2'>
@@ -59,9 +60,7 @@ const Page = async ({ params }: IProps) => {
         <CardProfileComponent pokemon={pokemon} species={species} />
 
         <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
-          <BaseStatsComponent pokemon={pokemon} />
-
-          <EvolutionDetailComponent initialUrl={species.evolution_chain.url} />
+          <PokemonDetailsComponent pokemon={pokemon} initialUrl={species.evolution_chain.url} />
         </div>
       </div>
     </DashboardLayoutComponent>

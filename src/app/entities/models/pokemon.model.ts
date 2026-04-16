@@ -66,6 +66,7 @@ export interface IPokemon {
   sprites?: ISprites
 }
 
+
 export interface IPokemonSpecies extends INameResource {
   id: number
   base_happiness: number

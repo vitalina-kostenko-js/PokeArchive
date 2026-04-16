@@ -1,11 +1,11 @@
 import { LanguagesIcon } from 'lucide-react'
 import { ReactNode } from 'react'
 
-import { Button } from '../../../pkg/theme/ui/button'
-import { ModeToggle } from '../../shared/ui/mode-toggle'
-import { LanguageDropdownComponent } from '../../widgets/dropdown-language'
-import { ProfileDropdownComponent } from '../../widgets/dropdown-profile'
-import { HeaderBarComponent } from '../../widgets/header'
+import { LanguageDropdownComponent } from '@/app/features/dropdown-language'
+import { ProfileDropdownComponent } from '@/app/features/dropdown-profile'
+import { ModeToggleComponent } from '@/app/features/mode-toggle'
+import { HeaderBarComponent } from '@/app/widgets/header'
+import { Button } from '@/pkg/theme/ui/button'
 
 //interface
 interface IDashboardLayoutProps {
@@ -13,9 +13,10 @@ interface IDashboardLayoutProps {
 }
 
 //component
-export const DashboardLayoutComponent = (props: IDashboardLayoutProps) => {
+const DashboardLayoutComponent = (props: IDashboardLayoutProps) => {
   const { children } = props
 
+  //render
   return (
     <div className='flex min-h-dvh w-full flex-col'>
       <HeaderBarComponent>
@@ -26,7 +27,8 @@ export const DashboardLayoutComponent = (props: IDashboardLayoutProps) => {
             </Button>
           }
         />
-        <ModeToggle />
+        <ModeToggleComponent />
+
         <ProfileDropdownComponent />
       </HeaderBarComponent>
 

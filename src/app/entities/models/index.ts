@@ -1,5 +1,8 @@
-export { mapPokemonToCard } from './pokemon.model'
-
+export type { TLoginFormValues, TRegisterFormValues } from './auth.model'
+export { loginSchema, registerSchema } from './auth.model'
+export type { IEvolutionChainResponse, IEvolutionDetail, IEvolutionNode } from './evolution.model'
+export type { IFavoriteItem, IPokemonCardsQueryResult } from './favorite.model'
+export type { IPageLoadingModel, ISkeletonItem, ISkeletonRow } from './loading.model'
 export type {
   IAbility,
   IHeldItem,
@@ -14,9 +17,4 @@ export type {
   IStat,
   IType,
 } from './pokemon.model'
-
-export type { IEvolutionChainResponse, IEvolutionDetail, IEvolutionNode } from './evolution.model'
-
-export { flattenEvolutionChain } from './evolution.model'
-
-// export type { IItem } from './item.model'
+export { mapPokemonToCard } from './pokemon.model'

@@ -1,13 +1,16 @@
-const ItemLoading = async () => {
-  return (
-    <>
-      <div className='flex min-h-[40vh] flex-col items-center justify-center gap-4'>
-        <div className='border-primary h-8 w-8 animate-spin rounded-full border-2 border-t-transparent' />
+import { CARD_SKELETON_MODEL } from '@/app/shared/constants/loading'
+import { SkeletonRendererComponent } from '@/app/shared/ui/skeleton-render'
 
-        <p className='text-muted-foreground'>Loading...</p>
-      </div>
-    </>
+//loading
+const FavoritesLoading = () => {
+  //render
+  return (
+    <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+      {Array.from({ length: 6 }).map((_, i) => (
+        <SkeletonRendererComponent key={i} model={CARD_SKELETON_MODEL} />
+      ))}
+    </div>
   )
 }
 
-export default ItemLoading
+export default FavoritesLoading

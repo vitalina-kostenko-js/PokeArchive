@@ -10,6 +10,7 @@ if (!JWT_SECRET && process.env.NODE_ENV === 'production') {
 
 const secret = new TextEncoder().encode(JWT_SECRET ?? 'local-dev-secret')
 
+//route
 export async function GET() {
   try {
     const cookieStore = await cookies()
@@ -21,13 +22,16 @@ export async function GET() {
 
     const { payload } = await jwtVerify(token, secret)
 
+    //render
     return NextResponse.json({
       user: { id: payload.id, name: payload.name, email: payload.email },
       session: { token },
     })
   } catch (err) {
     const message = err instanceof Error ? err.message : JSON.stringify(err)
-    console.error('POST /api/favorites error:', message)
+    console.error('GET /auth/session error:', message)
+
+    //render
     return NextResponse.json({ error: message }, { status: 500 })
   }
 }

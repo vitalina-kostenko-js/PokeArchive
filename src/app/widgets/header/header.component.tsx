@@ -1,14 +1,14 @@
 import { useTranslations } from 'next-intl'
 import { FC, ReactNode } from 'react'
 
-import { Link } from '../../../pkg/locale'
+import { Link } from '@/pkg/locale'
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from '../../../pkg/theme/ui/breadcrumb'
+} from '@/pkg/theme/ui/breadcrumb'
 
 //interface
 interface IProps {
@@ -21,6 +21,7 @@ const HeaderBarComponent: FC<Readonly<IProps>> = (props) => {
 
   const { children } = props
 
+  //render
   return (
     <header className='bg-card sticky top-0 z-50 border-b'>
       <div className='mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-2 sm:px-6'>

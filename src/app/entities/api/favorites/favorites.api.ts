@@ -1,44 +1,24 @@
-export const getFavorites = async () => {
-  const res = await fetch('/api/favorites', {
-    credentials: 'include',
-  })
+import { IFavoriteItem } from '@/app/entities/models'
+import { restApiFetcher } from '@/pkg/rest-api'
 
-  if (!res.ok) {
-    const errorBody = await res.text()
-    throw new Error(`Failed (${res.status}): ${errorBody}`)
-  }
-
-  return res.json()
+export const getFavorites = async (): Promise<IFavoriteItem[]> => {
+  return restApiFetcher.get('api/favorites', { credentials: 'include' }).json()
 }
 
 export const addFavorite = async (pokemonId: number) => {
-  const res = await fetch('/api/favorites', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ pokemonId: pokemonId }),
-    credentials: 'include',
-  })
-
-  if (!res.ok) {
-    const errorBody = await res.text()
-    throw new Error(`Failed (${res.status}): ${errorBody}`)
-  }
-
-  return res.json()
+  return restApiFetcher
+    .post('api/favorites', {
+      json: { pokemonId },
+      credentials: 'include',
+    })
+    .json()
 }
 
 export const removeFavorite = async (pokemonId: number) => {
-  const res = await fetch('/api/favorites', {
-    method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ pokemonId }),
-    credentials: 'include',
-  })
-
-  if (!res.ok) {
-    const errorBody = await res.text()
-    throw new Error(`Failed (${res.status}): ${errorBody}`)
-  }
-
-  return res.json()
+  return restApiFetcher
+    .delete('api/favorites', {
+      json: { pokemonId },
+      credentials: 'include',
+    })
+    .json()
 }

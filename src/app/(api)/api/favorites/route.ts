@@ -1,47 +1,61 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { addFavorite, getUserFavorites, removeFavorite } from './_favorites.servise'
+import { getAuthenticatedUser } from '@/pkg/auth/api-auth'
+
+import { addFavorite, getUserFavorites, removeFavorite } from './favorites.service'
 
 export async function GET(req: NextRequest) {
-  const userId = req.headers.get('x-user-id')
+  const user = await getAuthenticatedUser(req)
 
-  if (!userId) {
+  if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
-  const favorites = await getUserFavorites(userId)
 
+  const favorites = await getUserFavorites(user.id)
+
+  //render
   return NextResponse.json(favorites)
 }
 
 export async function POST(req: NextRequest) {
-  const userId = req.headers.get('x-user-id')
+  const user = await getAuthenticatedUser(req)
 
-  if (!userId) {
+  if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
+
   try {
     const { pokemonId } = await req.json()
 
-    const favorite = await addFavorite(userId, pokemonId)
+    const favorite = await addFavorite(user.id, pokemonId)
 
     return NextResponse.json(favorite)
   } catch (err) {
     console.error('POST /api/favorites error:', err)
 
+    //render
     return NextResponse.json({ error: String(err) }, { status: 500 })
   }
 }
 
 export async function DELETE(req: NextRequest) {
-  const userId = req.headers.get('x-user-id')
+  const user = await getAuthenticatedUser(req)
 
-  if (!userId) {
+  if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const { pokemonId } = await req.json()
+  try {
+    const { pokemonId } = await req.json()
 
-  await removeFavorite(userId, pokemonId)
+    if (typeof pokemonId !== 'number') {
+      return NextResponse.json({ error: 'Invalid pokemonId' }, { status: 400 })
+    }
 
-  return NextResponse.json({ success: true })
+    await removeFavorite(user.id, pokemonId)
+
+    return NextResponse.json({ success: true })
+  } catch (err) {
+    return NextResponse.json({ error: String(err) }, { status: 500 })
+  }
 }

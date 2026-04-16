@@ -1,3 +1,5 @@
+import ky from 'ky'
+
 import type {
   IEvolutionChainResponse,
   IPokemon,
@@ -5,47 +7,18 @@ import type {
   IPokemonSpecies,
   IPokemonTypeResponse,
 } from '@/app/entities/models'
+import { pokeApiFetcher } from '@/pkg/rest-api/fetcher'
 
-const API_URL = 'https://pokeapi.co/api/v2'
-
-export const getPokemonList = async (offset = 0, limit = 20, signal?: AbortSignal): Promise<IPokemonListResponse> => {
-  const res = await fetch(`${API_URL}/pokemon?offset=${offset}&limit=${limit}`, {
-    cache: 'force-cache',
-    next: { revalidate: 3600 },
-    signal,
-  })
-
-  if (!res.ok) {
-    throw new Error('Network response was not ok')
-  }
-
-  return res.json()
+export const getPokemonList = async (offset = 0, limit = 20): Promise<IPokemonListResponse> => {
+  return pokeApiFetcher.get('pokemon', { searchParams: { offset, limit } }).json()
 }
 
-export const getPokemonByName = async (name: string, signal?: AbortSignal): Promise<IPokemon> => {
-  const res = await fetch(`${API_URL}/pokemon/${encodeURIComponent(name)}`, {
-    cache: 'force-cache',
-    next: { revalidate: 3600 },
-    signal,
-  })
-
-  if (!res.ok) {
-    throw new Error('Network response was not ok')
-  }
-  return res.json()
+export const getPokemonByName = async (name: string): Promise<IPokemon> => {
+  return pokeApiFetcher.get(`pokemon/${encodeURIComponent(name)}`).json()
 }
 
 export const getPokemonSpecies = async (name: string): Promise<IPokemonSpecies> => {
-  const res = await fetch(`${API_URL}/pokemon-species/${encodeURIComponent(name)}`, {
-    cache: 'force-cache',
-    next: { revalidate: 3600 },
-  })
-
-  if (!res.ok) {
-    throw new Error('Species not found')
-  }
-
-  return res.json()
+  return pokeApiFetcher.get(`pokemon-species/${encodeURIComponent(name)}`).json()
 }
 
 export const getEvolutionChain = async (url: string): Promise<IEvolutionChainResponse> => {
@@ -55,30 +28,11 @@ export const getEvolutionChain = async (url: string): Promise<IEvolutionChainRes
     throw new Error('Invalid evolution chain URL')
   }
 
-  const res = await fetch(url, {
-    cache: 'force-cache',
-    next: { revalidate: 3600 },
-  })
-
-  if (!res.ok) {
-    throw new Error('Evolution chain not found')
-  }
-
-  return res.json()
+  return ky.get(url).json()
 }
 
-export const getPokemonByType = async (typeName: string, signal?: AbortSignal): Promise<IPokemonTypeResponse> => {
-  const res = await fetch(`${API_URL}/type/${encodeURIComponent(typeName)}`, {
-    cache: 'force-cache',
-    next: { revalidate: 3600 },
-    signal,
-  })
-
-  if (!res.ok) {
-    throw new Error('Type not found')
-  }
-
-  return res.json()
+export const getPokemonByType = async (typeName: string): Promise<IPokemonTypeResponse> => {
+  return pokeApiFetcher(`type/${encodeURIComponent(typeName)}`).json()
 }
 
 export const getFullPokemonData = async (id: string) => {

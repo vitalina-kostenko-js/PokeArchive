@@ -1,20 +1,23 @@
-import { dehydrate, QueryClient } from '@tanstack/react-query'
+import { NextPage } from 'next'
 
-import { fetcherPokemonCardsByType, fetchPokemonCards, pokemonKeys } from '@/app/entities/api/pokemons'
-import { ReactQueryHydration } from '@/app/shared/providers'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 
-import { DashboardLayoutComponent } from '../../../../modules/dashboard'
-import PokemonListComponent from '../../../../modules/pokemon-list/pokemon-list.component'
+import { pokemonCardsByTypeQueryOptions, pokemonCardsQueryOptions } from '@/app/entities/api/pokemons'
+import { DashboardLayoutComponent } from '@/app/modules/dashboard'
+import { PokemonListComponent } from '@/app/modules/pokemon-list'
+import { getQueryClient } from '@/pkg/rest-api/service'
 
 export const revalidate = 3600
 
 //interface
-interface ItemsPageProps {
+interface IProps {
   searchParams: Promise<{ page?: string; type?: string }>
 }
 
 //page
-const ItemsPage = async ({ searchParams }: ItemsPageProps) => {
+const Page: NextPage<Readonly<IProps>> = async (props) => {
+  const { searchParams } = props
+
   const sp = await searchParams
   const selectedType = sp.type ?? null
 
@@ -23,29 +26,24 @@ const ItemsPage = async ({ searchParams }: ItemsPageProps) => {
   const itemsPerPage = 12
   const offset = (page - 1) * itemsPerPage
 
-  const queryClient = new QueryClient()
+  const queryClient = getQueryClient()
 
   if (selectedType) {
-    await queryClient.prefetchQuery({
-      queryKey: pokemonKeys.cardsByType(selectedType, offset, itemsPerPage),
-      queryFn: () => fetcherPokemonCardsByType(selectedType, offset, itemsPerPage),
-    })
+    await queryClient.prefetchQuery(pokemonCardsByTypeQueryOptions(selectedType, offset, itemsPerPage))
   } else {
-    await queryClient.prefetchQuery({
-      queryKey: pokemonKeys.cards(offset, itemsPerPage),
-      queryFn: () => fetchPokemonCards(offset, itemsPerPage),
-    })
+    await queryClient.prefetchQuery(pokemonCardsQueryOptions(offset, itemsPerPage))
   }
 
+  //render
   return (
-    <ReactQueryHydration state={dehydrate(queryClient)}>
+    <HydrationBoundary state={dehydrate(queryClient)}>
       <DashboardLayoutComponent>
         <div className='flex flex-1 flex-col gap-6 py-4'>
           <PokemonListComponent page={page} offset={offset} selectedType={selectedType} />
         </div>
       </DashboardLayoutComponent>
-    </ReactQueryHydration>
+    </HydrationBoundary>
   )
 }
 
-export default ItemsPage
+export default Page

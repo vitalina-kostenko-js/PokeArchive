@@ -5,6 +5,7 @@ interface IHomePageProps {}
 
 //page
 const HomePage = async (props: IHomePageProps) => {
+  //render
   return <MainComponent />
 }
 

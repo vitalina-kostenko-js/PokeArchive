@@ -2,30 +2,24 @@
 
 import { useQueries } from '@tanstack/react-query'
 
-import { Link } from '../../../../../pkg/locale'
-import { useAddFacoritesQuery } from '../../../../entities/api/favorites'
-import { getPokemonByName } from '../../../../entities/api/pokemons'
-import { IPokemon, mapPokemonToCard } from '../../../../entities/models'
-import { DashboardLayoutComponent } from '../../../../modules/dashboard'
-import { CardComponent } from '../../../../widgets/card'
-
-//inteface
-interface IProps {}
+import { useAddFavoritesQuery } from '@/app/entities/api/favorites'
+import { pokemonDetailQueryOptions } from '@/app/entities/api/pokemons'
+import { IPokemon, mapPokemonToCard } from '@/app/entities/models'
+import { DashboardLayoutComponent } from '@/app/modules/dashboard'
+import { CardComponent } from '@/app/shared/components/card'
+import { Link } from '@/pkg/locale'
 
 //page
 const Page = () => {
-  const { data: favorites } = useAddFacoritesQuery()
+  const { data: favorites } = useAddFavoritesQuery()
 
   const pokemonQueries = useQueries({
-    queries: (favorites ?? []).map((f: { pokemon_id: number }) => ({
-      queryKey: ['pokemon', 'detail', String(f.pokemon_id)],
-      queryFn: () => getPokemonByName(String(f.pokemon_id)),
-      staleTime: 1000 * 60 * 5,
-    })),
+    queries: (favorites ?? []).map((f: { pokemon_id: number }) => pokemonDetailQueryOptions(String(f.pokemon_id))),
   })
 
   const cards = pokemonQueries.filter((q) => q.data).map((q) => mapPokemonToCard(q.data as IPokemon))
 
+  //render
   return (
     <DashboardLayoutComponent>
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>

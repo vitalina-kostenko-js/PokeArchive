@@ -3,17 +3,20 @@
 import { HeartIcon } from 'lucide-react'
 import { FC } from 'react'
 
-import { Button } from '../../../pkg/theme/ui/button'
-import { useAddFacoritesQuery, useAddFavoriteMutation, useRemoveFavoriteMutation } from '../../entities/api/favorites'
+import { useAddFavoriteMutation, useAddFavoritesQuery, useRemoveFavoriteMutation } from '@/app/entities/api/favorites'
+import { Button } from '@/pkg/theme/ui/button'
 
+//interface
 interface IProps {
   pokemonId: number
 }
 
+//component
 const FavoriteButtonComponent: FC<Readonly<IProps>> = (props) => {
   const { pokemonId } = props
 
-  const { data: favorites } = useAddFacoritesQuery()
+  const { data: favorites } = useAddFavoritesQuery()
+
   const { mutate: addFavorite, isPending: isAdding } = useAddFavoriteMutation()
   const { mutate: removeFavorite, isPending: isRemoving } = useRemoveFavoriteMutation()
 
@@ -28,6 +31,7 @@ const FavoriteButtonComponent: FC<Readonly<IProps>> = (props) => {
     }
   }
 
+  //render
   return (
     <Button variant='ghost' size='icon' onClick={handleToggle} disabled={isPending}>
       <HeartIcon

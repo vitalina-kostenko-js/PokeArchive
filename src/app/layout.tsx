@@ -5,7 +5,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { ReactNode } from 'react'
 
-import { ReactQueryProvider } from './shared/providers'
+import { ReactQueryProvider } from '../pkg/theme/providers'
 
 import '@/config/styles/global.css'
 

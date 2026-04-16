@@ -1,9 +1,12 @@
-const ItemLoading = async () => {
-  return (
-    <div className='flex min-h-[40vh] flex-col items-center justify-center gap-4'>
-      <div className='border-primary h-8 w-8 animate-spin rounded-full border-2 border-t-transparent' />
+import { ITEMS_PAGE_LOADING } from '@/app/shared/constants/loading'
+import { SkeletonRendererComponent } from '@/app/shared/ui/skeleton-render'
 
-      <p className='text-muted-foreground'>Loading...</p>
+//loading
+const ItemLoading = () => {
+  //render
+  return (
+    <div className='flex flex-1 flex-col gap-6 py-4'>
+      <SkeletonRendererComponent model={ITEMS_PAGE_LOADING} />
     </div>
   )
 }

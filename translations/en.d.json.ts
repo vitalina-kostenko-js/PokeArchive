@@ -16,7 +16,10 @@ declare const messages: {
     "email": "Email",
     "password": "Password",
     "confirmPassword": "Password confirmation",
-    "alreadyHaveAccount": "Already have an account?"
+    "alreadyHaveAccount": "Already have an account?",
+    "tooManyRequests": "Too many requests, please try again later",
+    "userAlreadyExists": "User already exists",
+    "formLocked": "Form is locked, please try again in {seconds} seconds"
   },
   "form_login": {
     "subtitle": "Enter your credentials to access your account",
@@ -27,14 +30,17 @@ declare const messages: {
     "loggingIn": "Logging in...",
     "email": "Email",
     "password": "Password",
-    "dontHaveAccount": "Don't have an account?"
+    "dontHaveAccount": "Don't have an account?",
+    "tooManyRequests": "Too many requests, please try again later",
+    "formLocked": "Form is locked, please try again in {seconds} seconds"
   },
   "auth_schema": {
     "invalidEmail": "Invalid email",
     "nameIsRequired": "Name is required.",
     "passwordMustBeAtLeast10CharactersLong": "Password must be at least 10 characters long",
     "passwordConfirmationIsRequired": "Password confirmation is required.",
-    "passwordsDoNotMatch": "Passwords do not match."
+    "passwordsDoNotMatch": "Passwords do not match.",
+    "tooManyRequests": "Too many requests, please try again later"
   },
   "auth_button": {
     "login": "Login",

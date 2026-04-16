@@ -1,13 +1,12 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { Link } from '../pkg/locale'
+// eslint-disable-next-line no-restricted-imports -- global-error renders outside all providers, next-intl Link is unavailable
+import Link from 'next/link'
+
 import { Button } from '../pkg/theme/ui/button'
 
-export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
-  const t = useTranslations('notFound')
-
+export default function GlobalError({ _error, reset }: { _error: Error & { digest?: string }; reset: () => void }) {
   return (
     <html lang='en'>
       <body className='bg-background'>
@@ -31,9 +30,10 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
 
           <div className='space-y-4'>
             <h1 className='text-foreground flex items-center justify-center gap-2 text-2xl font-bold md:text-3xl'>
-              {t('title')} <span className='text-xl'>⚠️</span>
+              Page Not Found
             </h1>
-            <p className='text-muted-foreground mx-auto max-w-xs'>{t('description')}</p>
+
+            <p className='text-muted-foreground mx-auto max-w-xs'>We couldn&apos;t find the page you are looking for</p>
           </div>
 
           <div className='mt-10 flex flex-col gap-4 sm:flex-row'>
@@ -42,7 +42,7 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
             </Button>
 
             <Button asChild size='lg' className='px-8'>
-              <Link href='/'>{t('backToHome')}</Link>
+              <Link href='/'>Back to home page</Link>
             </Button>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { ReactNode, Suspense } from 'react'
 
-import LocaleSegmentLoading from '../../shared/ui/loading/loading'
+import { LocaleSegmentLoading } from '@/app/shared/ui/loading'
 
 //interface
 interface ILayoutComponentProps {
