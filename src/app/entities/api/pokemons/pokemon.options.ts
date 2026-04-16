@@ -1,7 +1,7 @@
 import { queryOptions } from '@tanstack/react-query'
 
 import { getPokemonByName } from '@/app/entities/api/pokemons'
-import { fetcherPokemonCardsByType, fetchPokemonCards, pokemonKeys } from '@/app/entities/api/pokemons/pokemon.query'
+import { fetcherPokemonCardsByType, fetchPokemonCards, pokemonKeys } from '@/app/entities/api/pokemons'
 
 export const pokemonCardsQueryOptions = (offset: number, limit: number) => {
   //render

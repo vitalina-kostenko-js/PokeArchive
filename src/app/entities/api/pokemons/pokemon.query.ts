@@ -1,14 +1,22 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query'
 
+import {
+  getEvolutionChain,
+  getPokemonByName,
+  getPokemonByType,
+  getPokemonList,
+} from '@/app/entities/api/pokemons/pokemon.api'
+import {
+  pokemonCardsByTypeQueryOptions,
+  pokemonCardsQueryOptions,
+  pokemonDetailQueryOptions,
+} from '@/app/entities/api/pokemons/pokemon.options'
 import type {
   IEvolutionChainResponse,
   IPokemon,
   IPokemonCardsQueryResult,
   IPokemonListResponse,
 } from '@/app/entities/models'
-
-import { getEvolutionChain, getPokemonByName, getPokemonByType, getPokemonList } from './pokemon.api'
-import { pokemonCardsByTypeQueryOptions, pokemonCardsQueryOptions, pokemonDetailQueryOptions } from './pokemon.options'
 
 // query keys
 export const pokemonKeys = {
