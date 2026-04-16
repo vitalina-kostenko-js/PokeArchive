@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
+import { useAuthSession } from '@/app/shared/hooks/auth-session'
+
 import { getFavorites } from './favorites.api'
 
 export const favoritesKeys = {
@@ -8,9 +10,13 @@ export const favoritesKeys = {
   list: (userId?: string) => [...favoritesKeys.all, 'list', userId] as const,
 }
 
-export const useAddFavoritesQuery = (userId?: string) => {
+export const useAddFavoritesQuery = () => {
+  const { data: session } = useAuthSession()
+  const userId = session?.user?.id
+
   return useQuery({
     queryKey: favoritesKeys.list(userId),
     queryFn: getFavorites,
+    enabled: !!userId,
   })
 }
