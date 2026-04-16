@@ -155,6 +155,10 @@
   body {
     @apply bg-background text-foreground;
   }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 /* shadcn/ui */
 
@@ -205,15 +209,9 @@ li {
   list-style: none;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 button,
 input {
   font-family: inherit;
-  color: inherit;
 }
 
 input {

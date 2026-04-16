@@ -1,12 +1,12 @@
 import { getTranslations } from 'next-intl/server'
 
-import { authServer } from '../../../pkg/auth/server'
-import { Link } from '../../../pkg/locale'
-import { Button } from '../../../pkg/theme/ui/button'
-import { DashboardLayoutComponent } from '../dashboard'
+import { DashboardLayoutComponent } from '@/app/modules/dashboard'
+import { authServer } from '@/pkg/auth/server'
+import { Link } from '@/pkg/locale'
+import { Button } from '@/pkg/theme/ui/button'
 
 //interface
-interface UserSession {
+interface IUserSession {
   user?: {
     name?: string
   }
@@ -15,9 +15,11 @@ interface UserSession {
 //component
 const MainComponent = async () => {
   const t = await getTranslations('home')
-  const session = (await authServer.getSession()) as UserSession | null
+
+  const session = (await authServer.getSession()) as IUserSession | null
   const user = session?.user
 
+  //render
   return (
     <DashboardLayoutComponent>
       <div className='flex flex-1 flex-col items-center justify-center p-4'>
@@ -27,6 +29,7 @@ const MainComponent = async () => {
               <h1 className='text-4xl font-bold tracking-tight'>
                 {t('welcome')} {user.name}
               </h1>
+
               <p className='text-muted-foreground text-lg'>{t('welcomeDescription')}</p>
 
               <Button asChild size='lg' className='px-8'>
@@ -36,6 +39,7 @@ const MainComponent = async () => {
           ) : (
             <>
               <h1 className='text-4xl font-bold tracking-tight'>{t('title')}</h1>
+
               <p className='text-muted-foreground text-lg'>{t('description')}</p>
 
               <div className='flex items-center justify-center gap-4'>

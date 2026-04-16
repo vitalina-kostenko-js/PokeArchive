@@ -1,15 +1,20 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+import { useTransition } from 'react'
+import { useForm } from 'react-hook-form'
+
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import { loginUser } from '@/app/entities/api/auth'
+import { loginSchema, TLoginFormValues } from '@/app/entities/models'
+import { useFormThrottle } from '@/app/shared/hooks/form-throttle'
 import { useAuthStore } from '@/app/shared/store'
+import { PasswordInputComponent } from '@/app/shared/ui/password-input'
 import { useRouter } from '@/pkg/locale'
 import { Button } from '@/pkg/theme/ui/button'
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/pkg/theme/ui/form'
 import { Input } from '@/pkg/theme/ui/input'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useTranslations } from 'next-intl'
-import { useTransition } from 'react'
-import { useForm } from 'react-hook-form'
-import { LoginFormValues, loginSchema, loginUser } from '../../../../features/auth-form'
 
 //component
 const LoginFormComponent = () => {
@@ -20,22 +25,36 @@ const LoginFormComponent = () => {
 
   const router = useRouter()
 
-  const form = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema(tSchema)),
+  const form = useForm<TLoginFormValues>({
+    resolver: zodResolver(loginSchema({ t: tSchema })),
     defaultValues: { email: '', password: '' },
   })
 
-  const { control, formState, handleSubmit, setError } = form
+  const { isLocked, remainingSeconds, registerAttempt } = useFormThrottle({
+    maxAttempts: 5,
+    lockoutSeconds: 30,
+  })
 
+  const { control, formState, handleSubmit, setError } = form
   const { errors, isSubmitting } = formState
+
   const isLoading = isSubmitting || isPending
 
-  const handleLoginSubmit = async (values: LoginFormValues) => {
+  const handleLoginSubmit = async (values: TLoginFormValues) => {
+    if (isLocked) {
+      return
+    }
+
     try {
       const res = await loginUser(values)
 
       if ('error' in res) {
-        setError('root', { message: t('loginFailed') })
+        registerAttempt()
+
+        const message = res.error === 'Too many requests' ? t('tooManyRequests') : t('loginFailed')
+
+        setError('root', { message })
+
         return
       }
 
@@ -51,12 +70,17 @@ const LoginFormComponent = () => {
         router.refresh()
       })
     } catch {
+      registerAttempt()
+
       setError('root', { message: t('loginFailed') })
     }
   }
 
+  //render
   return (
     <Form {...form}>
+      {isLocked && <p className='text-destructive text-sm'>{t('formLocked', { seconds: remainingSeconds })}</p>}
+
       <form onSubmit={handleSubmit(handleLoginSubmit)} className='space-y-4'>
         {errors.root && <p className='text-destructive text-sm'>{errors.root.message}</p>}
 
@@ -81,14 +105,14 @@ const LoginFormComponent = () => {
             <FormItem>
               <FormLabel>{t('password')}</FormLabel>
 
-              <Input type='password' placeholder={t('enterPassword')} {...field} />
+              <PasswordInputComponent placeholder={t('enterPassword')} {...field} />
 
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type='submit' disabled={isLoading}>
+        <Button type='submit' disabled={isLoading || isLocked}>
           {isLoading ? t('loggingIn') : t('login')}
         </Button>
       </form>
