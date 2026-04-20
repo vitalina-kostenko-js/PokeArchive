@@ -7,7 +7,7 @@ import { Button } from '../../../pkg/theme/ui/button'
 
 const NotFoundComponent = () => {
   const t = useTranslations('notFound')
-  
+
   //render
   return (
     <div className='flex min-h-screen flex-col items-center justify-center px-4 text-center'>
@@ -32,6 +32,7 @@ const NotFoundComponent = () => {
         <h1 className='text-foreground flex items-center justify-center gap-2 text-2xl font-bold md:text-3xl'>
           {t('title')} <span className='text-xl'>⚠️</span>
         </h1>
+
         <p className='text-muted-foreground mx-auto max-w-xs'>{t('description')}</p>
       </div>
 

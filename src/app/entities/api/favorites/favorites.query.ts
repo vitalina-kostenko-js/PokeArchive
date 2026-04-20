@@ -11,6 +11,7 @@ export const favoritesKeys = {
 
 export const useAddFavoritesQuery = () => {
   const { data: session } = useAuthSession()
+
   const userId = session?.user?.id
 
   //render

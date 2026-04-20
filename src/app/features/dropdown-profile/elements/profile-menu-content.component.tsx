@@ -1,13 +1,3 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@radix-ui/react-dropdown-menu'
 import {
   CirclePlusIcon,
   CreditCardIcon,
@@ -19,6 +9,17 @@ import {
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { ReactNode } from 'react'
+
+import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@radix-ui/react-dropdown-menu'
 
 //interface
 interface ISession {

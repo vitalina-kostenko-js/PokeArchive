@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation'
 import { useLocale } from 'next-intl'
 import type { ReactNode } from 'react'
-import { useEffect, useState, useTransition } from 'react'
+import { useState, useTransition } from 'react'
 
 import { usePathname, useRouter } from '@/pkg/locale'
 import {
@@ -14,17 +14,20 @@ import {
   DropdownMenuTrigger,
 } from '@/pkg/theme/ui/dropdown-menu'
 
+//locales
 const LOCALES = [
   { value: 'en', label: 'English' },
   { value: 'de', label: 'Deutsch' },
 ]
 
+//inetrface
 interface ILanguageDropdownProps {
   trigger: ReactNode
   defaultOpen?: boolean
   align?: 'start' | 'center' | 'end'
 }
 
+//component
 const LanguageDropdownComponent = (props: ILanguageDropdownProps) => {
   const { trigger, defaultOpen, align = 'end' } = props
 

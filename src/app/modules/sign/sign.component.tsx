@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server'
+import { FC } from 'react'
 
 import { Link } from '@/pkg/locale'
 
@@ -9,7 +10,10 @@ interface IProps {
   variant: 'sign-in' | 'sign-up'
 }
 
-const SignComponent = async ({ variant }: IProps) => {
+//component
+const SignComponent: FC<Readonly<IProps>> = async (props) => {
+  const { variant } = props
+
   const tLogin = await getTranslations('form_login')
   const tRegister = await getTranslations('form_register')
 

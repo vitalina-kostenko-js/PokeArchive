@@ -57,6 +57,7 @@ const RegisterFormComponent = () => {
 
         setError('root', { message })
 
+        //render
         return
       }
 

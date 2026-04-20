@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   description: 'Sign up to create your account to access your library',
 }
 
+//page
 const RegisterPage = async () => {
   //render
   return <SignComponent variant='sign-up' />

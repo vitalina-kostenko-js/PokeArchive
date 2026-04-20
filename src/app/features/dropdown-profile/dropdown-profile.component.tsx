@@ -21,6 +21,7 @@ const ProfileDropdownComponent = () => {
   const user = data?.user
 
   if (user) {
+    //render
     return (
       <>
         {isSigningOut && (

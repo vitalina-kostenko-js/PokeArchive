@@ -17,6 +17,7 @@ export async function GET() {
     const token = cookieStore.get('auth-token')?.value
 
     if (!token) {
+      //render
       return NextResponse.json({ user: null, session: null })
     }
 
