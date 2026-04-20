@@ -23,10 +23,12 @@ const PokemonAvatarComponent: FC<Readonly<IProps>> = ({ name, size = 'md' }) => 
   }
 
   if (isLoading) {
+    //render
     return <div className={`${sizeClasses[size]} animate-pulse rounded-full bg-gray-200 dark:bg-gray-700`} />
   }
 
   if (isError || !data) {
+    //render
     return (
       <div
         className={`${sizeClasses[size]} flex items-center justify-center rounded-full bg-red-100 text-xs text-red-500`}

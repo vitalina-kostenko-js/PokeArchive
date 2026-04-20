@@ -25,7 +25,10 @@ export const useFormThrottle = (options: IUseFormThrottleOptions): IUseFormThrot
   const isLocked = remainingSeconds > 0
 
   useEffect(() => {
-    if (!lockUntil) return
+    if (!lockUntil) {
+      //render
+      return
+    }
 
     const interval = setInterval(() => {
       const left = Math.ceil((lockUntil - Date.now()) / 1000)
@@ -40,6 +43,7 @@ export const useFormThrottle = (options: IUseFormThrottleOptions): IUseFormThrot
       }
     }, 1000)
 
+    //render
     return () => clearInterval(interval)
   }, [lockUntil])
 
@@ -53,6 +57,7 @@ export const useFormThrottle = (options: IUseFormThrottleOptions): IUseFormThrot
         setRemainingSeconds(lockoutSeconds)
       }
 
+      //render
       return next
     })
   }, [maxAttempts, lockoutSeconds])

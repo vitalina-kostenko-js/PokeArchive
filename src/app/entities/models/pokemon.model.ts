@@ -1,3 +1,4 @@
+//interface
 export interface INameResource {
   name: string
   url: string
@@ -65,7 +66,6 @@ export interface IPokemon {
   held_items?: IHeldItem[]
   sprites?: ISprites
 }
-
 
 export interface IPokemonSpecies extends INameResource {
   id: number

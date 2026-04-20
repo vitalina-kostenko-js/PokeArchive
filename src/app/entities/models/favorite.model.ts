@@ -1,5 +1,6 @@
 import { IPokemon } from '@/app/entities/models'
 
+//interface
 export interface IFavoriteItem {
   pokemon_id: number
 }

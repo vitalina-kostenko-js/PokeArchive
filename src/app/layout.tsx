@@ -1,15 +1,14 @@
 import type { Metadata } from 'next'
-import { hasLocale, NextIntlClientProvider } from 'next-intl'
-import { getLocale, getMessages } from 'next-intl/server'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { notFound } from 'next/navigation'
+import { hasLocale, NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
 import { ReactNode } from 'react'
-
-import { ReactQueryProvider } from '../pkg/theme/providers'
 
 import '@/config/styles/global.css'
 
 import { routing } from '../pkg/locale/routing'
+import { ReactQueryProvider } from '../pkg/theme/providers'
 
 //interface
 interface IProps {
@@ -46,6 +45,7 @@ export default async function RootLayout(props: IProps) {
     notFound()
   }
 
+  //render
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>

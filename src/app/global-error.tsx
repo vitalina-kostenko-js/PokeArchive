@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { Button } from '../pkg/theme/ui/button'
 
 export default function GlobalError({ _error, reset }: { _error: Error & { digest?: string }; reset: () => void }) {
+  //render
   return (
     <html lang='en'>
       <body className='bg-background'>

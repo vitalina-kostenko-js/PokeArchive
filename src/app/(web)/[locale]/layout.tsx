@@ -20,6 +20,7 @@ interface IProps {
 
 // static params
 export const generateStaticParams = async () => {
+  //render
   return routing.locales.map((locale) => ({ locale }))
 }
 

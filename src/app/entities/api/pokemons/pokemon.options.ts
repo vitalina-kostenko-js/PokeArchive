@@ -24,6 +24,7 @@ export const pokemonCardsByTypeQueryOptions = (typeName: string | null, offset: 
         throw new Error('typeName is required')
       }
 
+      //render
       return fetcherPokemonCardsByType(typeName, offset, limit)
     },
 
@@ -32,6 +33,7 @@ export const pokemonCardsByTypeQueryOptions = (typeName: string | null, offset: 
 }
 
 export const pokemonDetailQueryOptions = (name: string) => {
+  //render
   return queryOptions({
     queryKey: pokemonKeys.detail(name),
 

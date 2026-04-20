@@ -15,7 +15,6 @@ const CardBackComponent: FC<Readonly<IProps>> = (props) => {
   const t = useTranslations('card_component')
 
   //render
-  //render
   return (
     <div className='absolute inset-0 flex h-full w-full [transform:rotateY(180deg)] flex-col rounded-3xl border-2 bg-slate-800 p-6 text-white shadow-inner [backface-visibility:hidden]'>
       <h3 className='mb-6 text-center text-xl font-black tracking-wider text-sky-400 uppercase'>{t('base_stat')}</h3>

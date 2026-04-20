@@ -20,6 +20,7 @@ const EvolutionDetailComponent: FC<Readonly<IProps>> = (props) => {
   const { data: evolutionData } = usePokemonEvolutionQuery(initialUrl)
 
   if (!evolutionData) {
+    //render
     return null
   }
 

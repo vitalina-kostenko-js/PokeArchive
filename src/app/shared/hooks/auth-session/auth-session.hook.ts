@@ -2,6 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query'
 
+//interface
 interface IAuthSessionUser {
   id: string
   name: string
@@ -14,11 +15,6 @@ interface IAuthSessionResponse {
   session: { token: string } | null
 }
 
-// interface IUseAuthSessionReturn {
-//   isPending: boolean
-//   session: { user: IAuthSessionUser } | null
-// }
-
 //hook
 export const useAuthSession = () => {
   return useQuery({
@@ -27,6 +23,7 @@ export const useAuthSession = () => {
     queryFn: async () => {
       const res = await fetch('/auth/session', { credentials: 'include' })
 
+      //render
       return res.json() as Promise<IAuthSessionResponse>
     },
     staleTime: 5 * 60 * 1000,

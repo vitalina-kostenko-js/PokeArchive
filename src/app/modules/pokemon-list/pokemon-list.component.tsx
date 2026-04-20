@@ -39,13 +39,16 @@ const PokemonListComponent: FC<Readonly<IPokemonListComponentProps>> = (props) =
 
   const displayData = useMemo<IPokemonCardData[]>(() => {
     if (dataPokemons) {
+      //render
       return dataPokemons.map(mapPokemonToCard)
     }
 
     if (selectedType && typeData) {
+      //render
       return typeData.items.map(mapPokemonToCard)
     }
 
+    //render
     return (allData?.items ?? []).map(mapPokemonToCard)
   }, [dataPokemons, allData, selectedType, typeData])
 

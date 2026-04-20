@@ -27,6 +27,7 @@ export const useTypeFilter = () => {
     },
     [router, searchParams, startTransition],
   )
+  
   //render
   return { handleTypeChange, isPending }
 }

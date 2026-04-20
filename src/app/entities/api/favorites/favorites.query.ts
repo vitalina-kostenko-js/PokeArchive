@@ -13,6 +13,7 @@ export const useAddFavoritesQuery = () => {
   const { data: session } = useAuthSession()
   const userId = session?.user?.id
 
+  //render
   return useQuery({
     queryKey: favoritesKeys.list(userId),
     queryFn: getFavorites,

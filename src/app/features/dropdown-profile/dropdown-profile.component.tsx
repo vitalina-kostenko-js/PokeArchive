@@ -31,6 +31,7 @@ const ProfileDropdownComponent = () => {
           >
             <div className='flex flex-col items-center gap-3'>
               <div className='border-primary h-10 w-10 animate-spin rounded-full border-2 border-t-transparent' />
+
               <p className='text-muted-foreground text-sm'>{tLoading('signingOut')}</p>
             </div>
           </div>
@@ -42,7 +43,9 @@ const ProfileDropdownComponent = () => {
             setIsSigningOut(true)
             try {
               await signOutAppAuth()
+
               router.push('/sign-in')
+
               router.refresh()
             } catch {
               setIsSigningOut(false)

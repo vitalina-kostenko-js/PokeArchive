@@ -7,6 +7,8 @@ import { Button } from '../../../pkg/theme/ui/button'
 
 const NotFoundComponent = () => {
   const t = useTranslations('notFound')
+  
+  //render
   return (
     <div className='flex min-h-screen flex-col items-center justify-center px-4 text-center'>
       <div className='mb-8 flex items-center justify-center select-none'>

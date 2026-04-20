@@ -33,7 +33,7 @@ function AnimatedBeam(props: AnimatedBeamProps) {
     toRef,
     curvature = 0,
     reverse = false,
-    duration = Math.random() * 3 + 4,
+    duration: durationProp,
     delay = 0,
     pathColor = 'currentColor',
     pathWidth = 1,
@@ -47,6 +47,7 @@ function AnimatedBeam(props: AnimatedBeamProps) {
   } = props
 
   const id = React.useId()
+  const [duration] = React.useState(() => durationProp ?? Math.random() * 3 + 4)
   const [pathD, setPathD] = React.useState('')
   const [svgDimensions, setSvgDimensions] = React.useState({ width: 0, height: 0 })
 

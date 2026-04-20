@@ -8,6 +8,7 @@ import { Button } from '@/pkg/theme/ui/button'
 const RegisterButtonComponent = () => {
   const t = useTranslations('auth_button')
 
+  //render
   return (
     <Button variant='ghost' size='default' asChild>
       <Link href='/sign-up'>{t('register')}</Link>

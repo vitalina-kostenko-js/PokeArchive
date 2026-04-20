@@ -5,6 +5,7 @@ import { addFavorite, removeFavorite } from '@/app/entities/api/favorites'
 export const useAddFavoriteMutation = () => {
   const queryClient = useQueryClient()
 
+  //render
   return useMutation({
     mutationFn: addFavorite,
 
@@ -21,6 +22,7 @@ export const useAddFavoriteMutation = () => {
 export const useRemoveFavoriteMutation = () => {
   const queryClient = useQueryClient()
 
+  //render
   return useMutation({
     mutationFn: removeFavorite,
 

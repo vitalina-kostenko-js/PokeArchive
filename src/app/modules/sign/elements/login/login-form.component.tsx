@@ -42,6 +42,7 @@ const LoginFormComponent = () => {
 
   const handleLoginSubmit = async (values: TLoginFormValues) => {
     if (isLocked) {
+      //render
       return
     }
 
@@ -54,7 +55,7 @@ const LoginFormComponent = () => {
         const message = res.error === 'Too many requests' ? t('tooManyRequests') : t('loginFailed')
 
         setError('root', { message })
-
+        //render
         return
       }
 

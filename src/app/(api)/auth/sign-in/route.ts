@@ -5,8 +5,10 @@ import z from 'zod'
 import { findUserByEmail, verifyPassword } from '@/app/(api)/auth/user.service'
 import { authRateLimit } from '@/pkg/rate-limit'
 
+//secret jwt
 const secret = new TextEncoder().encode(process.env.JWT_SECRET)
 
+//schema
 const signInSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1),
@@ -19,12 +21,14 @@ export async function POST(req: NextRequest) {
   const { success } = await authRateLimit.limit(ip)
 
   if (!success) {
+    //render
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
   }
 
   const parsed = signInSchema.safeParse(await req.json())
 
   if (!parsed.success) {
+    //render
     return NextResponse.json({ error: 'Validation failed' }, { status: 400 })
   }
 
@@ -46,6 +50,7 @@ export async function POST(req: NextRequest) {
     const sessionUser = { id: user.id, name: user.name, email: user.email }
 
     const response = NextResponse.json({ token, user: sessionUser })
+    
     response.cookies.set('auth-token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',

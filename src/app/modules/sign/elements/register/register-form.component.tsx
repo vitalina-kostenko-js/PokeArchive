@@ -35,6 +35,7 @@ const RegisterFormComponent = () => {
 
   const handleRegisterSubmit = async (values: TRegisterFormValues) => {
     if (isLocked) {
+      //render
       return
     }
 
@@ -70,6 +71,7 @@ const RegisterFormComponent = () => {
     }
   }
 
+  //render
   return (
     <Form {...form}>
       {isLocked && <p className='text-destructive text-sm'>{t('formLocked', { seconds: remainingSeconds })}</p>}

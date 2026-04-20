@@ -4,6 +4,7 @@ import z from 'zod'
 import { createUser, findUserByEmail } from '@/app/(api)/auth/user.service'
 import { authRateLimit } from '@/pkg/rate-limit'
 
+//schema
 const signUpSchema = z.object({
   name: z.string().min(1).max(100),
   email: z.string().email(),
@@ -17,6 +18,7 @@ export async function POST(req: NextRequest) {
   const { success } = await authRateLimit.limit(ip)
 
   if (!success) {
+    //render
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
   }
 
@@ -24,6 +26,7 @@ export async function POST(req: NextRequest) {
     const parsed = signUpSchema.safeParse(await req.json())
 
     if (!parsed.success) {
+      //render
       return NextResponse.json({ error: 'Validation failed', details: parsed.error.flatten() }, { status: 400 })
     }
 
@@ -41,6 +44,7 @@ export async function POST(req: NextRequest) {
 
     await createUser(name, email, password)
 
+    //render
     return NextResponse.json({ success: true })
   } catch {
     //render

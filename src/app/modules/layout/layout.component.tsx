@@ -12,6 +12,7 @@ interface ILayoutComponentProps {
 const LayoutComponent = (props: ILayoutComponentProps) => {
   const { children } = props
 
+  //render
   return (
     <Suspense fallback={<LocaleSegmentLoading />}>
       <div className='relative z-0 flex min-h-dvh flex-col'>{children}</div>

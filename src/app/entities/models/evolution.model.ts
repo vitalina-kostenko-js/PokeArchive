@@ -1,5 +1,6 @@
 import { INameResource } from './pokemon.model'
 
+//interface
 export interface IEvolutionDetail {
   trigger: INameResource
   min_level?: number

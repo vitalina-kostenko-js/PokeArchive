@@ -35,5 +35,6 @@ export const registerSchema = (props: IAuthFormTranslate) => {
     })
 }
 
+//type
 export type TRegisterFormValues = z.infer<ReturnType<typeof registerSchema>>
 export type TLoginFormValues = z.infer<ReturnType<typeof loginSchema>>

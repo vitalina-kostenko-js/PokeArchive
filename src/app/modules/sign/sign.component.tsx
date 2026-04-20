@@ -4,6 +4,7 @@ import { Link } from '@/pkg/locale'
 
 import { LoginFormComponent, RegisterFormComponent } from './elements'
 
+//interface
 interface IProps {
   variant: 'sign-in' | 'sign-up'
 }
@@ -12,6 +13,7 @@ const SignComponent = async ({ variant }: IProps) => {
   const tLogin = await getTranslations('form_login')
   const tRegister = await getTranslations('form_register')
 
+  //render
   return (
     <div className='flex min-h-dvh items-center justify-center px-4'>
       <div className='bg-card w-full max-w-md space-y-6 rounded-xl border p-8 shadow-sm'>

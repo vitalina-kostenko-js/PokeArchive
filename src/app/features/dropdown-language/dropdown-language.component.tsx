@@ -36,10 +36,12 @@ const LanguageDropdownComponent = (props: ILanguageDropdownProps) => {
 
   const [isPending, startTransition] = useTransition()
   const [language, setLanguage] = useState(locale)
+  const [prevLocale, setPrevLocale] = useState(locale)
 
-  useEffect(() => {
+  if (locale !== prevLocale) {
+    setPrevLocale(locale)
     setLanguage(locale)
-  }, [locale])
+  }
 
   const handleChange = (value: string) => {
     setLanguage(value)
@@ -55,6 +57,7 @@ const LanguageDropdownComponent = (props: ILanguageDropdownProps) => {
     })
   }
 
+  //render
   return (
     <DropdownMenu defaultOpen={defaultOpen}>
       <DropdownMenuTrigger asChild disabled={isPending}>
