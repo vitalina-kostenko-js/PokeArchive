@@ -14,7 +14,9 @@ import { ProfileMenuContentComponent } from './elements'
 //component
 const ProfileDropdownComponent = () => {
   const tLoading = useTranslations('loading')
+
   const router = useRouter()
+
   const [isSigningOut, setIsSigningOut] = useState(false)
 
   const { data } = useAuthSession()

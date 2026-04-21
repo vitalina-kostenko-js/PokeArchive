@@ -16,6 +16,9 @@ import { Button } from '@/pkg/theme/ui/button'
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/pkg/theme/ui/form'
 import { Input } from '@/pkg/theme/ui/input'
 
+//interface
+interface IProps {}
+
 //component
 const LoginFormComponent = () => {
   const t = useTranslations('form_login')

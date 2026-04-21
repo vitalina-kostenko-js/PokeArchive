@@ -14,6 +14,10 @@ import { Button } from '@/pkg/theme/ui/button'
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/pkg/theme/ui/form'
 import { Input } from '@/pkg/theme/ui/input'
 
+//interface
+interface IProps {}
+
+//component
 const RegisterFormComponent = () => {
   const t = useTranslations('form_register')
   const tSchema = useTranslations('auth_schema')
