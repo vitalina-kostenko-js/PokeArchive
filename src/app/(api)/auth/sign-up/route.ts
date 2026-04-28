@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import z from 'zod'
 
-import { createUser, findUserByEmail } from '@/app/(api)/auth/user.service'
+import { createUser, findUserByEmail } from '@/app/entities/api/auth/auth.service'
 import { authRateLimit } from '@/pkg/rate-limit'
 
 //schema
@@ -11,7 +11,7 @@ const signUpSchema = z.object({
   password: z.string().min(10),
 })
 
-//route
+// POST /auth/sign-up
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown'
 

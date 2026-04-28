@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 import { FC } from 'react'
 
 import { usePokemonEvolutionQuery } from '@/app/entities/api/pokemons'
-import { PokemonAvatarComponent } from '@/app/features/pokemon-avatar'
+import { PokemonAvatarComponent } from '@/app/shared/components/pokemon-avatar'
 import { flattenEvolutionChain } from '@/app/features/pokemon-details/elements/evolution-detail/evolution-detail.service'
 
 //interface

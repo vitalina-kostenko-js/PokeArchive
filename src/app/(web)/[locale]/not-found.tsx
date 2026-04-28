@@ -4,7 +4,7 @@ import { NotFoundComponent } from '@/app/modules/not-found'
 
 // component
 const NotFound: NextPage = () => {
-  // return
+  // render
   return <NotFoundComponent />
 }
 

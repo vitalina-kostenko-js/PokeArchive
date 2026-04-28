@@ -1,5 +1,5 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 //interface
 interface IAuthStore {
@@ -20,6 +20,8 @@ export const useAuthStore = create<IAuthStore>()(
     }),
     {
       name: 'auth-session',
+      version: 1,
+      migrate: (persistedState) => persistedState,
     },
   ),
 )

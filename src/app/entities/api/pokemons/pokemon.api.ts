@@ -7,23 +7,27 @@ import type {
   IPokemonSpecies,
   IPokemonTypeResponse,
 } from '@/app/entities/models'
-import { pokeApiFetcher } from '@/pkg/rest-api/fetcher'
+import { pokeApiFetcher } from '@/app/entities/api/pokemons'
 
+// get list
 export const getPokemonList = async (offset = 0, limit = 20): Promise<IPokemonListResponse> => {
   //render
   return pokeApiFetcher.get('pokemon', { searchParams: { offset, limit } }).json()
 }
 
+// get by name
 export const getPokemonByName = async (name: string): Promise<IPokemon> => {
   //render
   return pokeApiFetcher.get(`pokemon/${encodeURIComponent(name)}`).json()
 }
 
+//get species
 export const getPokemonSpecies = async (name: string): Promise<IPokemonSpecies> => {
   //render
   return pokeApiFetcher.get(`pokemon-species/${encodeURIComponent(name)}`).json()
 }
 
+//get evolution chain 
 export const getEvolutionChain = async (url: string): Promise<IEvolutionChainResponse> => {
   const parsed = new URL(url)
 
@@ -35,11 +39,13 @@ export const getEvolutionChain = async (url: string): Promise<IEvolutionChainRes
   return ky.get(url).json()
 }
 
+//get pokemon by type
 export const getPokemonByType = async (typeName: string): Promise<IPokemonTypeResponse> => {
   //render
   return pokeApiFetcher(`type/${encodeURIComponent(typeName)}`).json()
 }
 
+//get full pokemon data
 export const getFullPokemonData = async (id: string) => {
   try {
     const [pokemon, species] = await Promise.all([getPokemonByName(id), getPokemonSpecies(id)])

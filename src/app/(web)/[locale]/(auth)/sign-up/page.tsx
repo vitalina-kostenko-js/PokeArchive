@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 }
 
 //page
-const RegisterPage = async () => {
+const Page = async () => {
   //render
   return <SignComponent variant='sign-up' />
 }
 
-export default RegisterPage
+export default Page

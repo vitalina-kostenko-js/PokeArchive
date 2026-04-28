@@ -8,6 +8,7 @@ export const ratelimit = new Ratelimit({
   limiter: Ratelimit.slidingWindow(10, '10 s'),
 })
 
+//auth rate limit
 export const authRateLimit = new Ratelimit({
   redis: Redis.fromEnv(),
 

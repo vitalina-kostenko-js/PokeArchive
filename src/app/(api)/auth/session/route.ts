@@ -2,15 +2,17 @@ import { jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
+// jwt secret
 const JWT_SECRET = process.env.JWT_SECRET
 
 if (!JWT_SECRET && process.env.NODE_ENV === 'production') {
   throw new Error('JWT_SECRET must be set in production')
 }
 
+// encoded secret
 const secret = new TextEncoder().encode(JWT_SECRET ?? 'local-dev-secret')
 
-//route
+//GET /auth/session
 export async function GET() {
   try {
     const cookieStore = await cookies()

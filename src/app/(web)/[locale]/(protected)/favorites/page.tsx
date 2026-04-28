@@ -6,7 +6,7 @@ import { useAddFavoritesQuery } from '@/app/entities/api/favorites'
 import { pokemonDetailQueryOptions } from '@/app/entities/api/pokemons'
 import { IPokemon, mapPokemonToCard } from '@/app/entities/models'
 import { DashboardLayoutComponent } from '@/app/modules/dashboard'
-import { CardComponent } from '@/app/shared/components/card'
+import { CardListComponent } from '@/app/shared/components/card-list'
 import { Link } from '@/pkg/locale'
 
 //page
@@ -26,7 +26,7 @@ const Page = () => {
         {cards.map((item) => (
           <div key={item.name}>
             <Link href={`/items/${item.name}`}>
-              <CardComponent data={item} />
+              <CardListComponent data={item} />
             </Link>
           </div>
         ))}

@@ -1,6 +1,9 @@
 import { useTranslations } from 'next-intl'
-import { FC, ReactNode } from 'react'
+import { FC } from 'react'
 
+import { LanguageDropdownComponent } from '@/app/shared/components/dropdown-language'
+import { ProfileDropdownComponent } from '@/app/shared/components/dropdown-profile'
+import { ModeToggleComponent } from '@/app/shared/components/mode-toggle'
 import { Link } from '@/pkg/locale'
 import {
   Breadcrumb,
@@ -9,17 +12,15 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/pkg/theme/ui/breadcrumb'
+import { Button } from '@/pkg/theme/ui/button'
+import { LanguagesIcon } from 'lucide-react'
 
 //interface
-interface IProps {
-  children?: ReactNode
-}
+interface IProps {}
 
 //component
 const HeaderBarComponent: FC<Readonly<IProps>> = (props) => {
   const t = useTranslations('header')
-
-  const { children } = props
 
   //render
   return (
@@ -53,7 +54,18 @@ const HeaderBarComponent: FC<Readonly<IProps>> = (props) => {
           </Breadcrumb>
         </div>
 
-        <div className='flex items-center gap-1.5'>{children}</div>
+        <div className='flex items-center gap-2'>
+          <LanguageDropdownComponent
+            trigger={
+              <Button data-testid='language-toggle' variant='ghost' size='icon'>
+                <LanguagesIcon />
+              </Button>
+            }
+          />
+          <ModeToggleComponent />
+          
+          <ProfileDropdownComponent />
+        </div>
       </div>
     </header>
   )

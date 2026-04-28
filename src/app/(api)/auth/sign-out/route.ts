@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-//route
+// POST /auth/sign-out
 export async function POST() {
   const response = NextResponse.json({ success: true })
 

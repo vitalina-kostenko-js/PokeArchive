@@ -1,5 +1,5 @@
+import { SkeletonRendererComponent } from '@/app/shared/components/skeleton-render'
 import { CARD_SKELETON_MODEL } from '@/app/shared/constants/loading'
-import { SkeletonRendererComponent } from '@/app/shared/ui/skeleton-render'
 
 //loading
 const FavoritesLoading = () => {

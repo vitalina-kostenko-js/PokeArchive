@@ -1,11 +1,6 @@
-import { LanguagesIcon } from 'lucide-react'
 import { ReactNode } from 'react'
 
-import { LanguageDropdownComponent } from '@/app/features/dropdown-language'
-import { ProfileDropdownComponent } from '@/app/features/dropdown-profile'
-import { ModeToggleComponent } from '@/app/features/mode-toggle'
 import { HeaderBarComponent } from '@/app/widgets/header'
-import { Button } from '@/pkg/theme/ui/button'
 
 //interface
 interface IDashboardLayoutProps {
@@ -19,18 +14,7 @@ const DashboardLayoutComponent = (props: IDashboardLayoutProps) => {
   //render
   return (
     <div className='flex min-h-dvh w-full flex-col'>
-      <HeaderBarComponent>
-        <LanguageDropdownComponent
-          trigger={
-            <Button data-testid='language-toggle' variant='ghost' size='icon'>
-              <LanguagesIcon />
-            </Button>
-          }
-        />
-        <ModeToggleComponent />
-
-        <ProfileDropdownComponent />
-      </HeaderBarComponent>
+      <HeaderBarComponent/>
 
       <main className='mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-6 sm:px-6'>{children}</main>
 

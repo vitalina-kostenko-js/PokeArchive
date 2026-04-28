@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { addFavorite, removeFavorite } from '@/app/entities/api/favorites'
+import { addFavorite, removeFavorite } from '@/app/entities/api/favorites/favorites.api'
+import { favoritesKeys } from '@/app/entities/api/favorites/favorites.query'
 
+//add favorite mutation
 export const useAddFavoriteMutation = () => {
   const queryClient = useQueryClient()
 
@@ -10,7 +12,7 @@ export const useAddFavoriteMutation = () => {
     mutationFn: addFavorite,
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['favorites'] })
+      queryClient.invalidateQueries({ queryKey: favoritesKeys.all })
     },
 
     onError: (err) => {
@@ -19,6 +21,7 @@ export const useAddFavoriteMutation = () => {
   })
 }
 
+//remove favorite mutation
 export const useRemoveFavoriteMutation = () => {
   const queryClient = useQueryClient()
 
@@ -27,7 +30,7 @@ export const useRemoveFavoriteMutation = () => {
     mutationFn: removeFavorite,
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['favorites'] })
+      queryClient.invalidateQueries({ queryKey: favoritesKeys.all })
     },
 
     onError: (err) => {

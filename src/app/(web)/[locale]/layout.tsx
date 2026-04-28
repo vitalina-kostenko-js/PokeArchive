@@ -1,84 +1,71 @@
-import { type Metadata } from 'next'
+import type { Metadata } from 'next'
+import { hasLocale, NextIntlClientProvider } from 'next-intl'
+import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { hasLocale } from 'next-intl'
-import { setRequestLocale } from 'next-intl/server'
-import { type FC, type ReactNode } from 'react'
 
 import { EAssetImage } from '@/app/shared/interfaces'
 import { envClient } from '@/config/env'
 import { routing } from '@/pkg/locale'
-import { ThemeProvider } from '@/pkg/theme/providers'
+import { ReactQueryProvider, ThemeProvider } from '@/pkg/theme/providers'
 import { Toaster } from '@/pkg/theme/ui/sonner'
 
-import '@/config/styles/global.css'
-
-// interface
+//interface
 interface IProps {
-  children: ReactNode
+  children: React.ReactNode
   params: Promise<{ locale: string }>
 }
 
-// static params
-export const generateStaticParams = async () => {
-  //render
-  return routing.locales.map((locale) => ({ locale }))
-}
+//static params
+export const generateStaticParams = () =>
+  routing.locales.map((locale) => ({ locale }))
 
-// metadata
+//metadata
 export const generateMetadata = async (): Promise<Metadata> => {
-  const favicon = EAssetImage.FAVICON
   const title = 'PokeArchive'
   const description = 'A complete guide to Pokémon with detailed stats and evolutionary chains.'
-  const ogImage = EAssetImage.OG_IMAGE
 
   return {
     metadataBase: new URL(envClient.NEXT_PUBLIC_CLIENT_WEB_URL),
     keywords: ['pokemon', 'pokemon species', 'pokemon types'],
-    icons: { icon: favicon },
-    title: {
-      default: title,
-      template: `%s | ${title}`,
-    },
-    description: description,
+    icons: { icon: EAssetImage.FAVICON },
+    title: { default: title, template: `%s | ${title}` },
+    description,
     applicationName: title,
     openGraph: {
-      title: {
-        default: title,
-        template: `%s | ${title}`,
-      },
-      description: description,
+      title: { default: title, template: `%s | ${title}` },
+      description,
       siteName: title,
       type: 'website',
       url: envClient.NEXT_PUBLIC_CLIENT_WEB_URL,
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
+      images: [{ url: EAssetImage.OG_IMAGE, width: 1200, height: 630, alt: title }],
     },
   }
 }
 
-// component
-const LocaleLayout: FC<Readonly<IProps>> = async (props: IProps) => {
-  const { children, params } = props
+//layout
+const LocaleLayout = async (props: IProps) => {
+  const {children, params } = props
 
   const { locale } = await params
 
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
-  setRequestLocale(locale)
 
-  // render
+  setRequestLocale(locale)
+  
+  const messages = await getMessages()
+
+  //render
   return (
-    <ThemeProvider>
-      {children}
-      <Toaster position='top-center' duration={3000} />
-    </ThemeProvider>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <ReactQueryProvider>
+        <ThemeProvider>
+          {children}
+          <Toaster position='top-center' duration={3000} />
+        </ThemeProvider>
+      </ReactQueryProvider>
+    </NextIntlClientProvider>
   )
 }
 

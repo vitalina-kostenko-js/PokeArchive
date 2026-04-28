@@ -7,15 +7,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import { registerUser } from '@/app/entities/api/auth'
 import { registerSchema, TRegisterFormValues } from '@/app/entities/models'
+import { PasswordInputComponent } from '@/app/shared/components/password-input'
 import { useFormThrottle } from '@/app/shared/hooks/form-throttle'
-import { PasswordInputComponent } from '@/app/shared/ui/password-input'
 import { useRouter } from '@/pkg/locale'
 import { Button } from '@/pkg/theme/ui/button'
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/pkg/theme/ui/form'
 import { Input } from '@/pkg/theme/ui/input'
-
-//interface
-interface IProps {}
 
 //component
 const RegisterFormComponent = () => {
@@ -140,8 +137,8 @@ const RegisterFormComponent = () => {
           )}
         />
 
-        <Button type='submit' disabled={isSubmitting || isLocked}>
-          {isSubmitting ? t('creatingAccount') : t('register')}
+        <Button type='submit' disabled={isLocked || isSubmitting}>
+          {t('register')}
         </Button>
       </form>
     </Form>

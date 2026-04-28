@@ -1,12 +1,12 @@
-import type { Metadata } from 'next'
+import type { Metadata, NextPage } from 'next'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
 import { getFullPokemonData, getPokemonByName } from '@/app/entities/api/pokemons'
-import { BackButtonComponent } from '@/app/features/back-button'
-import PokemonDetailsComponent from '@/app/features/pokemon-details/pokemon-details.component'
 import { DashboardLayoutComponent } from '@/app/modules/dashboard'
+import { BackButtonComponent } from '@/app/shared/components/back-button'
 import { CardProfileComponent } from '@/app/shared/components/card-profile'
+import { PokemonDetailsComponent } from '@/app/features/pokemon-details'
 
 export const revalidate = 3600
 
@@ -38,7 +38,7 @@ export const generateMetadata = async ({ params }: IProps): Promise<Metadata> =>
 }
 
 //page
-const Page = async ({ params }: IProps) => {
+const Page: NextPage<Readonly<IProps>> = async ({ params }) => {
   const { id } = await params
 
   const t = await getTranslations('items_page')
@@ -49,8 +49,6 @@ const Page = async ({ params }: IProps) => {
     notFound()
   }
 
-  const { species } = pokemon
-
   //render
   return (
     <DashboardLayoutComponent>
@@ -59,10 +57,10 @@ const Page = async ({ params }: IProps) => {
       </div>
 
       <div className='animate-in fade-in slide-in-from-bottom-4 mx-auto max-w-5xl space-y-8 duration-700'>
-        <CardProfileComponent pokemon={pokemon} species={species} />
+        <CardProfileComponent pokemon={pokemon} species={pokemon.species} />
 
         <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
-          <PokemonDetailsComponent pokemon={pokemon} initialUrl={species.evolution_chain.url} />
+          <PokemonDetailsComponent pokemon={pokemon} initialUrl={pokemon.species.evolution_chain.url} />
         </div>
       </div>
     </DashboardLayoutComponent>

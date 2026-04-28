@@ -1,12 +1,17 @@
 import { createClient } from '@supabase/supabase-js'
 
+import { Database } from '@/app/entities/dto'
 import { envServer } from '@/config/env'
 
-import { Database } from './database.types'
-
-export const supabaseAdmin = createClient<Database>(envServer.SUPABASE_URL, envServer.SUPABASE_SERVICE_ROLE_KEY, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false,
-  },
-})
+export const getSupabaseAdmin = () => {
+  return createClient<Database>(
+    envServer.SUPABASE_URL,
+    envServer.SUPABASE_SERVICE_ROLE_KEY,
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    }
+  )
+}

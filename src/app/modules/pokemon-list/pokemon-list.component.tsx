@@ -3,18 +3,18 @@
 import { FC, useMemo, useState } from 'react'
 
 import { usePokemonCardsByTypeQuery, usePokemonCardsQuery } from '@/app/entities/api/pokemons'
-import { IPokemon, IPokemonCardData, mapPokemonToCard } from '@/app/entities/models'
-import { TypeFilterComponent } from '@/app/features/type-filter'
-import { CardComponent } from '@/app/shared/components/card'
+import { IPokemon, mapPokemonToCard } from '@/app/entities/models'
+import { CardListComponent } from '@/app/shared/components/card-list'
 import { PaginationComponent } from '@/app/shared/components/pagination'
+import { SkeletonRendererComponent } from '@/app/shared/components/skeleton-render'
+import { TypeFilterComponent } from '@/app/shared/components/type-filter'
 import { CARD_SKELETON_MODEL } from '@/app/shared/constants/loading'
-import { SkeletonRendererComponent } from '@/app/shared/ui/skeleton-render'
 import { Link } from '@/pkg/locale'
 
 import { useTypeFilter } from './pokemon-list.service'
 
 //interface
-interface IPokemonListComponentProps {
+interface IProps {
   dataPokemons?: IPokemon[]
   page: number
   offset: number
@@ -22,8 +22,8 @@ interface IPokemonListComponentProps {
 }
 
 //component
-const PokemonListComponent: FC<Readonly<IPokemonListComponentProps>> = (props) => {
-  const { dataPokemons, page: currentPage, offset: listOffset, selectedType } = props
+const PokemonListComponent: FC<Readonly<IProps>> = (props) => {
+  const { dataPokemons, offset: listOffset, selectedType } = props
   const itemsPerPage = 12
 
   const { handleTypeChange, isPending } = useTypeFilter()
@@ -31,13 +31,9 @@ const PokemonListComponent: FC<Readonly<IPokemonListComponentProps>> = (props) =
 
   const { data: allData, isLoading, isError } = usePokemonCardsQuery(listOffset, itemsPerPage, !dataPokemons)
 
-  const {
-    data: typeData,
-    isLoading: isTypeLoading,
-    isError: isTypeError,
-  } = usePokemonCardsByTypeQuery(selectedType ?? null, listOffset, itemsPerPage)
+  const { data: typeData } = usePokemonCardsByTypeQuery(selectedType ?? null, listOffset, itemsPerPage)
 
-  const displayData = useMemo<IPokemonCardData[]>(() => {
+  const displayData = useMemo(() => {
     if (dataPokemons) {
       //render
       return dataPokemons.map(mapPokemonToCard)
@@ -67,7 +63,7 @@ const PokemonListComponent: FC<Readonly<IPokemonListComponentProps>> = (props) =
         <TypeFilterComponent selectedType={selectedType ?? null} onTypeChange={handleTypeChange} />
       </div>
 
-      {isLoading || isTypeLoading || isPending || isPaginationPending ? (
+      {isLoading || isPending || isPaginationPending ? (
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
           {Array.from({ length: 12 }).map((_, i) => (
             <SkeletonRendererComponent key={i} model={CARD_SKELETON_MODEL} />
@@ -78,7 +74,7 @@ const PokemonListComponent: FC<Readonly<IPokemonListComponentProps>> = (props) =
           {displayData.map((item) => (
             <div key={item.name} className='min-h-0'>
               <Link href={`/items/${item.name}`}>
-                <CardComponent data={item} />
+                <CardListComponent data={item} />
               </Link>
             </div>
           ))}

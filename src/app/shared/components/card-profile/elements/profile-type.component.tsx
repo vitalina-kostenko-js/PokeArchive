@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import { IType } from '@/app/entities/models'
-import { PokemonTypeComponent } from '@/app/features/pokemon-type'
+import { PokemonTypeComponent } from '@/app/shared/components/pokemon-type'
 
 //interface
 interface IProps {

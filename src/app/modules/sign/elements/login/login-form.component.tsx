@@ -1,30 +1,24 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { loginUser } from '@/app/entities/api/auth'
 import { loginSchema, TLoginFormValues } from '@/app/entities/models'
+import { PasswordInputComponent } from '@/app/shared/components/password-input'
 import { useFormThrottle } from '@/app/shared/hooks/form-throttle'
 import { useAuthStore } from '@/app/shared/store'
-import { PasswordInputComponent } from '@/app/shared/ui/password-input'
 import { useRouter } from '@/pkg/locale'
 import { Button } from '@/pkg/theme/ui/button'
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/pkg/theme/ui/form'
 import { Input } from '@/pkg/theme/ui/input'
 
-//interface
-interface IProps {}
-
 //component
 const LoginFormComponent = () => {
   const t = useTranslations('form_login')
   const tSchema = useTranslations('auth_schema')
-
-  const [isPending, startTransition] = useTransition()
 
   const router = useRouter()
 
@@ -40,8 +34,6 @@ const LoginFormComponent = () => {
 
   const { control, formState, handleSubmit, setError } = form
   const { errors, isSubmitting } = formState
-
-  const isLoading = isSubmitting || isPending
 
   const handleLoginSubmit = async (values: TLoginFormValues) => {
     if (isLocked) {
@@ -69,10 +61,7 @@ const LoginFormComponent = () => {
         image: null,
       })
 
-      startTransition(() => {
-        router.push('/items')
-        router.refresh()
-      })
+      router.push('/items')
     } catch {
       registerAttempt()
 
@@ -116,8 +105,8 @@ const LoginFormComponent = () => {
           )}
         />
 
-        <Button type='submit' disabled={isLoading || isLocked}>
-          {isLoading ? t('loggingIn') : t('login')}
+        <Button type='submit' disabled={isLocked || isSubmitting}>
+          {t('login')}
         </Button>
       </form>
     </Form>

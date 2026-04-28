@@ -1,1 +1,1 @@
-export { typeColorMap, typeIconMap } from './pokemon-type.constant'
+export { typeColorMap } from './pokemon-type.constant'

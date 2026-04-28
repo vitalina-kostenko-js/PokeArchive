@@ -2,6 +2,8 @@
 
 import { useQuery } from '@tanstack/react-query'
 
+import { restApiFetcher } from '@/pkg/rest-api/fetcher'
+
 //interface
 interface IAuthSessionUser {
   id: string
@@ -20,16 +22,12 @@ export const useAuthSession = () => {
   return useQuery({
     queryKey: ['auth', 'session'],
 
-    queryFn: async () => {
-      const res = await fetch('/auth/session', { credentials: 'include' })
-
-      //render
-      return res.json() as Promise<IAuthSessionResponse>
-    },
+    queryFn: () => restApiFetcher.get('auth/session', { credentials: 'include' }).json<IAuthSessionResponse>(),
+    
     staleTime: 5 * 60 * 1000,
   })
 }
 
 export const signOutAppAuth = async (): Promise<void> => {
-  await fetch('/auth/sign-out', { method: 'POST', credentials: 'include' })
+  await restApiFetcher.post('auth/sign-out', { credentials: 'include' })
 }

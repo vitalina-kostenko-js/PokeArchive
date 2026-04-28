@@ -4,9 +4,9 @@ import { MainComponent } from '@/app/modules/main'
 interface IHomePageProps {}
 
 //page
-const HomePage = async (props: IHomePageProps) => {
+const Page = async () => {
   //render
   return <MainComponent />
 }
 
-export default HomePage
+export default Page

@@ -1,5 +1,5 @@
+import { SkeletonRendererComponent } from '@/app/shared/components/skeleton-render'
 import { ITEMS_PAGE_LOADING } from '@/app/shared/constants/loading'
-import { SkeletonRendererComponent } from '@/app/shared/ui/skeleton-render'
 
 //loading
 const ItemLoading = () => {

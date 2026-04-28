@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import { Metadata, NextPage } from 'next'
 
 import { SignComponent } from '@/app/modules/sign'
 
@@ -9,9 +9,10 @@ export const metadata: Metadata = {
 }
 
 //page
-const LoginPage = async () => {
+const Page = async () => {
   //render
   return <SignComponent variant='sign-in' />
 }
 
-export default LoginPage
+export default Page
+  

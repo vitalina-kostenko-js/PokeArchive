@@ -2,9 +2,10 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-import { Link } from '../../../pkg/locale'
-import { Button } from '../../../pkg/theme/ui/button'
+import { Link } from '@/pkg/locale'
+import { Button } from '@/pkg/theme/ui/button'
 
+//сomponent
 const NotFoundComponent = () => {
   const t = useTranslations('notFound')
 

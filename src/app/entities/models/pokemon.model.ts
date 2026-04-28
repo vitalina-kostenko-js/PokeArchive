@@ -1,4 +1,5 @@
-//interface
+// --- helpers ---
+
 export interface INameResource {
   name: string
   url: string
@@ -12,10 +13,7 @@ export interface IAbility {
 
 export interface IType {
   slot: number
-  type: {
-    name: string
-    url: string
-  }
+  type: INameResource
 }
 
 export interface IStat {
@@ -36,13 +34,6 @@ export interface IHeldItem {
   }>
 }
 
-export interface IPokemonListResponse {
-  count: number
-  next: string | null
-  previous: string | null
-  results: INameResource[]
-}
-
 export interface ISprites {
   front_default: string | null
   front_shiny: string | null
@@ -53,18 +44,26 @@ export interface ISprites {
   }
 }
 
+// --- models ---
+
 export interface IPokemon {
   id: number
   name: string
   height?: number
   weight?: number
-
   abilities?: IAbility[]
   types?: IType[]
   stats?: IStat[]
   moves?: IMove[]
   held_items?: IHeldItem[]
   sprites?: ISprites
+}
+
+export interface IPokemonListResponse {
+  count: number
+  next: string | null
+  previous: string | null
+  results: INameResource[]
 }
 
 export interface IPokemonSpecies extends INameResource {
@@ -85,6 +84,15 @@ export interface IPokemonSpecies extends INameResource {
   }>
   is_legendary: boolean
   is_mythical: boolean
+}
+
+export interface IPokemonTypeResponse {
+  id: number
+  name: string
+  pokemon: Array<{
+    pokemon: INameResource
+    slot: number
+  }>
 }
 
 export interface IPokemonCardData {
@@ -108,15 +116,3 @@ export const mapPokemonToCard = (pokemon: IPokemon): IPokemonCardData => ({
   abilities: pokemon.abilities ?? [],
   stats: pokemon.stats ?? [],
 })
-
-export interface IPokemonTypeResponse {
-  id: string
-  name: string
-  pokemon: Array<{
-    pokemon: {
-      name: string
-      url: string
-    }
-    slot: number
-  }>
-}

@@ -3,7 +3,8 @@ import { FC } from 'react'
 
 import { Link } from '@/pkg/locale'
 
-import { LoginFormComponent, RegisterFormComponent } from './elements'
+import { RegisterFormComponent } from '@/app/modules/sign/elements/register'
+import { LoginFormComponent } from './elements/login'
 
 //interface
 interface IProps {

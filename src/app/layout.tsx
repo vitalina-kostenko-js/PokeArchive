@@ -1,58 +1,27 @@
-import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import { notFound } from 'next/navigation'
-import { hasLocale, NextIntlClientProvider } from 'next-intl'
-import { getLocale, getMessages } from 'next-intl/server'
+import { getLocale } from 'next-intl/server'
+
+import { fontPrimary, fontSecondary } from '@/config/fonts'
+import '@/config/styles/global.css'
 import { ReactNode } from 'react'
 
-import '@/config/styles/global.css'
-
-import { routing } from '../pkg/locale/routing'
-import { ReactQueryProvider } from '../pkg/theme/providers'
-
-//interface
 interface IProps {
   children: ReactNode
 }
 
-//fonts
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
-
-//metadata
-export const metadata: Metadata = {
-  title: 'PokeArchive',
-  description: 'A complete guide to Pokémon with detailed stats and evolutionary chains.',
-  icons: {
-    icon: '/favicon.ico.svg',
-  },
-}
-
-export default async function RootLayout(props: IProps) {
-  const locale = await getLocale()
-  const messages = await getMessages()
-
+//root layout
+const RootLayout = async(props: IProps) => {
   const { children } = props
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
+  const locale = await getLocale()
 
   //render
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
-        </NextIntlClientProvider>
+      <body className={`${fontPrimary.className} ${fontSecondary.className} antialiased`}>
+        {children}
       </body>
     </html>
   )
 }
+
+export default RootLayout

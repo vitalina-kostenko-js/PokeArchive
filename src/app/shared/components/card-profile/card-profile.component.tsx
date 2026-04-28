@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import { IPokemon, IPokemonSpecies } from '@/app/entities/models'
-import { FavoriteButtonComponent } from '@/app/features/favorite-button'
+import { FavoriteButtonComponent } from '@/app/shared/components/favorite-button'
 
 import {
   ProfileAvatarComponent,

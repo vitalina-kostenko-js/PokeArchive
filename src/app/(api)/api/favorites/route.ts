@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { addFavorite, getUserFavorites, removeFavorite } from '@/app/(api)/api/favorites/favorites.service'
+import { createFavorite, deleteFavorite, findFavoritesByUser } from '@/app/entities/api/favorites'
 import { getAuthenticatedUser } from '@/pkg/auth/api-auth'
 
+// GET /api/favorites
 export async function GET(req: NextRequest) {
   const user = await getAuthenticatedUser(req)
 
@@ -11,12 +12,13 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const favorites = await getUserFavorites(user.id)
+  const favorites = await findFavoritesByUser(user.id)
 
   //render
   return NextResponse.json(favorites)
 }
 
+// POST /api/favorites
 export async function POST(req: NextRequest) {
   const user = await getAuthenticatedUser(req)
 
@@ -28,7 +30,7 @@ export async function POST(req: NextRequest) {
   try {
     const { pokemonId } = await req.json()
 
-    const favorite = await addFavorite(user.id, pokemonId)
+    const favorite = await createFavorite(user.id, pokemonId)
 
     //render
     return NextResponse.json(favorite)
@@ -40,6 +42,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
+// DELETE /api/favorites
 export async function DELETE(req: NextRequest) {
   const user = await getAuthenticatedUser(req)
 
@@ -56,7 +59,7 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid pokemonId' }, { status: 400 })
     }
 
-    await removeFavorite(user.id, pokemonId)
+    await deleteFavorite(user.id, pokemonId)
 
     //render
     return NextResponse.json({ success: true })

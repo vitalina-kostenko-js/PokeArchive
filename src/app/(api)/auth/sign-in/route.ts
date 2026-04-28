@@ -2,10 +2,10 @@ import { SignJWT } from 'jose'
 import { NextRequest, NextResponse } from 'next/server'
 import z from 'zod'
 
-import { findUserByEmail, verifyPassword } from '@/app/(api)/auth/user.service'
+import { findUserByEmail, verifyPassword } from '@/app/entities/api/auth/auth.service'
 import { authRateLimit } from '@/pkg/rate-limit'
 
-//secret jwt
+// jwt secret
 const secret = new TextEncoder().encode(process.env.JWT_SECRET)
 
 //schema
@@ -14,7 +14,7 @@ const signInSchema = z.object({
   password: z.string().min(1),
 })
 
-//route
+	// POST /auth/sign-in
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown'
 

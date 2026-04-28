@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation'
 import { FC } from 'react'
 
-import { cn } from '@/pkg/lib/utils/utils'
+import { cn } from '@/pkg/theme/lib/utils'
 import { usePathname } from '@/pkg/locale'
 import { buttonVariants } from '@/pkg/theme/ui/button'
 import {
@@ -15,8 +15,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/pkg/theme/ui/pagination'
+import { visiblePageItems } from '@/app/shared/utils'
 
-import visiblePageItems from './pagination.service'
 
 //interface
 interface IPaginationProps {

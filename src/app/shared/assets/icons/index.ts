@@ -1,20 +1,2 @@
-export {
-  BugIcon,
-  DarkIcon,
-  DragonIcon,
-  ElectricIcon,
-  FairyIcon,
-  FightingIcon,
-  FireIcon,
-  FlyingIcon,
-  GhostIcon,
-  GrassIcon,
-  GroundIcon,
-  IceIcon,
-  NormalIcon,
-  PoisonIcon,
-  PsychicIcon,
-  RockIcon,
-  SteelIcon,
-  WaterIcon,
-} from '../pokemon-icons'
+export { PokemonIcon, POKEMON_TYPES } from '../pokemon-icons'
+export type { TPokemonType } from '../pokemon-icons'

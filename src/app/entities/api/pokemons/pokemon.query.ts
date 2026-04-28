@@ -1,4 +1,4 @@
-import { useQuery, UseQueryResult } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
 import {
   getEvolutionChain,
@@ -11,13 +11,6 @@ import {
   pokemonCardsQueryOptions,
   pokemonDetailQueryOptions,
 } from '@/app/entities/api/pokemons/pokemon.options'
-import type {
-  IEvolutionChainResponse,
-  IPokemon,
-  IPokemonCardsQueryResult,
-  IPokemonListResponse,
-} from '@/app/entities/models'
-
 // query keys
 export const pokemonKeys = {
   all: ['pokemon'] as const,
@@ -36,7 +29,7 @@ export const pokemonKeys = {
 }
 
 // fetchers
-export const fetchPokemonCards = async (offset: number, limit: number): Promise<IPokemonCardsQueryResult> => {
+export const fetchPokemonCards = async (offset: number, limit: number) => {
   const list = await getPokemonList(offset, limit)
 
   const items = await Promise.all(list.results.map((p) => getPokemonByName(p.name)))
@@ -45,11 +38,7 @@ export const fetchPokemonCards = async (offset: number, limit: number): Promise<
   return { items, totalCount: list.count }
 }
 
-export const fetcherPokemonCardsByType = async (
-  typeName: string,
-  offset: number,
-  limit: number,
-): Promise<IPokemonCardsQueryResult> => {
+export const fetcherPokemonCardsByType = async (typeName: string, offset: number, limit: number) => {
   const typeData = await getPokemonByType(typeName)
 
   const sliced = typeData.pokemon.slice(offset, offset + limit)
@@ -64,7 +53,7 @@ export const fetcherPokemonCardsByType = async (
 }
 
 // query hooks
-export const usePokemonListQuery = (offset: number, limit: number): UseQueryResult<IPokemonListResponse> => {
+export const usePokemonListQuery = (offset: number, limit: number) => {
   //render
   return useQuery({
     queryKey: pokemonKeys.list(offset, limit),
@@ -75,19 +64,16 @@ export const usePokemonListQuery = (offset: number, limit: number): UseQueryResu
   })
 }
 
-export const usePokemonDetailQuery = (name: string): UseQueryResult<IPokemon> => {
+export const usePokemonDetailQuery = (name: string) => {
   //render
   return useQuery({
     ...pokemonDetailQueryOptions(name),
+    
     enabled: !!name,
   })
 }
 
-export const usePokemonCardsQuery = (
-  offset: number,
-  limit: number,
-  enabled = true,
-): UseQueryResult<IPokemonCardsQueryResult> => {
+export const usePokemonCardsQuery = (offset: number, limit: number, enabled = true) => {
   //render
   return useQuery({
     ...pokemonCardsQueryOptions(offset, limit),
@@ -96,7 +82,7 @@ export const usePokemonCardsQuery = (
   })
 }
 
-export const usePokemonEvolutionQuery = (url: string): UseQueryResult<IEvolutionChainResponse> => {
+export const usePokemonEvolutionQuery = (url: string) => {
   //render
   return useQuery({
     queryKey: pokemonKeys.evolution(url),
@@ -109,11 +95,7 @@ export const usePokemonEvolutionQuery = (url: string): UseQueryResult<IEvolution
   })
 }
 
-export const usePokemonCardsByTypeQuery = (
-  typeName: string | null,
-  offset: number,
-  limit: number,
-): UseQueryResult<IPokemonCardsQueryResult> => {
+export const usePokemonCardsByTypeQuery = (typeName: string | null, offset: number, limit: number) => {
   //render
   return useQuery({
     ...pokemonCardsByTypeQueryOptions(typeName, offset, limit),
