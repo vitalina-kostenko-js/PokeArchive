@@ -1,12 +1,12 @@
 import type { Metadata, NextPage } from 'next'
-import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
+import { notFound } from 'next/navigation'
 
 import { getFullPokemonData, getPokemonByName } from '@/app/entities/api/pokemons'
+import { PokemonDetailsComponent } from '@/app/features/pokemon-details'
 import { DashboardLayoutComponent } from '@/app/modules/dashboard'
 import { BackButtonComponent } from '@/app/shared/components/back-button'
 import { CardProfileComponent } from '@/app/shared/components/card-profile'
-import { PokemonDetailsComponent } from '@/app/features/pokemon-details'
 
 export const revalidate = 3600
 
@@ -38,7 +38,9 @@ export const generateMetadata = async ({ params }: IProps): Promise<Metadata> =>
 }
 
 //page
-const Page: NextPage<Readonly<IProps>> = async ({ params }) => {
+const Page: NextPage<Readonly<IProps>> = async (props) => {
+  const { params } = props
+
   const { id } = await params
 
   const t = await getTranslations('items_page')
