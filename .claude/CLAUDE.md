@@ -13,5 +13,5 @@ If writing or fixing code style → Comments skill
 - Client structure → client-structure.md
 - Architecture → client-architecture.md
 - Comments → comments.md
-- Runtime → .claude/runtime/runtime.md
+- Skill lifecycle → lifecycle.md
 - Commands → .claude/commands/

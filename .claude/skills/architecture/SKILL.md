@@ -144,4 +144,5 @@ If rules conflict, apply in order:
 - Add new slice → scaffolding.md
 - Decide code placement → client-structure.md
 - Code style rules → comments.md
+- Skill lifecycle → lifecycle.md
 - Full architecture → references/client-architecture.md
