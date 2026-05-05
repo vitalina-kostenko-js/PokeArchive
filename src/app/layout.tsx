@@ -1,27 +1,16 @@
-import { getLocale } from 'next-intl/server'
+import { type FC, type ReactNode } from 'react'
 
-import { fontPrimary, fontSecondary } from '@/config/fonts'
-import '@/config/styles/global.css'
-import { ReactNode } from 'react'
-
+// interface
 interface IProps {
   children: ReactNode
 }
 
-//root layout
-const RootLayout = async(props: IProps) => {
+// component
+const RootLayout: FC<Readonly<IProps>> = (props) => {
   const { children } = props
 
-  const locale = await getLocale()
-
-  //render
-  return (
-    <html lang={locale} suppressHydrationWarning>
-      <body className={`${fontPrimary.className} ${fontSecondary.className} antialiased`}>
-        {children}
-      </body>
-    </html>
-  )
+  // return
+  return children
 }
 
 export default RootLayout

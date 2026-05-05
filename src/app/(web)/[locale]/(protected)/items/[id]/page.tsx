@@ -16,7 +16,9 @@ interface IProps {
 }
 
 //metadata
-export const generateMetadata = async ({ params }: IProps): Promise<Metadata> => {
+export const generateMetadata = async (props: Readonly<IProps>): Promise<Metadata> => {
+  const { params } = props
+
   const { id } = await params
   const pokemon = await getPokemonByName(id)
 

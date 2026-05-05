@@ -2,12 +2,12 @@ import bcrypt from 'bcryptjs'
 
 import { getSupabaseAdmin } from '@/pkg/lib/supabase'
 
-import { Tables } from '@/app/entities/dto'
+import { Database, Tables } from '@/app/entities/models'
 
 export interface IUser extends Tables<'users'> {}
 
 export const findUserByEmail = async (email: string): Promise<IUser | null> => {
-  const { data } = await getSupabaseAdmin()
+  const { data } = await getSupabaseAdmin<Database>()
     .from('users')
     .select('id, name, email, password_hash, created_at')
     .eq('email', email)
@@ -20,7 +20,7 @@ export const findUserByEmail = async (email: string): Promise<IUser | null> => {
 export const createUser = async (name: string, email: string, password: string): Promise<IUser> => {
   const password_hash = await bcrypt.hash(password, 10)
 
-  const { data, error } = await getSupabaseAdmin().from('users').insert({ name, email, password_hash }).select().single()
+  const { data, error } = await getSupabaseAdmin<Database>().from('users').insert({ name, email, password_hash }).select().single()
 
   if (error) {
     throw error

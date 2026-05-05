@@ -1,3 +1,4 @@
+export type { CompositeTypes, Database, Enums, Json, Tables, TablesInsert, TablesUpdate } from './database.model'
 export { loginSchema, registerSchema } from './auth.model'
 export type { TLoginFormValues, TRegisterFormValues } from './auth.model'
 export type { IEvolutionChainResponse, IEvolutionDetail, IEvolutionNode } from './evolution.model'

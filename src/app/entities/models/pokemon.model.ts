@@ -22,18 +22,6 @@ export interface IStat {
   stat: INameResource
 }
 
-export interface IMove {
-  move: INameResource
-}
-
-export interface IHeldItem {
-  item: INameResource
-  version_details: Array<{
-    rarity: number
-    version: INameResource
-  }>
-}
-
 export interface ISprites {
   front_default: string | null
   front_shiny: string | null
@@ -54,8 +42,6 @@ export interface IPokemon {
   abilities?: IAbility[]
   types?: IType[]
   stats?: IStat[]
-  moves?: IMove[]
-  held_items?: IHeldItem[]
   sprites?: ISprites
 }
 

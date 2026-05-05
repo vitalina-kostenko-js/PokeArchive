@@ -1,7 +1,8 @@
+import { Database } from '@/app/entities/models'
 import { getSupabaseAdmin } from '@/pkg/lib/supabase'
 
 export const findFavoritesByUser = async (userId: string) => {
-  const { data, error } = await getSupabaseAdmin()
+  const { data, error } = await getSupabaseAdmin<Database>()
     .from('favorites')
     .select('*')
     .eq('user_id', userId)
@@ -16,7 +17,7 @@ export const findFavoritesByUser = async (userId: string) => {
 }
 
 export const createFavorite = async (userId: string, pokemon_id: number) => {
-  const { data, error } = await getSupabaseAdmin()
+  const { data, error } = await getSupabaseAdmin<Database>()
     .from('favorites')
     .insert({
       user_id: userId,
@@ -34,7 +35,7 @@ export const createFavorite = async (userId: string, pokemon_id: number) => {
 }
 
 export const deleteFavorite = async (userId: string, pokemon_id: number) => {
-  const { error } = await getSupabaseAdmin().from('favorites').delete().eq('user_id', userId).eq('pokemon_id', pokemon_id)
+  const { error } = await getSupabaseAdmin<Database>().from('favorites').delete().eq('user_id', userId).eq('pokemon_id', pokemon_id)
 
   if (error) {
     throw error
