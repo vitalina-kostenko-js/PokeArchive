@@ -1,7 +1,20 @@
 import { queryOptions, useQuery } from '@tanstack/react-query'
-
-import { pokemonKeys } from '@/app/entities/models'
 import { getEvolutionChain, getPokemonByName, getPokemonByType, getPokemonList } from './pokemon.api'
+
+// query keys
+export const pokemonKeys = {
+  all: ['pokemon'] as const,
+
+  list: (offset: number, limit: number) => [...pokemonKeys.all, 'list', offset, limit] as const,
+  detail: (name: string) => [...pokemonKeys.all, 'detail', name] as const,
+
+  cards: (offset: number, limit: number) => [...pokemonKeys.all, 'cards', offset, limit] as const,
+  cardsByType: (typeName: string, offset: number, limit: number) =>
+    [...pokemonKeys.all, 'cards', 'type', typeName, offset, limit] as const,
+
+  species: (name: string) => [...pokemonKeys.all, 'species', name] as const,
+  evolution: (url: string) => [...pokemonKeys.all, 'evolution', url] as const,
+}
 
 // fetch pokemon cards
 export const fetchPokemonCards = async (offset: number, limit: number) => {

@@ -16,5 +16,3 @@ export type {
   IType,
 } from './pokemon.model'
 
-export { favoritesKeys } from './favorite.model'
-export { pokemonKeys } from './pokemon.model'
