@@ -2,7 +2,7 @@
 
 import { FC } from 'react'
 
-import { IPageLoadingModel } from '@/app/entities/models'
+import { IPageLoadingModel } from '@/app/shared/models'
 import { cn } from '@/pkg/theme/lib/utils'
 import { Skeleton } from '@/pkg/theme/ui/skeleton'
 

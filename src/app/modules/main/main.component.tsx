@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 
-import { DashboardLayoutComponent } from '@/app/modules/dashboard'
+import { LayoutComponent } from '@/app/modules/layout'
 import { authServer } from '@/pkg/auth/server'
 import { Link } from '@/pkg/locale'
 import { Button } from '@/pkg/theme/ui/button'
@@ -21,11 +21,11 @@ const MainComponent = async () => {
 
   //render
   return (
-    <DashboardLayoutComponent>
+    <LayoutComponent type='public'>
       <div className='flex flex-1 flex-col items-center justify-center p-4'>
         <div className='max-w-xl space-y-6 text-center'>
           {user ? (
-            <>
+            <div>
               <h1 className='text-4xl font-bold tracking-tight'>
                 {t('welcome')} {user.name}
               </h1>
@@ -35,9 +35,9 @@ const MainComponent = async () => {
               <Button asChild size='lg' className='px-8'>
                 <Link href='/items'>{t('viewLibrary')}</Link>
               </Button>
-            </>
+            </div>
           ) : (
-            <>
+            <div>
               <h1 className='text-4xl font-bold tracking-tight'>{t('title')}</h1>
 
               <p className='text-muted-foreground text-lg'>{t('description')}</p>
@@ -51,11 +51,11 @@ const MainComponent = async () => {
                   <Link href='/sign-up'>{t('signUp')}</Link>
                 </Button>
               </div>
-            </>
+            </div>
           )}
         </div>
       </div>
-    </DashboardLayoutComponent>
+    </LayoutComponent>
   )
 }
 

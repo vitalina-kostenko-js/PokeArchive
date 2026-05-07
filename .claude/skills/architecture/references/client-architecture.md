@@ -1,5 +1,10 @@
 # client-architecture
 
+**Back to:** [architecture/SKILL.md](../SKILL.md)
+**See also:** [layers.md](layers.md) · [import-rules.md](import-rules.md) · [naming.md](naming.md) · [structure.md](structure.md) · [tests.md](tests.md)
+
+---
+
 ## Layers
 
 (web) → modules → widgets → features → entities → shared → config → pkg

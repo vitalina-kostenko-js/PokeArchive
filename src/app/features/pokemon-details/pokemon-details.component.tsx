@@ -16,10 +16,10 @@ const PokemonDetailsComponent: FC<Readonly<IProps>> = (props) => {
 
   //render
   return (
-    <>
+    <div>
       <BaseStatsComponent pokemon={pokemon} />
       <EvolutionDetailComponent initialUrl={initialUrl} />
-    </>
+    </div>
   )
 }
 

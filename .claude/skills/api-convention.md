@@ -3,6 +3,8 @@ name: api-conventions
 description: Strict API rules including HTTP client usage, response contracts, and entity-level data access
 ---
 
+**Related:** [architecture/SKILL.md](architecture/SKILL.md) · [scaffolding.md](scaffolding.md) · [architecture/references/layers.md](architecture/references/layers.md) · [architecture/references/import-rules.md](architecture/references/import-rules.md)
+
 ## HTTP client (critical)
 
 - Use ky for ALL HTTP requests

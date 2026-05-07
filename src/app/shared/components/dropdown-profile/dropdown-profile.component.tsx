@@ -25,7 +25,7 @@ const ProfileDropdownComponent = () => {
   if (user) {
     //render
     return (
-      <>
+      <div>
         {isSigningOut && (
           <div
             className='bg-background/80 fixed inset-0 z-[200] flex items-center justify-center backdrop-blur-sm'
@@ -63,7 +63,7 @@ const ProfileDropdownComponent = () => {
             </Button>
           }
         />
-      </>
+      </div>
     )
   }
 

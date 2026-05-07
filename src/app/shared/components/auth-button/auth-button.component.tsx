@@ -4,10 +4,10 @@ import { LoginButtonComponent, RegisterButtonComponent } from '@/app/shared/comp
 const AuthButtonComponent = () => {
   //render
   return (
-    <>
+    <div>
       <LoginButtonComponent />
       <RegisterButtonComponent />
-    </>
+    </div>
   )
 }
 

@@ -1,3 +1,8 @@
+**Back to:** [architecture/SKILL.md](../SKILL.md)
+**See also:** [layers.md](layers.md) · [naming.md](naming.md) · [import-rules.md](import-rules.md)
+
+---
+
 ## Project Structure
 
 ```

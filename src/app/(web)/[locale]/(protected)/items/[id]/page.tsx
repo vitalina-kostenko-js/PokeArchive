@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 
 import { getFullPokemonData, getPokemonByName } from '@/app/entities/api/pokemons'
 import { PokemonDetailsComponent } from '@/app/features/pokemon-details'
-import { DashboardLayoutComponent } from '@/app/modules/dashboard'
+import { LayoutComponent } from '@/app/modules/layout'
 import { BackButtonComponent } from '@/app/shared/components/back-button'
 import { CardProfileComponent } from '@/app/shared/components/card-profile'
 
@@ -55,7 +55,7 @@ const Page: NextPage<Readonly<IProps>> = async (props) => {
 
   //render
   return (
-    <DashboardLayoutComponent>
+    <LayoutComponent type='protected'>
       <div className='pb-2'>
         <BackButtonComponent text={t('backToList')} />
       </div>
@@ -67,7 +67,7 @@ const Page: NextPage<Readonly<IProps>> = async (props) => {
           <PokemonDetailsComponent pokemon={pokemon} initialUrl={pokemon.species.evolution_chain.url} />
         </div>
       </div>
-    </DashboardLayoutComponent>
+    </LayoutComponent>
   )
 }
 

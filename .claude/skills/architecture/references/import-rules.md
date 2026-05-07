@@ -1,3 +1,8 @@
+**Back to:** [architecture/SKILL.md](../SKILL.md)
+**See also:** [layers.md](layers.md) · [client-architecture.md](client-architecture.md) · [structure.md](structure.md)
+
+---
+
 ## Import Rules
 
 Each layer may only import from layers below it.

@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { getFavorites } from '@/app/entities/api/favorites'
 import { useAuthSession } from '@/app/shared/hooks/auth-session'
+
+import { getFavorites } from './favorites.api'
 
 export const favoritesKeys = {
   all: ['favorites'] as const,

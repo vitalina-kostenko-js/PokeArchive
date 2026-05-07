@@ -3,9 +3,9 @@
 import { useQueries } from '@tanstack/react-query'
 
 import { useAddFavoritesQuery } from '@/app/entities/api/favorites'
-import { pokemonDetailQueryOptions } from '@/app/entities/api/pokemons'
-import { IPokemon, mapPokemonToCard } from '@/app/entities/models'
-import { DashboardLayoutComponent } from '@/app/modules/dashboard'
+import { mapPokemonToCard, pokemonDetailQueryOptions } from '@/app/entities/api/pokemons'
+import { IPokemon } from '@/app/entities/models'
+import { LayoutComponent } from '@/app/modules/layout'
 import { CardListComponent } from '@/app/shared/components/card-list'
 import { Link } from '@/pkg/locale'
 
@@ -21,7 +21,7 @@ const Page = () => {
 
   //render
   return (
-    <DashboardLayoutComponent>
+    <LayoutComponent type='protected'>
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
         {cards.map((item) => (
           <div key={item.name}>
@@ -31,7 +31,7 @@ const Page = () => {
           </div>
         ))}
       </div>
-    </DashboardLayoutComponent>
+    </LayoutComponent>
   )
 }
 

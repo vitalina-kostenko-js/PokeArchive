@@ -6,6 +6,8 @@ This file is used by AI to decide WHERE code should live and HOW to resolve arch
 
 It does NOT define architecture — only decision logic over it.
 
+**Related:** [architecture/SKILL.md](architecture/SKILL.md) · [scaffolding.md](scaffolding.md) · [architecture/references/import-rules.md](architecture/references/import-rules.md) · [architecture/references/layers.md](architecture/references/layers.md)
+
 ---
 
 ## Rule priority

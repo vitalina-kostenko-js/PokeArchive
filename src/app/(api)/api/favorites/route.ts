@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { createFavorite, deleteFavorite, findFavoritesByUser } from '@/app/entities/api/favorites'
+import { createFavorite, deleteFavorite, findFavoritesByUser } from '@/app/entities/api/favorites/favorites.service'
 import { getAuthenticatedUser } from '@/pkg/auth/api-auth'
 
 // GET /api/favorites

@@ -1,5 +1,9 @@
 ## Skill lifecycle rule
 
+**Related:** [architecture/SKILL.md](architecture/SKILL.md) · [client-structure.md](client-structure.md)
+
+---
+
 This skill is persistent within a session.
 
 All rules defined here are treated as ongoing constraints, not one-time instructions.

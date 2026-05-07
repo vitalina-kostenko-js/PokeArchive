@@ -2,8 +2,8 @@
 
 import { FC, useMemo, useState } from 'react'
 
-import { usePokemonCardsByTypeQuery, usePokemonCardsQuery } from '@/app/entities/api/pokemons'
-import { IPokemon, mapPokemonToCard } from '@/app/entities/models'
+import { mapPokemonToCard, usePokemonCardsByTypeQuery, usePokemonCardsQuery } from '@/app/entities/api/pokemons'
+import { IPokemon } from '@/app/entities/models'
 import { CardListComponent } from '@/app/shared/components/card-list'
 import { PaginationComponent } from '@/app/shared/components/pagination'
 import { SkeletonRendererComponent } from '@/app/shared/components/skeleton-render'
@@ -56,7 +56,7 @@ const PokemonListComponent: FC<Readonly<IProps>> = (props) => {
 
   //render
   return (
-    <>
+    <div>
       {isError && <div>Error loading data</div>}
 
       <div>
@@ -88,7 +88,7 @@ const PokemonListComponent: FC<Readonly<IProps>> = (props) => {
           onPageChange={setIsPaginationPending}
         />
       </div>
-    </>
+    </div>
   )
 }
 

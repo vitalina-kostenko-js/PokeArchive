@@ -1,4 +1,4 @@
-import { IPageLoadingModel } from '@/app/entities/models'
+import { IPageLoadingModel } from '@/app/shared/models'
 
 const ITEMS_PAGE_LOADING: IPageLoadingModel = {
   rows: [

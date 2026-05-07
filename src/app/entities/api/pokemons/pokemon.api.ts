@@ -7,7 +7,7 @@ import type {
   IPokemonSpecies,
   IPokemonTypeResponse,
 } from '@/app/entities/models'
-import { pokeApiFetcher } from '@/app/entities/api/pokemons'
+import { pokeApiFetcher } from './pokeapi.fetcher'
 
 // get list
 export const getPokemonList = async (offset = 0, limit = 20): Promise<IPokemonListResponse> => {

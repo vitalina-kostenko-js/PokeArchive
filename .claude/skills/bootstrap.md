@@ -1,6 +1,8 @@
 # Mode A — Bootstrap a New Client (Next.js)
 
-Step-by-step setup for a clean FSD client. See [client-architecture.md](references/client-architecture.md) for layer rules.
+Step-by-step setup for a clean FSD client. See [architecture/references/client-architecture.md](architecture/references/client-architecture.md) for layer rules.
+
+**Related:** [architecture/SKILL.md](architecture/SKILL.md) · [scaffolding.md](scaffolding.md) · [architecture/references/structure.md](architecture/references/structure.md) · [architecture/references/naming.md](architecture/references/naming.md)
 
 ---
 

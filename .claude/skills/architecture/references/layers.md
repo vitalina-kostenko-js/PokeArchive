@@ -1,3 +1,8 @@
+**Back to:** [architecture/SKILL.md](../SKILL.md)
+**See also:** [client-architecture.md](client-architecture.md) · [import-rules.md](import-rules.md) · [structure.md](structure.md) · [naming.md](naming.md)
+
+---
+
 ## Layers
 
 **`(web)`** — Next.js routing. Pages, layouts, error boundaries, loading states, API route handlers. Keep pages thin — no business logic.

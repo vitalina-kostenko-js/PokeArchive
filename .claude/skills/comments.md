@@ -2,6 +2,8 @@
 
 Short label-style `//` comments sit above named symbols and expand on the identifier in 1–5 words. Routes use `// VERB /path` shorthand. Methods inside a service/class get a single-verb label.
 
+**Related:** [architecture/SKILL.md](architecture/SKILL.md) · [scaffolding.md](scaffolding.md) · [api-convention.md](api-convention.md)
+
 ---
 
 ## General Rules

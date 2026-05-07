@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server'
 import createMiddleware from 'next-intl/middleware'
+import { NextRequest, NextResponse } from 'next/server'
 
 import { getSessionPayloadFromRequest } from '@/pkg/auth/session-from-request'
 import { routing } from '@/pkg/locale'
@@ -22,7 +22,6 @@ export default async function proxy(req: NextRequest) {
   i18nRes.cookies.set('x-country', country)
 
   const pathname = req.nextUrl.pathname
-  const user = await getSessionPayloadFromRequest(req)
 
   const parts = pathname.split('/').filter(Boolean)
   const itemsIdx = parts.indexOf('items')
@@ -38,20 +37,28 @@ export default async function proxy(req: NextRequest) {
 
   const isProtectedRoute = strippedPath.startsWith('/items') || strippedPath.startsWith('/favorites')
 
-  if (isProtectedRoute && !user) {
-    return NextResponse.redirect(new URL(`/${locale}/sign-in`, req.url))
+  if (isProtectedRoute) {
+    const user = await getSessionPayloadFromRequest(req)
+
+    if (!user) {
+      return NextResponse.redirect(new URL(`/${locale}/sign-in`, req.url))
+    }
   }
 
-  if (isItemsListOnly && !user) {
-    return NextResponse.redirect(new URL(`/${locale}/sign-in`, req.url))
+  if (isSignIn) {
+    const user = await getSessionPayloadFromRequest(req)
+
+    if (user) {
+      return NextResponse.redirect(new URL(`/${locale}/items`, req.url))
+    }
   }
 
-  if (isSignIn && user) {
-    return NextResponse.redirect(new URL(`/${locale}/items`, req.url))
-  }
+  if (isSignUp) {
+    const user = await getSessionPayloadFromRequest(req)
 
-  if (isSignUp && user) {
-    return NextResponse.redirect(new URL(`/${locale}/items`, req.url))
+    if (user) {
+      return NextResponse.redirect(new URL(`/${locale}/items`, req.url))
+    }
   }
 
   return i18nRes

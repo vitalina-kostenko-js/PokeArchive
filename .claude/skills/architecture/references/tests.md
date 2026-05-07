@@ -1,3 +1,8 @@
+**Back to:** [architecture/SKILL.md](../SKILL.md)
+**See also:** [structure.md](structure.md)
+
+---
+
 ## Tests
 
 ```

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { addFavorite, removeFavorite } from '@/app/entities/api/favorites/favorites.api'
-import { favoritesKeys } from '@/app/entities/api/favorites/favorites.query'
+import { addFavorite, removeFavorite } from './favorites.api'
+import { favoritesKeys } from './favorites.query'
 
 //add favorite mutation
 export const useAddFavoriteMutation = () => {
