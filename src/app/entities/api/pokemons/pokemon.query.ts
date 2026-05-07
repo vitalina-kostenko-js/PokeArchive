@@ -1,21 +1,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query'
 
+import { pokemonKeys } from '@/app/entities/models'
 import { getEvolutionChain, getPokemonByName, getPokemonByType, getPokemonList } from './pokemon.api'
-
-// query keys
-export const pokemonKeys = {
-  all: ['pokemon'] as const,
-
-  list: (offset: number, limit: number) => [...pokemonKeys.all, 'list', offset, limit] as const,
-  detail: (name: string) => [...pokemonKeys.all, 'detail', name] as const,
-
-  cards: (offset: number, limit: number) => [...pokemonKeys.all, 'cards', offset, limit] as const,
-  cardsByType: (typeName: string, offset: number, limit: number) =>
-    [...pokemonKeys.all, 'cards', 'type', typeName, offset, limit] as const,
-
-  species: (name: string) => [...pokemonKeys.all, 'species', name] as const,
-  evolution: (url: string) => [...pokemonKeys.all, 'evolution', url] as const,
-}
 
 // fetch pokemon cards
 export const fetchPokemonCards = async (offset: number, limit: number) => {
@@ -37,18 +23,21 @@ export const fetcherPokemonCardsByType = async (typeName: string, offset: number
 }
 
 // cards options
-export const pokemonCardsQueryOptions = (offset: number, limit: number) =>
-  queryOptions({
+export const pokemonCardsQueryOptions = (offset: number, limit: number) => {
+  //render
+  return queryOptions({
     queryKey: pokemonKeys.cards(offset, limit),
 
     queryFn: () => fetchPokemonCards(offset, limit),
 
     staleTime: 1000 * 60 * 5,
   })
+}
 
 // cards by type options
-export const pokemonCardsByTypeQueryOptions = (typeName: string | null, offset: number, limit: number) =>
-  queryOptions({
+export const pokemonCardsByTypeQueryOptions = (typeName: string | null, offset: number, limit: number) => {
+  //render
+  return queryOptions({
     queryKey: pokemonKeys.cardsByType(typeName ?? '', offset, limit),
 
     queryFn: () => {
@@ -61,56 +50,82 @@ export const pokemonCardsByTypeQueryOptions = (typeName: string | null, offset: 
     },
     staleTime: 1000 * 60 * 5,
   })
+}
 
 // detail options
-export const pokemonDetailQueryOptions = (name: string) =>
-  queryOptions({
+export const pokemonDetailQueryOptions = (name: string) => {
+  //render
+  return queryOptions({
     queryKey: pokemonKeys.detail(name),
 
     queryFn: () => getPokemonByName(name),
 
     staleTime: 1000 * 60 * 5,
   })
+}
 
-// list query
-export const usePokemonListQuery = (offset: number, limit: number) =>
-  useQuery({
+// list options
+export const pokemonListQueryOptions = (offset: number, limit: number) => {
+  //render
+  return queryOptions({
     queryKey: pokemonKeys.list(offset, limit),
 
     queryFn: () => getPokemonList(offset, limit),
 
     staleTime: 1000 * 60 * 5,
   })
+}
+
+// list query
+export const usePokemonListQuery = (offset: number, limit: number) => {
+  //render
+  return useQuery(pokemonListQueryOptions(offset, limit))
+}
 
 // detail query
-export const usePokemonDetailQuery = (name: string) =>
-  useQuery({
+export const usePokemonDetailQuery = (name: string) => {
+  //render
+  return useQuery({
     ...pokemonDetailQueryOptions(name),
     enabled: !!name,
   })
+}
 
 // cards query
-export const usePokemonCardsQuery = (offset: number, limit: number, enabled = true) =>
-  useQuery({
+export const usePokemonCardsQuery = (offset: number, limit: number, enabled = true) => {
+  //render
+  return useQuery({
     ...pokemonCardsQueryOptions(offset, limit),
     enabled,
   })
+}
 
-// evolution query
-export const usePokemonEvolutionQuery = (url: string) =>
-  useQuery({
+// evolution options
+export const pokemonEvolutionQueryOptions = (url: string) => {
+  //render
+  return queryOptions({
     queryKey: pokemonKeys.evolution(url),
 
     queryFn: () => getEvolutionChain(url),
 
-    enabled: !!url,
-
     staleTime: 1000 * 60 * 5,
   })
+}
+
+// evolution query
+export const usePokemonEvolutionQuery = (url: string) => {
+  //render
+  return useQuery({
+    ...pokemonEvolutionQueryOptions(url),
+    enabled: !!url,
+  })
+}
 
 // cards by type query
-export const usePokemonCardsByTypeQuery = (typeName: string | null, offset: number, limit: number) =>
-  useQuery({
+export const usePokemonCardsByTypeQuery = (typeName: string | null, offset: number, limit: number) => {
+  //render
+  return useQuery({
     ...pokemonCardsByTypeQueryOptions(typeName, offset, limit),
     enabled: !!typeName,
   })
+}
