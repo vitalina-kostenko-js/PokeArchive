@@ -16,7 +16,9 @@ interface IProps {
 }
 
 //component
-const PokemonAvatarComponent: FC<Readonly<IProps>> = ({ name, imageUrl, isLoading, isError, size = 'md' }) => {
+const PokemonAvatarComponent: FC<Readonly<IProps>> = (props) => {
+  const { name, imageUrl, isLoading, isError, size = 'md' } = props
+
   if (isLoading) {
     //render
     return <div className={`${sizeClasses[size]} animate-pulse rounded-full bg-gray-200 dark:bg-gray-700`} />
