@@ -46,7 +46,9 @@ export async function POST(req: NextRequest) {
 
     //render
     return NextResponse.json({ success: true })
-  } catch {
+  } catch (err) {
+    console.error('[sign-up] error:', err)
+
     //render
     return NextResponse.json({ error: 'Registration failed' }, { status: 500 })
   }

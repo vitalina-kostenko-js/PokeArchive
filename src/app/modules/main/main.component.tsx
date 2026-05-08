@@ -1,6 +1,5 @@
 import { getTranslations } from 'next-intl/server'
 
-import { LayoutComponent } from '@/app/modules/layout'
 import { authServer } from '@/pkg/auth/server'
 import { Link } from '@/pkg/locale'
 import { Button } from '@/pkg/theme/ui/button'
@@ -21,8 +20,7 @@ const MainComponent = async () => {
 
   //render
   return (
-    <LayoutComponent type='public'>
-      <div className='flex flex-1 flex-col items-center justify-center p-4'>
+    <div className='flex flex-1 flex-col items-center justify-center p-4'>
         <div className='max-w-xl space-y-6 text-center'>
           {user ? (
             <div>
@@ -54,8 +52,7 @@ const MainComponent = async () => {
             </div>
           )}
         </div>
-      </div>
-    </LayoutComponent>
+    </div>
   )
 }
 

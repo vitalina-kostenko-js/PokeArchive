@@ -20,7 +20,7 @@ const SignComponent: FC<Readonly<IProps>> = async (props) => {
 
   //render
   return (
-    <div className='flex min-h-dvh items-center justify-center px-4'>
+    <div className='flex flex-1 items-center justify-center px-4'>
       <div className='bg-card w-full max-w-md space-y-6 rounded-xl border p-8 shadow-sm'>
         <div className='space-y-1 text-center'>
           <h1 className='text-2xl font-bold'>{variant === 'sign-in' ? tLogin('login') : tRegister('createAccount')}</h1>

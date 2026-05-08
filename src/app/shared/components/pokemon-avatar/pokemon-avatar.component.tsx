@@ -3,31 +3,26 @@
 import Image from 'next/image'
 import { FC } from 'react'
 
-import { usePokemonDetailQuery } from '@/app/entities/api/pokemons'
+import { sizeClasses } from '@/app/shared/components/pokemon-avatar/pokemon-avatar.constanta'
 import { Link } from '@/pkg/locale'
 
 //interface
 interface IProps {
   name: string
+  imageUrl?: string
+  isLoading?: boolean
+  isError?: boolean
   size?: 'sm' | 'md' | 'lg'
 }
 
 //component
-const PokemonAvatarComponent: FC<Readonly<IProps>> = ({ name, size = 'md' }) => {
-  const { data, isLoading, isError } = usePokemonDetailQuery(name)
-
-  const sizeClasses = {
-    sm: 'w-12 h-12',
-    md: 'w-24 h-24',
-    lg: 'w-40 h-40',
-  }
-
+const PokemonAvatarComponent: FC<Readonly<IProps>> = ({ name, imageUrl, isLoading, isError, size = 'md' }) => {
   if (isLoading) {
     //render
     return <div className={`${sizeClasses[size]} animate-pulse rounded-full bg-gray-200 dark:bg-gray-700`} />
   }
 
-  if (isError || !data) {
+  if (isError || !imageUrl) {
     //render
     return (
       <div
@@ -37,8 +32,6 @@ const PokemonAvatarComponent: FC<Readonly<IProps>> = ({ name, size = 'md' }) => 
       </div>
     )
   }
-
-  const imageUrl = data.sprites?.other?.['official-artwork']?.front_default ?? data.sprites?.front_default ?? ''
 
   //render
   return (

@@ -3,10 +3,10 @@ import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 
 import { getFullPokemonData, getPokemonByName } from '@/app/entities/api/pokemons'
-import { PokemonDetailsComponent } from '@/app/features/pokemon-details'
-import { LayoutComponent } from '@/app/modules/layout'
+import { BaseStatsComponent } from '@/app/features/base-stats'
+import { CardProfileComponent } from '@/app/features/card-profile'
+import { EvolutionDetailComponent } from '@/app/features/evolution-detail'
 import { BackButtonComponent } from '@/app/shared/components/back-button'
-import { CardProfileComponent } from '@/app/shared/components/card-profile'
 
 export const revalidate = 3600
 
@@ -55,19 +55,20 @@ const Page: NextPage<Readonly<IProps>> = async (props) => {
 
   //render
   return (
-    <LayoutComponent type='protected'>
+    <>
       <div className='pb-2'>
         <BackButtonComponent text={t('backToList')} />
       </div>
 
-      <div className='animate-in fade-in slide-in-from-bottom-4 mx-auto max-w-5xl space-y-8 duration-700'>
+      <div className='animate-in fade-in slide-in-from-bottom-4 mx-auto max-w-3xl space-y-8 duration-700'>
         <CardProfileComponent pokemon={pokemon} species={pokemon.species} />
 
-        <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
-          <PokemonDetailsComponent pokemon={pokemon} initialUrl={pokemon.species.evolution_chain.url} />
+        <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
+          <BaseStatsComponent pokemon={pokemon} />
+          <EvolutionDetailComponent initialUrl={pokemon.species.evolution_chain.url} />
         </div>
       </div>
-    </LayoutComponent>
+    </>
   )
 }
 

@@ -4,7 +4,7 @@ import { FC, useMemo, useState } from 'react'
 
 import { mapPokemonToCard, usePokemonCardsByTypeQuery, usePokemonCardsQuery } from '@/app/entities/api/pokemons'
 import { IPokemon } from '@/app/entities/models'
-import { CardListComponent } from '@/app/shared/components/card-list'
+import { CardListComponent } from '@/app/features/card-list'
 import { PaginationComponent } from '@/app/shared/components/pagination'
 import { SkeletonRendererComponent } from '@/app/shared/components/skeleton-render'
 import { TypeFilterComponent } from '@/app/shared/components/type-filter'

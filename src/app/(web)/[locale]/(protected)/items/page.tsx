@@ -3,7 +3,6 @@ import { NextPage } from 'next'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 
 import { pokemonCardsByTypeQueryOptions, pokemonCardsQueryOptions } from '@/app/entities/api/pokemons'
-import { LayoutComponent } from '@/app/modules/layout'
 import { PokemonListComponent } from '@/app/modules/pokemon-list'
 import { getQueryClient } from '@/pkg/rest-api/service'
 
@@ -37,11 +36,9 @@ const Page: NextPage<Readonly<IProps>> = async (props) => {
   //render
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <LayoutComponent type='protected'>
-        <div className='flex flex-1 flex-col gap-6 py-4'>
-          <PokemonListComponent page={page} offset={offset} selectedType={selectedType} />
-        </div>
-      </LayoutComponent>
+      <div className='flex flex-1 flex-col gap-6 py-4'>
+        <PokemonListComponent page={page} offset={offset} selectedType={selectedType} />
+      </div>
     </HydrationBoundary>
   )
 }

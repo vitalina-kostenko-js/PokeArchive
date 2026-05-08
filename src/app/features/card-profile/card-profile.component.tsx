@@ -1,8 +1,11 @@
+'use client'
+
 import { FC } from 'react'
 
 import { IPokemon, IPokemonSpecies } from '@/app/entities/models'
 import { FavoriteButtonComponent } from '@/app/shared/components/favorite-button'
 
+import { useToggleFavorite } from '@/app/shared/hooks/use-toggle-favorite'
 import {
   ProfileAvatarComponent,
   ProfileIdentityComponent,
@@ -23,6 +26,8 @@ const CardProfileComponent: FC<Readonly<IProps>> = (props) => {
   const mainImage = pokemon.sprites?.other?.['official-artwork']?.front_default ?? pokemon.sprites?.front_default ?? ''
   const genus = species.genera.find((g) => g.language.name === 'en')?.genus
 
+  const favorite = useToggleFavorite(pokemon.id)
+
   //render
   return (
     <div className='bg-card rounded-3xl border p-8 shadow-xl transition-all hover:shadow-2xl'>
@@ -38,7 +43,11 @@ const CardProfileComponent: FC<Readonly<IProps>> = (props) => {
         </div>
       </div>
 
-      <FavoriteButtonComponent pokemonId={pokemon.id} />
+      <FavoriteButtonComponent
+        isFavorite={favorite.isFavorite}
+        isPending={favorite.isPending}
+        onToggle={favorite.onToggle}
+      />
     </div>
   )
 }

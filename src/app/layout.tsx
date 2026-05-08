@@ -1,5 +1,9 @@
 import { type FC, type ReactNode } from 'react'
 
+import { ThemeProvider } from '@/pkg/theme/providers'
+
+import '@/config/styles/global.css'
+
 // interface
 interface IProps {
   children: ReactNode
@@ -9,8 +13,14 @@ interface IProps {
 const RootLayout: FC<Readonly<IProps>> = (props) => {
   const { children } = props
 
-  // return
-  return children
+  //render
+  return (
+    <html lang='en' suppressHydrationWarning>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
+    </html>
+  )
 }
 
 export default RootLayout

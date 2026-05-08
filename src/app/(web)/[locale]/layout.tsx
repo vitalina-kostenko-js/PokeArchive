@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation'
 import { EAssetImage } from '@/app/shared/interfaces'
 import { envClient } from '@/config/env'
 import { routing } from '@/pkg/locale'
-import { ReactQueryProvider, ThemeProvider } from '@/pkg/theme/providers'
+import { ReactQueryProvider } from '@/pkg/theme/providers'
 import { Toaster } from '@/pkg/theme/ui/sonner'
 
 //interface
@@ -60,10 +60,8 @@ const LocaleLayout = async (props: IProps) => {
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <ReactQueryProvider>
-        <ThemeProvider>
-          {children}
-          <Toaster position='top-center' duration={3000} />
-        </ThemeProvider>
+        {children}
+        <Toaster position='top-center' duration={3000} />
       </ReactQueryProvider>
     </NextIntlClientProvider>
   )
